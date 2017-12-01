@@ -20,7 +20,7 @@ public class Dec2015Day5Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleOne() {
-        List<String> input = fileUtils.loadFileLines(INPUT_FILE);
+        List<String> input = getAllFileLines(INPUT_FILE);
         return (int) input.stream()
                 .filter(this::isStringValidV1)
                 .count();
@@ -28,7 +28,7 @@ public class Dec2015Day5Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleTwo() {
-        List<String> input = fileUtils.loadFileLines(INPUT_FILE);
+        List<String> input = getAllFileLines(INPUT_FILE);
         return (int) input.stream()
                 .filter(this::isStringValidV2)
                 .count();

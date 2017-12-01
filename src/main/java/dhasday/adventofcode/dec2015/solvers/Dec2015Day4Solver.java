@@ -14,13 +14,13 @@ public class Dec2015Day4Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleOne() {
-        String input = fileUtils.loadFileContents(INPUT_FILE);
+        String input = getOnlyFileLine(INPUT_FILE);
         return getFirstLeadingMultizeroHash(input, 5);
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        String input = fileUtils.loadFileContents(INPUT_FILE);
+        String input = getOnlyFileLine(INPUT_FILE);
         return getFirstLeadingMultizeroHash(input, 6);
     }
 

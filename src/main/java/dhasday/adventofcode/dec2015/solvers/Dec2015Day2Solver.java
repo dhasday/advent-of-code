@@ -17,7 +17,7 @@ public class Dec2015Day2Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleOne() {
-        List<String> allDimensions = fileUtils.loadFileLines(INPUT_FILE);
+        List<String> allDimensions = getAllFileLines(INPUT_FILE);
 
         return allDimensions.stream()
                 .mapToInt(this::calculateNeededWrappingPaper)
@@ -26,7 +26,7 @@ public class Dec2015Day2Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleTwo() {
-        List<String> allDimensions = fileUtils.loadFileLines(INPUT_FILE);
+        List<String> allDimensions = getAllFileLines(INPUT_FILE);
 
         return allDimensions.stream()
                 .mapToInt(this::calculateNeededRibbon)

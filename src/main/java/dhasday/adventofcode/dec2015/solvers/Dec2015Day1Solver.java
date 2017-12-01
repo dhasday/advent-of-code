@@ -11,8 +11,6 @@ public class Dec2015Day1Solver implements DaySolver {
     private static final int LEVEL_UP_CHAR = '(';
     private static final int LEVEL_DOWN_CHAR = ')';
 
-    private FileUtils fileUtils = new FileUtils();
-
     @Override
     public int getDayNumber() {
         return 1;
@@ -20,14 +18,14 @@ public class Dec2015Day1Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleOne() {
-        String input = fileUtils.loadFileContents(DAY_ONE_INPUT_FILE);
+        String input = getOnlyFileLine(DAY_ONE_INPUT_FILE);
         Day1FloorTracker result = processInput(input);
         return result.getCurrentFloor();
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        String input = fileUtils.loadFileContents(DAY_ONE_INPUT_FILE);
+        String input = getOnlyFileLine(DAY_ONE_INPUT_FILE);
         Day1FloorTracker result = processInput(input);
         return result.getFirstBasementFloor();
     }

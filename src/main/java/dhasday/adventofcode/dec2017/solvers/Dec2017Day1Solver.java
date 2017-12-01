@@ -13,13 +13,13 @@ public class Dec2017Day1Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleOne() {
-        String input = fileUtils.loadFileContents(DAY_ONE_INPUT);
+        String input = getOnlyFileLine(DAY_ONE_INPUT);
         return sumOfConsecutiveDigits(input);
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        String input = fileUtils.loadFileContents(DAY_ONE_INPUT);
+        String input = getOnlyFileLine(DAY_ONE_INPUT);
         return sumOfRotatedDigits(input);
     }
 

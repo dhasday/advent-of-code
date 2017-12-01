@@ -24,13 +24,13 @@ public class Dec2015Day3Solver implements DaySolver {
 
     @Override
     public Integer solvePuzzleOne() {
-        String input = fileUtils.loadFileContents(INPUT_FILE);
+        String input = getOnlyFileLine(INPUT_FILE);
         return deliverPresents(input, 1);
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        String input = fileUtils.loadFileContents(INPUT_FILE);
+        String input = getOnlyFileLine(INPUT_FILE);
         return deliverPresents(input, 2);
     }
 
