@@ -1,4 +1,4 @@
-package dhasday.adventofcode.dec2015.solvers;
+package dhasday.adventofcode.dec2015.solvers0x;
 
 import static org.junit.jupiter.api.Assertions.*;
 

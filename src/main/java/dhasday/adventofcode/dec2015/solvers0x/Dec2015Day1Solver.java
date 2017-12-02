@@ -1,7 +1,6 @@
-package dhasday.adventofcode.dec2015.solvers;
+package dhasday.adventofcode.dec2015.solvers0x;
 
 import dhasday.adventofcode.DaySolver;
-import dhasday.adventofcode.FileUtils;
 import dhasday.adventofcode.dec2015.domain.Day1FloorTracker;
 
 public class Dec2015Day1Solver implements DaySolver {

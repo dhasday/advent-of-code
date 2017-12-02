@@ -1,4 +1,4 @@
-package dhasday.adventofcode.dec2015.solvers;
+package dhasday.adventofcode.dec2015.solvers0x;
 
 import java.util.List;
 import java.util.Set;
