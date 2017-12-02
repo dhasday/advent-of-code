@@ -2,13 +2,13 @@ package dhasday.adventofcode;
 
 import java.util.List;
 
-public interface DaySolver {
+public interface DaySolver<T> {
 
     int getDayNumber();
 
-    Integer solvePuzzleOne();
+    T solvePuzzleOne();
 
-    Integer solvePuzzleTwo();
+    T solvePuzzleTwo();
 
     default List<String> getAllFileLines(String filename) {
         FileUtils fileUtils = new FileUtils();

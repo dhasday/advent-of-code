@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import dhasday.adventofcode.DaySolver;
 
-public class Dec2017Day2Solver implements DaySolver {
+public class Dec2017Day2Solver implements DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/2-input";
 

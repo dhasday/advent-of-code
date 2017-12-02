@@ -3,7 +3,7 @@ package dhasday.adventofcode.dec2015.solvers0x;
 import dhasday.adventofcode.DaySolver;
 import dhasday.adventofcode.dec2015.domain.Day1FloorTracker;
 
-public class Dec2015Day1Solver implements DaySolver {
+public class Dec2015Day1Solver implements DaySolver<Integer> {
 
     private static final String DAY_ONE_INPUT_FILE = "src/main/resources/dec2015/1-input";
 

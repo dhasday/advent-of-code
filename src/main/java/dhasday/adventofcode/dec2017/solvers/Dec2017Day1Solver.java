@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2017.solvers;
 
 import dhasday.adventofcode.DaySolver;
 
-public class Dec2017Day1Solver implements DaySolver {
+public class Dec2017Day1Solver implements DaySolver<Integer> {
 
     private static final String DAY_ONE_INPUT = "src/main/resources/dec2017/1-input";
 

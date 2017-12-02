@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import dhasday.adventofcode.DaySolver;
 
-public class Dec2015Day6Solver implements DaySolver {
+public class Dec2015Day6Solver implements DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/6-input";
 
