@@ -2,11 +2,6 @@ package dhasday.adventofcode.dec2015.solvers1x;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.junit.jupiter.api.Test;
 
 class Dec2015Day12SolverTest {

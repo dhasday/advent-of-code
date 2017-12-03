@@ -1,6 +1,6 @@
 package dhasday.adventofcode.dec2015.solvers1x;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 

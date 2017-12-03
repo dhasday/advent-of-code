@@ -2,7 +2,6 @@ package dhasday.adventofcode.dec2015.solvers0x;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dhasday.adventofcode.dec2015.domain.Day1FloorTracker;
 import org.junit.jupiter.api.Test;
 
 public class Dec2015Day1SolverTest {
@@ -30,14 +29,14 @@ public class Dec2015Day1SolverTest {
     }
 
     private void validatePuzzleOne(String input, int expected) {
-        Day1FloorTracker actual = underTest.processInput(input);
+        Dec2015Day1Solver.FloorTracker actual = underTest.processInput(input);
 
-        assertEquals(expected, actual.getCurrentFloor());
+        assertEquals(expected, actual.currentFloor);
     }
 
     private void validatePuzzleTwo(String input, Integer expected) {
-        Day1FloorTracker actual = underTest.processInput(input);
+        Dec2015Day1Solver.FloorTracker actual = underTest.processInput(input);
 
-        assertEquals(expected, actual.getFirstBasementFloor());
+        assertEquals(expected, actual.firstBasementFloor);
     }
 }

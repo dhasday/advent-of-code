@@ -2,8 +2,6 @@ package dhasday.adventofcode.dec2015.solvers1x;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
