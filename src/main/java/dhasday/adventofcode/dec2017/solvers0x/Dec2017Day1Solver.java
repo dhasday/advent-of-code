@@ -1,4 +1,4 @@
-package dhasday.adventofcode.dec2017.solvers;
+package dhasday.adventofcode.dec2017.solvers0x;
 
 import dhasday.adventofcode.DaySolver;
 
