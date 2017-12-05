@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class Dec2015Dec2017Day1SolverTest {
+class Dec2017Day1SolverTest {
 
     private Dec2017Day1Solver underTest = new Dec2017Day1Solver();
 
