@@ -120,7 +120,6 @@ public class Dec2017Day3Solver implements DaySolver<Integer> {
             }
         }
 
-
         return sum;
     }
 

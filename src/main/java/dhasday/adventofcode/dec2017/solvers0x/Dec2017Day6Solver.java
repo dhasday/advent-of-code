@@ -13,10 +13,6 @@ public class Dec2017Day6Solver implements DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/6-input";
 
-    private static final String INPUT_REGEX = "";
-
-    private Pattern inputPattern = Pattern.compile(INPUT_REGEX);
-
     @Override
     public int getDayNumber() {
         return 6;
