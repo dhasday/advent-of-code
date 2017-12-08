@@ -1,14 +1,7 @@
 package dhasday.adventofcode.dec2017;
 
 import dhasday.adventofcode.DaySolver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day1Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day2Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day3Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day4Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day5Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day6Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day7Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day8Solver;
+import dhasday.adventofcode.dec2017.solvers0x.*;
 
 public class PuzzleRunner2017 {
 

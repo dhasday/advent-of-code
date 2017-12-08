@@ -57,17 +57,12 @@ public class Dec2017Day8Solver implements DaySolver<Integer> {
             }
 
             String modifyReg = instr[0];
-            int curValue = state.getOrDefault(modifyReg, 0);
-
             int changeAmt = Integer.valueOf(instr[2]);
 
-            if ("inc".equals(instr[1])) {
-                curValue += changeAmt;
-            } else {
-                curValue -= changeAmt;
-            }
-            maxValue = Math.max(curValue, maxValue);
-            state.put(modifyReg, curValue);
+            int newValue = state.getOrDefault(modifyReg, 0) + ("inc".equals(instr[1]) ? changeAmt : - changeAmt);
+
+            maxValue = Math.max(newValue, maxValue);
+            state.put(modifyReg, newValue);
         }
 
         return maxValue;
