@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import dhasday.adventofcode.DaySolver;
 
-public class Dec2016Day8Solver implements DaySolver<Long> {
+public class Dec2016Day8Solver implements DaySolver<String> {
     private static final String INPUT_FILE = "src/main/resources/dec2016/8-input";
 
     @Override
@@ -16,18 +16,18 @@ public class Dec2016Day8Solver implements DaySolver<Long> {
     }
 
     @Override
-    public Long solvePuzzleOne() {
+    public String solvePuzzleOne() {
         List<String> allInstructions = getAllFileLines(INPUT_FILE);
 
         boolean[][] initialScreen = new boolean[6][50];
 
         boolean[][] finalScreen = processAllInstructions(allInstructions, initialScreen);
 
-        return countTrue(finalScreen);
+        return String.valueOf(countTrue(finalScreen));
     }
 
     @Override
-    public Long solvePuzzleTwo() {
+    public String solvePuzzleTwo() {
         List<String> allInstructions = getAllFileLines(INPUT_FILE);
 
         boolean[][] initialScreen = new boolean[6][50];
@@ -36,7 +36,7 @@ public class Dec2016Day8Solver implements DaySolver<Long> {
 
         printScreen(finalScreen);
 
-        return null; // Read Output
+        return "Read Output ^";
     }
 
     private boolean[][] processAllInstructions(List<String> allInstructions, boolean[][] initialScreen) {

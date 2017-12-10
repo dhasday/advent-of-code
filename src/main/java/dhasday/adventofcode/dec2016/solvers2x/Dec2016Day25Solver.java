@@ -1,4 +1,4 @@
-package dhasday.adventofcode.dec2016.solvers1x;
+package dhasday.adventofcode.dec2016.solvers2x;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,38 +7,39 @@ import java.util.Map;
 import dhasday.adventofcode.DaySolver;
 import dhasday.adventofcode.dec2016.common.AssembunnyProcessor;
 
-public class Dec2016Day12Solver implements DaySolver<Integer> {
+public class Dec2016Day25Solver implements DaySolver<Integer> {
 
-    private static final String INPUT_FILE = "src/main/resources/dec2016/12-input";
+    private static final String INPUT_FILE = "src/main/resources/dec2016/25-input";
 
     private AssembunnyProcessor assembunnyProcessor = new AssembunnyProcessor();
 
     @Override
     public int getDayNumber() {
-        return 12;
+        return 25;
     }
 
     @Override
     public Integer solvePuzzleOne() {
         List<String> instructions = getAllFileLines(INPUT_FILE);
 
-        Map<String, Integer> state = initializeState("a", "b", "c", "d");
+        String expectedZero = "0101010101010101010101010";
+        String expectedOne =  "1010101010101010101010101";
+        for (int i = 1; i < 250; i++) {
+            Map<String, Integer> state = initializeState("a", "b", "c", "d");
+            state.put("a", i);
+            String actual = assembunnyProcessor.process(state, instructions, 25);
 
-        assembunnyProcessor.process(state, instructions, null);
+            if (expectedZero.equals(actual) || expectedOne.equals(actual)) {
+                return i;
+            }
+        }
 
-        return state.get("a");
+        return null;
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        List<String> instructions = getAllFileLines(INPUT_FILE);
-;
-        Map<String, Integer> state = initializeState("a", "b", "c", "d");
-        state.put("c", 1);
-
-        assembunnyProcessor.process(state, instructions, null);
-
-        return state.get("a");
+        return null;
     }
 
     private Map<String, Integer> initializeState(String... registers) {

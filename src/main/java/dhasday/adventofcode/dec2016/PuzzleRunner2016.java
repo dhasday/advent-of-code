@@ -3,6 +3,7 @@ package dhasday.adventofcode.dec2016;
 import dhasday.adventofcode.DaySolver;
 import dhasday.adventofcode.dec2016.solvers0x.*;
 import dhasday.adventofcode.dec2016.solvers1x.*;
+import dhasday.adventofcode.dec2016.solvers2x.*;
 
 public class PuzzleRunner2016 {
 
@@ -19,13 +20,23 @@ public class PuzzleRunner2016 {
         solveAndPrintDay(new Dec2016Day9Solver());
         solveAndPrintDay(new Dec2016Day10Solver());
 
-//        solveAndPrintDay(new Dec2016Day11Solver());
+        solveAndPrintDay(new Dec2016Day11Solver());
         solveAndPrintDay(new Dec2016Day12Solver());
         solveAndPrintDay(new Dec2016Day13Solver());
         solveAndPrintDay(new Dec2016Day14Solver());
         solveAndPrintDay(new Dec2016Day15Solver());
 
         solveAndPrintDay(new Dec2016Day16Solver());
+        solveAndPrintDay(new Dec2016Day17Solver());
+        solveAndPrintDay(new Dec2016Day18Solver());
+        solveAndPrintDay(new Dec2016Day19Solver());
+        solveAndPrintDay(new Dec2016Day20Solver());
+
+        solveAndPrintDay(new Dec2016Day21Solver());
+        solveAndPrintDay(new Dec2016Day22Solver());
+        solveAndPrintDay(new Dec2016Day23Solver());
+        solveAndPrintDay(new Dec2016Day24Solver());
+        solveAndPrintDay(new Dec2016Day25Solver());
     }
 
     private static void solveAndPrintDay(DaySolver solver) {

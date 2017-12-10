@@ -1,266 +1,267 @@
 package dhasday.adventofcode.dec2016.solvers1x;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.AStarSearch;
+import javafx.util.Pair;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Dec2016Day11Solver implements DaySolver<Integer> {
+//        Part One
+//        The first floor contains a thulium generator, a thulium-compatible microchip, a plutonium generator, and a strontium generator.
+//        The second floor contains a plutonium-compatible microchip and a strontium-compatible microchip.
+//        The third floor contains a promethium generator, a promethium-compatible microchip, a ruthenium generator, and a ruthenium-compatible microchip.
+//        The fourth floor contains nothing relevant.
 
-    private static final Boolean HARD_FAIL = true;
+//        Part Two
+//        The first floor also contains:
+//            * An elerium generator.
+//            * An elerium-compatible microchip.
+//            * A dilithium generator.
+//            * A dilithium-compatible microchip.
+
+    private AStarSearch<State> aStarSearch = new AStarSearch<>();
 
     @Override
     public int getDayNumber() {
         return 11;
     }
 
-    public Integer solveExample() {
-        State initialState = new State(
-                0,
-                Lists.newArrayList(
-                        Sets.newHashSet(),
-                        Sets.newHashSet(Element.A),
-                        Sets.newHashSet(Element.B),
-                        Sets.newHashSet()
-                ),
-                Lists.newArrayList(
-                        Sets.newHashSet(Element.A, Element.B),
-                        Sets.newHashSet(),
-                        Sets.newHashSet(),
-                        Sets.newHashSet()
-                )
-        );
-
-        return findShortestPath(initialState, 15);
-    }
-
     @Override
     public Integer solvePuzzleOne() {
-        //        generators    microchips  elevator
-        //    1 - A,D,E         E           *
-        //    2 -               A,D
-        //    3 - B,C           B,C
-        //    4 -
+        State initialState = new State();
+        initialState.genChipLocations.put(Element.PLUTONIUM, new Pair<>(1,2));
+        initialState.genChipLocations.put(Element.PROMETHIUM, new Pair<>(3,3));
+        initialState.genChipLocations.put(Element.RUTHENIUM, new Pair<>(3,3));
+        initialState.genChipLocations.put(Element.STRONTIUM, new Pair<>(1,2));
+        initialState.genChipLocations.put(Element.THULIUM, new Pair<>(1,1));
 
-        if (HARD_FAIL) {
-            throw new RuntimeException("Fix your implementation");
-        }
-        State initialState = new State(
-                0,
-                Lists.newArrayList(
-                        Sets.newHashSet(Element.A, Element.D, Element.E),
-                        Sets.newHashSet(),
-                        Sets.newHashSet(Element.B, Element.C),
-                        Sets.newHashSet()
-                ),
-                Lists.newArrayList(
-                        Sets.newHashSet(Element.E),
-                        Sets.newHashSet(Element.A, Element.D),
-                        Sets.newHashSet(Element.B, Element.C),
-                        Sets.newHashSet()
-                )
+        List<State> shortestPath = aStarSearch.findShortestPath(
+                initialState,
+                determineFinalState(initialState),
+                getCostEstimator(),
+                getAdjacentNodeFinder()
         );
 
-        return findShortestPath(initialState, 35);
+        // return 31;
+        return shortestPath == null ? null : shortestPath.size() - 1;
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        //        generators    microchips  elevator
-        //    1 - A,D,E,F,G     E,F,G       *
-        //    2 -               A,D
-        //    3 - B,C           B,C
-        //    4 -
+        State initialState = new State();
+        initialState.genChipLocations.put(Element.PLUTONIUM, new Pair<>(1,2));
+        initialState.genChipLocations.put(Element.PROMETHIUM, new Pair<>(3,3));
+        initialState.genChipLocations.put(Element.RUTHENIUM, new Pair<>(3,3));
+        initialState.genChipLocations.put(Element.STRONTIUM, new Pair<>(1,2));
+        initialState.genChipLocations.put(Element.THULIUM, new Pair<>(1,1));
+        initialState.genChipLocations.put(Element.ELERIUM, new Pair<>(1,1));
+        initialState.genChipLocations.put(Element.DILITHIUM, new Pair<>(1,1));
 
-        if (HARD_FAIL) {
-            throw new RuntimeException("Fix your implementation");
-        }
-        State initialState = new State(
-                0,
-                Lists.newArrayList(
-                        Sets.newHashSet(Element.A, Element.D, Element.E, Element.F, Element.G),
-                        Sets.newHashSet(),
-                        Sets.newHashSet(Element.B, Element.C),
-                        Sets.newHashSet()
-                ),
-                Lists.newArrayList(
-                        Sets.newHashSet(Element.E, Element.F, Element.G),
-                        Sets.newHashSet(Element.A, Element.D),
-                        Sets.newHashSet(Element.B, Element.C),
-                        Sets.newHashSet()
-                )
+        List<State> shortestPath = aStarSearch.findShortestPath(
+                initialState,
+                determineFinalState(initialState),
+                getCostEstimator(),
+                getAdjacentNodeFinder()
         );
 
-        return findShortestPath(initialState, 60);
+        // return 55;
+        return shortestPath == null ? null : shortestPath.size() - 1;
     }
 
-    private Integer findShortestPath(State currentState, int maxMoves) {
-        return findShortestPath(new HashSet<>(), currentState, 0, maxMoves);
+    private State determineFinalState(State initialState) {
+        State finalState = new State();
+        finalState.elevatorFloor = 4;
+
+        for (Element element : initialState.genChipLocations.keySet()) {
+            finalState.genChipLocations.put(element, new Pair<>(4,4));
+        }
+
+        return finalState;
     }
 
-    private Integer findShortestPath(Set<State> visitedStates, State currentState, int curMoves, int remainingMoves) {
-        if (isEndState(currentState)) {
-            return curMoves;
-        }
-        if (remainingMoves <= 0 || wasVisited(visitedStates, currentState)) {
-            return null;
-        }
+    private BiFunction<State, State, Integer> getCostEstimator() {
+        return (s1, s2) -> {
+            int distance = 4 - s1.elevatorFloor;
 
-        Set<State> newVisitedStates = Sets.newHashSet(visitedStates);
-        newVisitedStates.add(currentState);
-
-        Integer minMoves = null;
-        for (State nextState : findValidNextStates(currentState)) {
-            int newRemainingMoves;
-            if (minMoves != null) {
-                newRemainingMoves = minMoves - curMoves - 1;
-            } else {
-                newRemainingMoves = remainingMoves - 1;
-            }
-            Integer possibleMin = findShortestPath(newVisitedStates, nextState, curMoves + 1, newRemainingMoves);
-
-            if (possibleMin != null) {
-                if (minMoves == null) {
-                    minMoves = possibleMin;
-                } else {
-                    minMoves = Math.min(minMoves, possibleMin);
+            for (Pair<Integer, Integer> pair : s1.genChipLocations.values()) {
+                if (pair.getKey() < 4) {
+                    distance += (4 - pair.getKey() ^ 2);
+                }
+                if (pair.getValue() < 4) {
+                    distance += (4 - pair.getValue() ^ 2);
                 }
             }
-        }
 
-        return minMoves;
+            return distance;
+        };
     }
 
-    private boolean isEndState(State state) {
-        return state.elevatorFloor == 3
-                && state.generators.stream().limit(state.generators.size() - 1).allMatch(Set::isEmpty)
-                && state.microchips.stream().limit(state.microchips.size() - 1).allMatch(Set::isEmpty);
-    }
+    private Function<State, Set<Pair<State, Integer>>> getAdjacentNodeFinder() {
+        return (state) -> {
+            List<Pair<Element, Boolean>> movablePairs = findMovablePairs(state);
 
-    private boolean wasVisited(Set<State> visitedStates, State state) {
-        return visitedStates.contains(state) // Exact match
-                || visitedStates.stream().anyMatch(visitedState -> areStatesEquivalent(visitedState, state));
+            Set<Pair<State, Integer>> adjacentNodesWithDistance = new HashSet<>();
 
-    }
+            getValidNextStatesSingleMove(state, state.elevatorFloor + 1, movablePairs)
+                    .forEach(s -> adjacentNodesWithDistance.add(new Pair<>(s, 2)));
+            getValidNextStatesDoubleMove(state, state.elevatorFloor + 1, movablePairs)
+                    .forEach(s -> adjacentNodesWithDistance.add(new Pair<>(s, 1)));
 
-    private boolean areStatesEquivalent(State stateOne, State stateTwo) {
-        if (stateOne.elevatorFloor != stateTwo.elevatorFloor) {
-            return false;
-        }
-
-        for (int i = 0; i < stateOne.generators.size(); i++) {
-            if (stateOne.generators.get(i).size() != stateTwo.generators.get(i).size()) {
-                return false;
+            if (!areLowerFloorsEmpty(state)) {
+                getValidNextStatesSingleMove(state, state.elevatorFloor - 1, movablePairs)
+                        .forEach(s -> adjacentNodesWithDistance.add(new Pair<>(s, 1)));
+                getValidNextStatesDoubleMove(state, state.elevatorFloor - 1, movablePairs)
+                        .forEach(s -> adjacentNodesWithDistance.add(new Pair<>(s, 2)));
             }
-            if (stateOne.microchips.get(i).size() != stateTwo.microchips.get(i).size()) {
-                return false;
-            }
-        }
 
-        return true;
+            return adjacentNodesWithDistance;
+        };
     }
 
-    private Set<State> findValidNextStates(State currentState) {
-        Set<State> nextStates = getAllNextStates(currentState, 1);
-        nextStates.addAll(getAllNextStates(currentState, -1));
+    private Set<State> getValidNextStatesSingleMove(State currentState,
+                                                    int nextFloor,
+                                                    List<Pair<Element, Boolean>> movablePairs) {
+        if (nextFloor > 4 || nextFloor < 1) {
+            return new HashSet<>();
+        }
 
-        return nextStates.stream()
+        return movablePairs.stream()
+                .map(pair -> getNextState(currentState, nextFloor, pair))
                 .filter(this::isValidState)
                 .collect(Collectors.toSet());
     }
 
-    private Set<State> getAllNextStates(State currentState, int floorOffset) {
-        int currentFloor = currentState.elevatorFloor;
-        int nextFloor = currentFloor + floorOffset;
-
-        if (nextFloor < 0 || nextFloor >= currentState.generators.size()) {
+    private Set<State> getValidNextStatesDoubleMove(State currentState,
+                                                    int nextFloor,
+                                                    List<Pair<Element, Boolean>> movablePairs) {
+        if (nextFloor > 4 || nextFloor < 1) {
             return new HashSet<>();
         }
 
-        Set<Element> curGenerators = currentState.generators.get(currentFloor);
-        Set<Element> curMicrochips = currentState.microchips.get(currentFloor);
+        Set<State> validNextStates = new HashSet<>();
+        for (Pair<Element, Boolean> pairOne : movablePairs) {
+            for (Pair<Element, Boolean> pairTwo : movablePairs) {
+                if (pairOne == pairTwo) {
+                    continue;
+                }
 
-        Set<State> allNextStates = new HashSet<>();
-        for (Element genOne : curGenerators) {
-            State nextStateOne = new State(currentState, nextFloor);
-            nextStateOne.generators.get(currentFloor).remove(genOne);
-            nextStateOne.generators.get(nextFloor).add(genOne);
-            allNextStates.add(nextStateOne);
-
-            for (Element genTwo : curGenerators) {
-                State nextStateTwo = new State(currentState, nextFloor);
-                nextStateTwo.generators.get(currentFloor).remove(genOne);
-                nextStateTwo.generators.get(currentFloor).remove(genTwo);
-                nextStateTwo.generators.get(nextFloor).add(genOne);
-                nextStateTwo.generators.get(nextFloor).add(genTwo);
-                allNextStates.add(nextStateTwo);
+                State possibleNextState = getNextState(currentState, nextFloor, pairOne, pairTwo);
+                if (isValidState(possibleNextState)) {
+                    validNextStates.add(possibleNextState);
+                }
             }
+        }
+        return validNextStates;
+    }
 
-            for (Element chipOne : curMicrochips) {
-                State nextStateThree = new State(currentState, nextFloor);
-                nextStateThree.generators.get(currentFloor).remove(genOne);
-                nextStateThree.microchips.get(currentFloor).remove(chipOne);
-                nextStateThree.generators.get(nextFloor).add(genOne);
-                nextStateThree.microchips.get(nextFloor).add(chipOne);
-                allNextStates.add(nextStateThree);
+    private List<Pair<Element, Boolean>> findMovablePairs(State currentState) {
+        List<Pair<Element, Boolean>> movablePairs = new ArrayList<>(); // Element to gen / chip
+
+        int curFloor = currentState.elevatorFloor;
+        for (Map.Entry<Element, Pair<Integer, Integer>> entry : currentState.genChipLocations.entrySet()) {
+            Element element = entry.getKey();
+
+            Pair<Integer, Integer> itemLocations = entry.getValue();
+
+            if (curFloor == itemLocations.getKey()) {
+                movablePairs.add(new Pair<>(element, true));
+            }
+            if (curFloor == itemLocations.getValue()) {
+                movablePairs.add(new Pair<>(element, false));
             }
         }
 
-        for (Element chipOne : curMicrochips) {
-            State nextStateFour = new State(currentState, nextFloor);
-            nextStateFour.microchips.get(currentFloor).remove(chipOne);
-            nextStateFour.microchips.get(nextFloor).add(chipOne);
-            allNextStates.add(nextStateFour);
+        return movablePairs;
+    }
 
-            for (Element chipTwo : curMicrochips) {
-                State nextStateFive = new State(currentState, nextFloor);
-                nextStateFive.microchips.get(currentFloor).remove(chipOne);
-                nextStateFive.microchips.get(currentFloor).remove(chipTwo);
-                nextStateFive.microchips.get(nextFloor).add(chipOne);
-                nextStateFive.microchips.get(nextFloor).add(chipTwo);
-                allNextStates.add(nextStateFive);
+    private State getNextState(State currentState, int nextFloor, Pair<Element, Boolean>... items) {
+        State newState = new State(currentState);
+        newState.elevatorFloor = nextFloor;
+
+        for (Pair<Element, Boolean> item : items) {
+            Pair<Integer, Integer> curItemState = newState.genChipLocations.get(item.getKey());
+
+            Pair<Integer, Integer> newItemState;
+            if (item.getValue()) {
+                newItemState = new Pair<>(nextFloor, curItemState.getValue());
+            } else {
+                newItemState = new Pair<>(curItemState.getKey(), nextFloor);
             }
+            newState.genChipLocations.put(item.getKey(), newItemState);
         }
 
-        return allNextStates;
+        return newState;
     }
 
     private boolean isValidState(State state) {
-        for (int i = 0; i < state.generators.size(); i++) {
-            Set<Element> generators = state.generators.get(i);
-            Set<Element> microchips = state.microchips.get(i);
+        if (state.elevatorFloor > 4 || state.elevatorFloor < 1) {
+            return false;
+        }
 
-            if (!generators.isEmpty() && microchips.stream().anyMatch(chip -> !generators.contains(chip))) {
+        boolean[] hasUnmatchedChip = new boolean[4];
+        boolean[] hasGenerator = new boolean[4];
+
+        for (Pair<Integer, Integer> pair : state.genChipLocations.values()) {
+            Integer genIndex = pair.getKey() - 1;
+            Integer chipIndex = pair.getValue() - 1;
+
+            if (genIndex < 0 || genIndex > 3 || chipIndex < 0 || chipIndex > 3) {
+                return false;
+            }
+
+            hasUnmatchedChip[chipIndex] = hasUnmatchedChip[chipIndex] || !chipIndex.equals(genIndex);
+            hasGenerator[genIndex] = true;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (hasUnmatchedChip[i] && hasGenerator[i]) {
                 return false;
             }
         }
+
+        return true;
+    }
+
+    private boolean areLowerFloorsEmpty(State state) {
+        int floor = state.elevatorFloor;
+
+        for (Pair<Integer, Integer> pair : state.genChipLocations.values()) {
+            if (pair.getKey() < floor || pair.getValue() < floor) {
+                return false;
+            }
+        }
+
         return true;
     }
 
     private class State {
-        private final int elevatorFloor;
+        private int elevatorFloor;
+        private Map<Element, Pair<Integer, Integer>> genChipLocations;
 
-        private final List<Set<Element>> generators;
-        private final List<Set<Element>> microchips;
-
-        State(int elevatorFloor, List<Set<Element>> generators, List<Set<Element>> microchips) {
-            this.elevatorFloor = elevatorFloor;
-            this.generators = generators;
-            this.microchips = microchips;
+        State() {
+            this.elevatorFloor = 1;
+            this.genChipLocations = new HashMap<>();
         }
 
-        State(State other, int elevatorFloor) {
-            this.elevatorFloor = elevatorFloor;
-            this.generators = other.generators.stream().map(Sets::newHashSet).collect(Collectors.toList());
-            this.microchips = other.microchips.stream().map(Sets::newHashSet).collect(Collectors.toList());
+        State(State other) {
+            this.elevatorFloor = other.elevatorFloor;
+
+            this.genChipLocations = new HashMap<>();
+            for (Map.Entry<Element, Pair<Integer, Integer>> entry : other.genChipLocations.entrySet()) {
+                Pair<Integer, Integer> otherPair = entry.getValue();
+                genChipLocations.put(entry.getKey(), new Pair<>(otherPair.getKey(), otherPair.getValue()));
+            }
         }
 
         @Override
@@ -275,12 +276,19 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
 
         @Override
         public String toString() {
-            return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+            return elevatorFloor + "-" + genChipLocations;
         }
     }
 
     private enum Element {
-        A, B, C, D, E, F, G
+        ELERIUM,
+        DILITHIUM,
+        HYDROGEN,
+        LITHIUM,
+        PLUTONIUM,
+        PROMETHIUM,
+        RUTHENIUM,
+        STRONTIUM,
+        THULIUM;
     }
-
 }
