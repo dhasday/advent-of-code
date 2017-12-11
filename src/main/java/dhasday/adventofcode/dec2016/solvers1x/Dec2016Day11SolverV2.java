@@ -1,22 +1,22 @@
 package dhasday.adventofcode.dec2016.solvers1x;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.google.common.collect.Lists;
 import dhasday.adventofcode.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
 import javafx.util.Pair;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Dec2016Day11Solver implements DaySolver<Integer> {
+public class Dec2016Day11SolverV2 implements DaySolver<Integer> {
 //        Part One
 //        The first floor contains a thulium generator, a thulium-compatible microchip, a plutonium generator, and a strontium generator.
 //        The second floor contains a plutonium-compatible microchip and a strontium-compatible microchip.
@@ -40,11 +40,13 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
     @Override
     public Integer solvePuzzleOne() {
         State initialState = new State();
-        initialState.genChipLocations.put(Element.PLUTONIUM, new Pair<>(1,2));
-        initialState.genChipLocations.put(Element.PROMETHIUM, new Pair<>(3,3));
-        initialState.genChipLocations.put(Element.RUTHENIUM, new Pair<>(3,3));
-        initialState.genChipLocations.put(Element.STRONTIUM, new Pair<>(1,2));
-        initialState.genChipLocations.put(Element.THULIUM, new Pair<>(1,1));
+        initialState.initialize(Lists.newArrayList(
+                new Pair<>(1,2), // PLUTONIUM
+                new Pair<>(3,3), // PROMETHIUM
+                new Pair<>(3,3), // RUTHENIUM
+                new Pair<>(1,2), // STRONTIUM
+                new Pair<>(1,1)  // THULIUM
+        ));
 
         List<State> shortestPath = aStarSearch.findShortestPath(
                 initialState,
@@ -60,13 +62,16 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
     @Override
     public Integer solvePuzzleTwo() {
         State initialState = new State();
-        initialState.genChipLocations.put(Element.PLUTONIUM, new Pair<>(1,2));
-        initialState.genChipLocations.put(Element.PROMETHIUM, new Pair<>(3,3));
-        initialState.genChipLocations.put(Element.RUTHENIUM, new Pair<>(3,3));
-        initialState.genChipLocations.put(Element.STRONTIUM, new Pair<>(1,2));
-        initialState.genChipLocations.put(Element.THULIUM, new Pair<>(1,1));
-        initialState.genChipLocations.put(Element.ELERIUM, new Pair<>(1,1));
-        initialState.genChipLocations.put(Element.DILITHIUM, new Pair<>(1,1));
+        initialState.initialize(Lists.newArrayList(
+                new Pair<>(1,2), // PLUTONIUM
+                new Pair<>(3,3), // PROMETHIUM
+                new Pair<>(3,3), // RUTHENIUM
+                new Pair<>(1,2), // STRONTIUM
+                new Pair<>(1,1), // THULIUM
+                new Pair<>(1,1), // ELERIUM
+                new Pair<>(1,1)  // DILITHIUM
+        ));
+
 
         List<State> shortestPath = aStarSearch.findShortestPath(
                 initialState,
@@ -83,9 +88,11 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
         State finalState = new State();
         finalState.elevatorFloor = 4;
 
-        for (Element element : initialState.genChipLocations.keySet()) {
-            finalState.genChipLocations.put(element, new Pair<>(4,4));
-        }
+        finalState.initialize(
+                initialState.sortedGenChipLocations.stream()
+                        .map(p -> new Pair<>(4, 4))
+                        .collect(Collectors.toList())
+        );
 
         return finalState;
     }
@@ -94,12 +101,12 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
         return (s1, s2) -> {
             int distance = 4 - s1.elevatorFloor;
 
-            for (Pair<Integer, Integer> pair : s1.genChipLocations.values()) {
+            for (Pair<Integer, Integer> pair : s1.sortedGenChipLocations) {
                 if (pair.getKey() < 4) {
-                    distance += (4 - pair.getKey() ^ 2);
+                    distance += Math.pow(4 - pair.getKey(), 2);
                 }
                 if (pair.getValue() < 4) {
-                    distance += (4 - pair.getValue() ^ 2);
+                    distance += Math.pow(4 - pair.getValue(), 2);
                 }
             }
 
@@ -109,7 +116,7 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
 
     private Function<State, Set<Pair<State, Integer>>> getAdjacentNodeFinder() {
         return (state) -> {
-            List<Pair<Element, Boolean>> movablePairs = findMovablePairs(state);
+            List<Pair<Integer, Boolean>> movablePairs = findMovablePairs(state);
 
             Set<Pair<State, Integer>> adjacentNodesWithDistance = new HashSet<>();
 
@@ -120,9 +127,9 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
 
             if (!areLowerFloorsEmpty(state)) {
                 getValidNextStatesSingleMove(state, state.elevatorFloor - 1, movablePairs)
-                        .forEach(s -> adjacentNodesWithDistance.add(new Pair<>(s, 1)));
-                getValidNextStatesDoubleMove(state, state.elevatorFloor - 1, movablePairs)
                         .forEach(s -> adjacentNodesWithDistance.add(new Pair<>(s, 2)));
+                getValidNextStatesDoubleMove(state, state.elevatorFloor - 1, movablePairs)
+                        .forEach(s -> adjacentNodesWithDistance.add(new Pair<>(s, 3)));
             }
 
             return adjacentNodesWithDistance;
@@ -131,7 +138,7 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
 
     private Set<State> getValidNextStatesSingleMove(State currentState,
                                                     int nextFloor,
-                                                    List<Pair<Element, Boolean>> movablePairs) {
+                                                    List<Pair<Integer, Boolean>> movablePairs) {
         if (nextFloor > 4 || nextFloor < 1) {
             return new HashSet<>();
         }
@@ -144,14 +151,14 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
 
     private Set<State> getValidNextStatesDoubleMove(State currentState,
                                                     int nextFloor,
-                                                    List<Pair<Element, Boolean>> movablePairs) {
+                                                    List<Pair<Integer, Boolean>> movablePairs) {
         if (nextFloor > 4 || nextFloor < 1) {
             return new HashSet<>();
         }
 
         Set<State> validNextStates = new HashSet<>();
-        for (Pair<Element, Boolean> pairOne : movablePairs) {
-            for (Pair<Element, Boolean> pairTwo : movablePairs) {
+        for (Pair<Integer, Boolean> pairOne : movablePairs) {
+            for (Pair<Integer, Boolean> pairTwo : movablePairs) {
                 if (pairOne == pairTwo) {
                     continue;
                 }
@@ -165,32 +172,30 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
         return validNextStates;
     }
 
-    private List<Pair<Element, Boolean>> findMovablePairs(State currentState) {
-        List<Pair<Element, Boolean>> movablePairs = new ArrayList<>(); // Element to gen / chip
+    private List<Pair<Integer, Boolean>> findMovablePairs(State currentState) {
+        List<Pair<Integer, Boolean>> movablePairs = new ArrayList<>(); // Element to gen / chip
 
         int curFloor = currentState.elevatorFloor;
-        for (Map.Entry<Element, Pair<Integer, Integer>> entry : currentState.genChipLocations.entrySet()) {
-            Element element = entry.getKey();
-
-            Pair<Integer, Integer> itemLocations = entry.getValue();
+        for (int i = 0; i < currentState.sortedGenChipLocations.size(); i++) {
+            Pair<Integer, Integer> itemLocations = currentState.sortedGenChipLocations.get(i);
 
             if (curFloor == itemLocations.getKey()) {
-                movablePairs.add(new Pair<>(element, true));
+                movablePairs.add(new Pair<>(i, true));
             }
             if (curFloor == itemLocations.getValue()) {
-                movablePairs.add(new Pair<>(element, false));
+                movablePairs.add(new Pair<>(i, false));
             }
         }
 
         return movablePairs;
     }
 
-    private State getNextState(State currentState, int nextFloor, Pair<Element, Boolean>... items) {
+    private State getNextState(State currentState, int nextFloor, Pair<Integer, Boolean>... items) {
         State newState = new State(currentState);
         newState.elevatorFloor = nextFloor;
 
-        for (Pair<Element, Boolean> item : items) {
-            Pair<Integer, Integer> curItemState = newState.genChipLocations.get(item.getKey());
+        for (Pair<Integer, Boolean> item : items) {
+            Pair<Integer, Integer> curItemState = newState.sortedGenChipLocations.get(item.getKey());
 
             Pair<Integer, Integer> newItemState;
             if (item.getValue()) {
@@ -198,7 +203,7 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
             } else {
                 newItemState = new Pair<>(curItemState.getKey(), nextFloor);
             }
-            newState.genChipLocations.put(item.getKey(), newItemState);
+            newState.updatePair(item.getKey(), newItemState);
         }
 
         return newState;
@@ -212,7 +217,7 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
         boolean[] hasUnmatchedChip = new boolean[4];
         boolean[] hasGenerator = new boolean[4];
 
-        for (Pair<Integer, Integer> pair : state.genChipLocations.values()) {
+        for (Pair<Integer, Integer> pair : state.sortedGenChipLocations) {
             Integer genIndex = pair.getKey() - 1;
             Integer chipIndex = pair.getValue() - 1;
 
@@ -236,7 +241,7 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
     private boolean areLowerFloorsEmpty(State state) {
         int floor = state.elevatorFloor;
 
-        for (Pair<Integer, Integer> pair : state.genChipLocations.values()) {
+        for (Pair<Integer, Integer> pair : state.sortedGenChipLocations) {
             if (pair.getKey() < floor || pair.getValue() < floor) {
                 return false;
             }
@@ -247,21 +252,16 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
 
     private class State {
         private int elevatorFloor;
-        private Map<Element, Pair<Integer, Integer>> genChipLocations;
+        private List<Pair<Integer, Integer>> sortedGenChipLocations;
 
         State() {
             this.elevatorFloor = 1;
-            this.genChipLocations = new HashMap<>();
+            this.sortedGenChipLocations = new ArrayList<>();
         }
 
         State(State other) {
             this.elevatorFloor = other.elevatorFloor;
-
-            this.genChipLocations = new HashMap<>();
-            for (Map.Entry<Element, Pair<Integer, Integer>> entry : other.genChipLocations.entrySet()) {
-                Pair<Integer, Integer> otherPair = entry.getValue();
-                genChipLocations.put(entry.getKey(), new Pair<>(otherPair.getKey(), otherPair.getValue()));
-            }
+            this.sortedGenChipLocations = Lists.newArrayList(other.sortedGenChipLocations);
         }
 
         @Override
@@ -276,19 +276,33 @@ public class Dec2016Day11Solver implements DaySolver<Integer> {
 
         @Override
         public String toString() {
-            return elevatorFloor + "-" + genChipLocations;
+            return elevatorFloor + "-" + sortedGenChipLocations;
         }
-    }
 
-    private enum Element {
-        ELERIUM,
-        DILITHIUM,
-        HYDROGEN,
-        LITHIUM,
-        PLUTONIUM,
-        PROMETHIUM,
-        RUTHENIUM,
-        STRONTIUM,
-        THULIUM;
+        private void updatePair(int index, Pair<Integer, Integer> genChipPair) {
+            sortedGenChipLocations.remove(index);
+            sortedGenChipLocations.add(genChipPair);
+
+            sortLocations();
+        }
+
+        public void initialize(Pair<Integer, Integer>... genChipPairs) {
+            initialize(Arrays.asList(genChipPairs));
+        }
+
+        public void initialize(List<Pair<Integer, Integer>> genChipPairs) {
+            sortedGenChipLocations.addAll(genChipPairs);
+
+            sortLocations();
+        }
+
+        private void sortLocations() {
+            sortedGenChipLocations.sort((p1, p2) -> {
+                if (!p1.getKey().equals(p2.getKey())) {
+                    return Integer.compare(p1.getKey(), p2.getKey());
+                }
+                return Integer.compare(p1.getValue(), p2.getValue());
+            });
+        }
     }
 }

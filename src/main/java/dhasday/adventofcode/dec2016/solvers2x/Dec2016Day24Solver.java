@@ -17,7 +17,7 @@ public class Dec2016Day24Solver implements DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/24-input";
 
-    private AStarSearch<Pair<Integer, Integer>> aStarSearch = new AStarSearch<>();
+    private AStarSearch aStarSearch = new AStarSearch();
 
     @Override
     public int getDayNumber() {

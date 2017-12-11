@@ -10,9 +10,9 @@ import java.util.function.Function;
 
 import javafx.util.Pair;
 
-public class AStarSearch<T> {
+public class AStarSearch {
 
-    public List<T> findShortestPath(T start,
+    public <T> List<T> findShortestPath(T start,
                                     T end,
                                     BiFunction<T, T, Integer> heuristicCostEstimate,
                                     Function<T, Set<Pair<T, Integer>>> findAdjacentNodes) {
@@ -23,7 +23,7 @@ public class AStarSearch<T> {
         openSet.put(start, startNode);
 
         while (!openSet.isEmpty()) {
-            AStarNode currentNode = getNodeWithLowestFScore(openSet);
+            AStarNode<T> currentNode = getNodeWithLowestFScore(openSet);
             if (currentNode.value.equals(end)) {
                 return reconstructPathToNode(currentNode);
             }
@@ -44,7 +44,7 @@ public class AStarSearch<T> {
                 int possibleGScore = currentNode.gScore + adjacentDistance;
 
                 if (adjacentNode == null || adjacentNode.gScore < possibleGScore) {
-                    adjacentNode = new AStarNode(
+                    adjacentNode = new AStarNode<>(
                             adjacentValue,
                             currentNode,
                             possibleGScore,
@@ -59,7 +59,7 @@ public class AStarSearch<T> {
         return null;
     }
 
-    private AStarNode getNodeWithLowestFScore(Map<T, AStarNode> openSet) {
+    private <T> AStarNode<T> getNodeWithLowestFScore(Map<T, AStarNode> openSet) {
         AStarNode lowestNode = null;
 
         for (AStarNode node : openSet.values()) {
@@ -71,7 +71,7 @@ public class AStarSearch<T> {
         return lowestNode;
     }
 
-    private List<T> reconstructPathToNode(AStarNode node) {
+    private <T> List<T> reconstructPathToNode(AStarNode<T> node) {
         List<T> path = new LinkedList<>();
         path.add(0, node.value);
 
@@ -82,7 +82,7 @@ public class AStarSearch<T> {
         return path;
     }
 
-    private class AStarNode {
+    private class AStarNode<T> {
         private T value;
         private AStarNode previousNode;
 

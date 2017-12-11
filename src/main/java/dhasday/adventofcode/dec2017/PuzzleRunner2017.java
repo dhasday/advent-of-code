@@ -18,6 +18,8 @@ public class PuzzleRunner2017 {
         solveAndPrintDay(new Dec2017Day8Solver());
         solveAndPrintDay(new Dec2017Day9Solver());
         solveAndPrintDay(new Dec2017Day10Solver());
+
+        solveAndPrintDay(new Dec2017Day11Solver());
     }
 
     private static void solveAndPrintDay(DaySolver solver) {
