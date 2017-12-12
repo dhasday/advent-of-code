@@ -12,7 +12,7 @@ public class PuzzleRunner2016 {
         solveAndPrintDay(new Dec2016Day2Solver());
         solveAndPrintDay(new Dec2016Day3Solver());
         solveAndPrintDay(new Dec2016Day4Solver());
-        solveAndPrintDay(new Dec2016Day5Solver());
+        solveAndPrintDay(new Dec2016Day5Solver()); // Slow
 
         solveAndPrintDay(new Dec2016Day6Solver());
         solveAndPrintDay(new Dec2016Day7Solver());
@@ -20,11 +20,10 @@ public class PuzzleRunner2016 {
         solveAndPrintDay(new Dec2016Day9Solver());
         solveAndPrintDay(new Dec2016Day10Solver());
 
-//        solveAndPrintDay(new Dec2016Day11Solver());
-        solveAndPrintDay(new Dec2016Day11SolverV2());
+        solveAndPrintDay(new Dec2016Day11Solver());
         solveAndPrintDay(new Dec2016Day12Solver());
         solveAndPrintDay(new Dec2016Day13Solver());
-        solveAndPrintDay(new Dec2016Day14Solver());
+        solveAndPrintDay(new Dec2016Day14Solver()); // Slow Part 2
         solveAndPrintDay(new Dec2016Day15Solver());
 
         solveAndPrintDay(new Dec2016Day16Solver());
@@ -35,7 +34,7 @@ public class PuzzleRunner2016 {
 
         solveAndPrintDay(new Dec2016Day21Solver());
         solveAndPrintDay(new Dec2016Day22Solver());
-        solveAndPrintDay(new Dec2016Day23Solver());
+        solveAndPrintDay(new Dec2016Day23Solver()); // Slow Part 2
         solveAndPrintDay(new Dec2016Day24Solver());
         solveAndPrintDay(new Dec2016Day25Solver());
     }
