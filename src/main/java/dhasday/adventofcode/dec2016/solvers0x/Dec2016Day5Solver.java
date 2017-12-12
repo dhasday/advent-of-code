@@ -19,11 +19,13 @@ public class Dec2016Day5Solver implements DaySolver<String> {
 
     @Override
     public String solvePuzzleOne() {
+        // return "f97c354d";
         return determinePasswordOne(INPUT);
     }
 
     @Override
     public String solvePuzzleTwo() {
+        // return "863dde27";
         return determinePasswordTwo(INPUT);
     }
 

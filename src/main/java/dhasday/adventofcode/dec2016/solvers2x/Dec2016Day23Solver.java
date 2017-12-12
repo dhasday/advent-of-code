@@ -27,6 +27,7 @@ public class Dec2016Day23Solver implements DaySolver<Integer> {
 
         assembunnyProcessor.process(state, instructions, null);
 
+        // return 12624;
         return state.get("a");
     }
 
@@ -39,6 +40,7 @@ public class Dec2016Day23Solver implements DaySolver<Integer> {
 
         assembunnyProcessor.process(state, instructions, null);
 
+//        return 479009184;
         return state.get("a");
     }
 
