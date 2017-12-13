@@ -37,9 +37,16 @@ public class Dec2017Day12Solver implements DaySolver<Integer> {
         Map<Integer, Set<Integer>> connectedNodes = loadAllConnectedNodes(allInputLines);
 
         Set<Set<Integer>> allGroups = new HashSet<>();
+        Set<Integer> closedSet = new HashSet<>();
 
         for (Integer node : connectedNodes.keySet()) {
-            allGroups.add(findNodesConnectedToTarget(connectedNodes, node));
+            if (closedSet.contains(node)) {
+                continue;
+            }
+
+            Set<Integer> nodeGroup = findNodesConnectedToTarget(connectedNodes, node);
+            allGroups.add(nodeGroup);
+            closedSet.addAll(nodeGroup);
         }
 
         return allGroups.size();
