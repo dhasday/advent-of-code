@@ -1,6 +1,5 @@
 package dhasday.adventofcode.dec2016.solvers1x;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -14,7 +13,7 @@ public class Dec2016Day14Solver implements DaySolver<Integer> {
 
     private static final String INPUT_VALUE = "ngcjuoqr";
 
-    private Map<Pair<String, Integer>, Map<Integer, String>> cachedHashes = new HashMap<>();
+    private Map<Pair<String, Integer>, Map<Integer, String>> hashCache = new HashMap<>(); // Get it?
 
     @Override
     public int getDayNumber() {
@@ -61,7 +60,7 @@ public class Dec2016Day14Solver implements DaySolver<Integer> {
         Pair<String, Integer> cacheKey = new Pair<>(salt, numHashes);
 
         // Get cached hash if present
-        Map<Integer, String> cachedHashesForKey = cachedHashes.get(cacheKey);
+        Map<Integer, String> cachedHashesForKey = hashCache.get(cacheKey);
         if (cachedHashesForKey != null && cachedHashesForKey.containsKey(index)) {
             return cachedHashesForKey.get(index);
         }
@@ -75,7 +74,7 @@ public class Dec2016Day14Solver implements DaySolver<Integer> {
         // Store hash
         if (cachedHashesForKey == null) {
             cachedHashesForKey = new HashMap<>();
-            cachedHashes.put(cacheKey, cachedHashesForKey);
+            hashCache.put(cacheKey, cachedHashesForKey);
         }
         cachedHashesForKey.put(index, currentValue);
 

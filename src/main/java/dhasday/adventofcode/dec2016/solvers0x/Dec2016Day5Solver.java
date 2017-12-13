@@ -1,8 +1,11 @@
 package dhasday.adventofcode.dec2016.solvers0x;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.codec.digest.DigestUtils;

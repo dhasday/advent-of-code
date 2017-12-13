@@ -1,7 +1,6 @@
 package dhasday.adventofcode.dec2016.common;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -12,6 +11,8 @@ public class AssembunnyProcessor {
 
     public String process(Map<String, Integer> state, List<String> instructions, Integer outputLimit) {
         List<Instruction> allInstructions = loadInstructions(instructions);
+
+        // TODO: Optimize Instructions
 
         return processInstructions(allInstructions, state, outputLimit);
     }
@@ -37,14 +38,6 @@ public class AssembunnyProcessor {
                 new Operand(matcher.group(2)),
                 new Operand(matcher.group(4))
         );
-    }
-
-    private Map<String, Integer> initializeState(String... registers) {
-        Map<String, Integer> state = new HashMap<>();
-        for (String register : registers) {
-            state.put(register, 0);
-        }
-        return state;
     }
 
     private String processInstructions(List<Instruction> instructions,

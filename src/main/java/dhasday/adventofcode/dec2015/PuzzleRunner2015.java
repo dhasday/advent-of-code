@@ -1,5 +1,7 @@
 package dhasday.adventofcode.dec2015;
 
+import java.util.Date;
+
 import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2015.solvers0x.*;
 import dhasday.adventofcode.dec2015.solvers1x.*;
@@ -8,6 +10,8 @@ import dhasday.adventofcode.dec2015.solvers2x.*;
 public class PuzzleRunner2015 {
 
     public static void main(String[] args) {
+        Date startTime = new Date();
+
         solveAndPrintDay(new Dec2015Day1Solver());
         solveAndPrintDay(new Dec2015Day2Solver());
         solveAndPrintDay(new Dec2015Day3Solver());
@@ -37,6 +41,12 @@ public class PuzzleRunner2015 {
         solveAndPrintDay(new Dec2015Day23Solver());
         solveAndPrintDay(new Dec2015Day24Solver());
         solveAndPrintDay(new Dec2015Day25Solver());
+
+        Date endTime = new Date();
+
+        System.out.println("Start   : " + startTime);
+        System.out.println("End     : " + endTime);
+        System.out.println("Elapsed : " + (endTime.getTime() - startTime.getTime()));
     }
 
     private static void solveAndPrintDay(DaySolver solver) {
