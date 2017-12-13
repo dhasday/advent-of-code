@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 
 public class Dec2015Day3Solver implements DaySolver<Integer> {

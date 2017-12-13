@@ -1,6 +1,8 @@
 package dhasday.adventofcode.dec2016;
 
-import dhasday.adventofcode.DaySolver;
+import java.util.Date;
+
+import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2016.solvers0x.*;
 import dhasday.adventofcode.dec2016.solvers1x.*;
 import dhasday.adventofcode.dec2016.solvers2x.*;

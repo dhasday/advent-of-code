@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
 import javafx.util.Pair;
 import org.apache.commons.lang3.builder.EqualsBuilder;

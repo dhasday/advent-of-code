@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2016.solvers0x;
 
 import java.util.List;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2016Day2Solver implements DaySolver<String> {
     private static final String INPUT_FILE = "src/main/resources/dec2016/2-input";

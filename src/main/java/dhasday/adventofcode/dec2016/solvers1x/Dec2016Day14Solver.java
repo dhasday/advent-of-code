@@ -1,11 +1,12 @@
 package dhasday.adventofcode.dec2016.solvers1x;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -22,13 +23,13 @@ public class Dec2016Day14Solver implements DaySolver<Integer> {
 
     @Override
     public Integer solvePuzzleOne() {
-//        14-1: 18626
+//        return 18626
         return findNthKey(INPUT_VALUE, 1, 64);
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-//        14-2: 20092
+//        return 20092
         return findNthKey(INPUT_VALUE, 2017, 64);
     }
 

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.google.common.collect.Lists;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2017Day10Solver implements DaySolver<String> {
 

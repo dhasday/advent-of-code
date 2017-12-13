@@ -1,6 +1,6 @@
 package dhasday.adventofcode.dec2015;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2015.solvers0x.*;
 import dhasday.adventofcode.dec2015.solvers1x.*;
 import dhasday.adventofcode.dec2015.solvers2x.*;

@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableMap;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
 public class Dec2015Day7Solver implements DaySolver<Integer> {

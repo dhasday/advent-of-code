@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2016Day6Solver implements DaySolver<String> {
     private static final String INPUT_FILE = "src/main/resources/dec2016/6-input";

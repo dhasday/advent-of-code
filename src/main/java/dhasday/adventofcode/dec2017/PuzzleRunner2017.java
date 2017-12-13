@@ -1,6 +1,6 @@
 package dhasday.adventofcode.dec2017;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2017.solvers0x.*;
 import dhasday.adventofcode.dec2017.solvers1x.*;
 
@@ -21,6 +21,7 @@ public class PuzzleRunner2017 {
 
         solveAndPrintDay(new Dec2017Day11Solver());
         solveAndPrintDay(new Dec2017Day12Solver());
+        solveAndPrintDay(new Dec2017Day13Solver());
     }
 
     private static void solveAndPrintDay(DaySolver solver) {

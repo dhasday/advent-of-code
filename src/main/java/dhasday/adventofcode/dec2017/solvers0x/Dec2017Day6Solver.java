@@ -3,11 +3,10 @@ package dhasday.adventofcode.dec2017.solvers0x;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2017Day6Solver implements DaySolver<Integer> {
 

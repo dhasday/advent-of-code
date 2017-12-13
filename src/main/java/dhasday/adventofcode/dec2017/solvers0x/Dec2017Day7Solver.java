@@ -1,9 +1,7 @@
 package dhasday.adventofcode.dec2017.solvers0x;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +13,7 @@ import java.util.stream.Collectors;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
 public class Dec2017Day7Solver implements DaySolver<String> {

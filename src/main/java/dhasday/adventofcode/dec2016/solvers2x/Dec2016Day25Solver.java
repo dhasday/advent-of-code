@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2016.common.AssembunnyProcessor;
 
 public class Dec2016Day25Solver implements DaySolver<Integer> {

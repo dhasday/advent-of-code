@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2015Day14Solver implements DaySolver<Integer> {
 

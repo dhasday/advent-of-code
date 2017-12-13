@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import com.google.common.base.Joiner;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
 import javafx.util.Pair;
 

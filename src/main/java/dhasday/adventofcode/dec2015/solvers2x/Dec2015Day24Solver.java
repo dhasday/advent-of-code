@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 
 public class Dec2015Day24Solver implements DaySolver<Long> {

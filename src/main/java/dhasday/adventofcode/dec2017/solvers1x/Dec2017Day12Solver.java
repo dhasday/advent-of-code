@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2017Day12Solver implements DaySolver<Integer> {
 

@@ -1,6 +1,6 @@
 package dhasday.adventofcode.dec2017.solvers0x;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 
 public class Dec2017Day9Solver implements DaySolver<Integer> {

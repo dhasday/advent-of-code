@@ -3,7 +3,7 @@ package dhasday.adventofcode.dec2016.solvers0x;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2016Day9Solver implements DaySolver<Long> {
     private static final String INPUT_FILE = "src/main/resources/dec2016/9-input";

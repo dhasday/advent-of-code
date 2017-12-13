@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2015Day13Solver implements DaySolver<Integer> {
 

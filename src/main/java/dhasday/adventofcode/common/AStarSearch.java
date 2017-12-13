@@ -13,13 +13,13 @@ import javafx.util.Pair;
 public class AStarSearch {
 
     public <T> List<T> findShortestPath(T start,
-                                    T end,
-                                    BiFunction<T, T, Integer> heuristicCostEstimate,
-                                    Function<T, Set<Pair<T, Integer>>> findAdjacentNodes) {
+                                        T end,
+                                        BiFunction<T, T, Integer> heuristicCostEstimate,
+                                        Function<T, Set<Pair<T, Integer>>> findAdjacentNodes) {
         Map<T, AStarNode> closedSet = new HashMap<>();
         Map<T, AStarNode> openSet = new HashMap<>();
 
-        AStarNode startNode = new AStarNode(start, null, 0, heuristicCostEstimate.apply(start, end));
+        AStarNode<T> startNode = new AStarNode<>(start, null, 0, heuristicCostEstimate.apply(start, end));
         openSet.put(start, startNode);
 
         while (!openSet.isEmpty()) {

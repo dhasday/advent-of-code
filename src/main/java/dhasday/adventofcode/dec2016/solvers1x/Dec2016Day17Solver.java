@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.codec.digest.DigestUtils;
 

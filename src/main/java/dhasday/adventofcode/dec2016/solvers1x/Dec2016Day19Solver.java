@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2016Day19Solver implements DaySolver<Integer> {
 

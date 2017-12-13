@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2015Day2Solver implements DaySolver<Integer> {
 

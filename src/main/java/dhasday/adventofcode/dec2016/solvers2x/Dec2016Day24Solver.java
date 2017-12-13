@@ -9,7 +9,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
 import javafx.util.Pair;
 

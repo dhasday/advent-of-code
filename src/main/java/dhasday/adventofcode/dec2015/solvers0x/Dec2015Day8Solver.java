@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2015.solvers0x;
 
 import java.util.List;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2015Day8Solver implements DaySolver<Integer> {
 

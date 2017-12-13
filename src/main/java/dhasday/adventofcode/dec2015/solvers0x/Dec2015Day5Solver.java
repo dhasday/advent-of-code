@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2015Day5Solver implements DaySolver<Integer> {
 

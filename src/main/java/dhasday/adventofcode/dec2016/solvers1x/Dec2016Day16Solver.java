@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2016.solvers1x;
 
 import java.util.Arrays;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
 public class Dec2016Day16Solver implements DaySolver<String> {

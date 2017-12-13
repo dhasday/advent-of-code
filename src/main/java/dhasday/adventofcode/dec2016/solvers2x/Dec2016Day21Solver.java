@@ -1,6 +1,5 @@
 package dhasday.adventofcode.dec2016.solvers2x;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,9 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
 public class Dec2016Day21Solver implements DaySolver<String> {

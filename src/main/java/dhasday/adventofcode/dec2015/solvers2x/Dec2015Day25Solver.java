@@ -1,6 +1,6 @@
 package dhasday.adventofcode.dec2015.solvers2x;
 
-import dhasday.adventofcode.DaySolver;
+import dhasday.adventofcode.common.DaySolver;
 
 public class Dec2015Day25Solver implements DaySolver<Long> {
 
