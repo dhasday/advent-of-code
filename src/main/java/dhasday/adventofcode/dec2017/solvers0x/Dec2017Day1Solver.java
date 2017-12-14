@@ -42,7 +42,7 @@ public class Dec2017Day1Solver implements DaySolver<Integer> {
 
             char currentChar = input.charAt(i);
             if (currentChar == input.charAt(nextCharIndex)) {
-                sum += Integer.valueOf(String.valueOf(currentChar));
+                sum += (currentChar - '0');
             }
         }
 

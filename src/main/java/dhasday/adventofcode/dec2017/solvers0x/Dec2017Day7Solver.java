@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
@@ -167,34 +166,6 @@ public class Dec2017Day7Solver implements DaySolver<String> {
                 .findFirst()
                 .get() // It'll be ok IntelliJ, don't fret over this optional check
                 .getKey();
-    }
-
-    private String weightsToString(Node parentNode) {
-        StringBuilder weightsString = new StringBuilder("\n");
-
-        for (Node node : parentNode.subNodes) {
-            weightsString.append(node.fullWeight);
-            weightsString.append(" (");
-            weightsString.append(node.weight);
-            weightsString.append(") : ");
-
-            List<Integer> childWeights = node.subNodes.stream().map(child -> child.fullWeight).collect(Collectors.toList());
-            weightsString.append(Joiner.on(",").join(childWeights));
-            weightsString.append("\n");
-        }
-
-        return weightsString.toString();
-    }
-
-    private void printTree(Node rootNode, int level) {
-        String line = "";
-        for (int i = 0; i < level; i++) {
-            line += "\t";
-        }
-        System.out.println(line + rootNode.fullWeight);
-        for (Node child : rootNode.subNodes) {
-            printTree(child, level + 1);
-        }
     }
 
     private class Node {

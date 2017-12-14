@@ -1,10 +1,11 @@
 package dhasday.adventofcode.dec2017.solvers0x;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import dhasday.adventofcode.common.DaySolver;
 
@@ -22,7 +23,7 @@ public class Dec2017Day4Solver implements DaySolver<Long> {
         List<String> allFileLines = getAllFileLines(INPUT_FILE);
 
         return allFileLines.stream()
-                .filter(this::isValidPasswordOne)
+                .filter(l -> isValidPassword(l, w -> w))
                 .count();
     }
 
@@ -31,55 +32,29 @@ public class Dec2017Day4Solver implements DaySolver<Long> {
         List<String> allFileLines = getAllFileLines(INPUT_FILE);
 
         return allFileLines.stream()
-                .filter(this::isValidPasswordTwo)
+                .filter(l -> isValidPassword(l, this::getCharMap))
                 .count();
     }
 
-    private boolean isValidPasswordOne(String input) {
-        Set<String> usedWords = new HashSet<>();
+    private <T> boolean isValidPassword(String input, Function<String, T> getPossiblyUsedWord) {
+        Set<T> usedWords = new HashSet<>();
 
         for (String word : input.split(" ")) {
-            if (usedWords.contains(word)) {
+            T possibleWord = getPossiblyUsedWord.apply(word);
+
+            if (usedWords.contains(possibleWord)) {
                 return false;
             }
 
-            usedWords.add(word);
+            usedWords.add(possibleWord);
         }
 
         return true;
     }
 
-    private boolean isValidPasswordTwo(String input) {
-        Set<Map<Character, Integer>> usedWords = new HashSet<>();
-
-        for (String word : input.split(" ")) {
-            Map<Character, Integer> charMap = getCharMap(word);
-
-            if (usedWords.contains(charMap)) {
-                return false;
-            }
-
-            usedWords.add(charMap);
-        }
-
-        return true;
-    }
-
-    private Map<Character, Integer> getCharMap(String word) {
-        Map<Character, Integer> letterMap = new HashMap<>();
-
-        for (int i = 0; i < word.length(); i++) {
-            char curChar = word.charAt(i);
-
-            Integer curCount = letterMap.get(curChar);
-
-            if (curCount == null) {
-                curCount = 0;
-            }
-
-            letterMap.put(curChar, curCount + 1);
-        }
-
-        return letterMap;
+    private Map<Character, Long> getCharMap(String word) {
+        return word.chars()
+                .boxed()
+                .collect(Collectors.groupingBy(i -> (char) i.intValue(), Collectors.counting()));
     }
 }

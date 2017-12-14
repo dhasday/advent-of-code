@@ -99,6 +99,6 @@ public class Dec2017Day6Solver implements DaySolver<Integer> {
             }
         }
 
-        throw new RuntimeException("this shouldn't happen");
+        throw new RuntimeException("How did we end up here? We clearly checked that `pattern` already exists in `seenValues` on L57, so this should never happen :(");
     }
 }

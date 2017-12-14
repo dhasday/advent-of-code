@@ -96,7 +96,7 @@ public class KnotHash {
     }
 
     private String generateHash(List<Integer> values, Function<Integer, String> convertToString) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < values.size() / 16; i++) {
             int startIndex = i * 16;
@@ -106,10 +106,10 @@ public class KnotHash {
                 xorResult = xorResult ^ values.get(startIndex + j);
             }
 
-            result += convertToString.apply(xorResult);
+            result.append(convertToString.apply(xorResult));
         }
 
-        return result;
+        return result.toString();
     }
 
     private class State {
