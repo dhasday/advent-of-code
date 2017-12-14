@@ -26,7 +26,7 @@ public class PuzzleRunner2017 {
         solveAndPrintDay(new Dec2017Day11Solver());
         solveAndPrintDay(new Dec2017Day12Solver());
         solveAndPrintDay(new Dec2017Day13Solver());
-//        solveAndPrintDay(new Dec2017Day14Solver());
+        solveAndPrintDay(new Dec2017Day14Solver());
 //        solveAndPrintDay(new Dec2017Day15Solver());
 //
 //        solveAndPrintDay(new Dec2017Day16Solver());
