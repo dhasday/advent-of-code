@@ -5,15 +5,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public interface DaySolver<T> {
+public abstract class DaySolver<T> implements Runnable {
 
-    int getDayNumber();
+    public abstract int getDayNumber();
 
-    T solvePuzzleOne();
+    public abstract T solvePuzzleOne();
 
-    T solvePuzzleTwo();
+    public abstract T solvePuzzleTwo();
 
-    default List<String> getAllFileLines(String filename) {
+    protected List<String> getAllFileLines(String filename) {
         try {
             return Files.readAllLines(Paths.get(filename));
         } catch (IOException e) {
@@ -21,7 +21,7 @@ public interface DaySolver<T> {
         }
     }
 
-    default String getOnlyFileLine(String filename) {
+    protected String getOnlyFileLine(String filename) {
         List<String> allLines = getAllFileLines(filename);
 
         if (allLines.size() != 1) {
@@ -31,4 +31,13 @@ public interface DaySolver<T> {
         return allLines.get(0);
     }
 
+    @Override
+    public void run() {
+        long startMillis = System.currentTimeMillis();
+        System.out.println(String.format("%2d-1: %s", getDayNumber(), String.valueOf(solvePuzzleOne())));
+        System.out.println(String.format("%2d-2: %s", getDayNumber(), String.valueOf(solvePuzzleTwo())));
+        long endMillis = System.currentTimeMillis();
+
+        System.out.println(String.format("%2d Elapsed: %d", getDayNumber(), endMillis - startMillis));
+    }
 }

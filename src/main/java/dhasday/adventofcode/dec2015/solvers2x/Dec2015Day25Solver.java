@@ -2,9 +2,7 @@ package dhasday.adventofcode.dec2015.solvers2x;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day25Solver implements DaySolver<Long> {
-
-    private static final String INPUT_FILE = "src/main/resources/dec2015/25-input";
+public class Dec2015Day25Solver extends DaySolver<Long> {
 
     private static final long MULTIPLE_KEY = 252533;
     private static final long DIVIDE_KEY = 33554393;

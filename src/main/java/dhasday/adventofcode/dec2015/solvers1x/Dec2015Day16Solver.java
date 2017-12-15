@@ -11,7 +11,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day16Solver implements DaySolver<Integer> {
+public class Dec2015Day16Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/16-input";
 

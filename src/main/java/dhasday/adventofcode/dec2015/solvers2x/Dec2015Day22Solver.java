@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day22Solver implements DaySolver<Integer> {
+public class Dec2015Day22Solver extends DaySolver<Integer> {
 
     @Override
     public int getDayNumber() {

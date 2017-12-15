@@ -13,7 +13,7 @@ import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
 import javafx.util.Pair;
 
-public class Dec2016Day24Solver implements DaySolver<Integer> {
+public class Dec2016Day24Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/24-input";
 

@@ -6,7 +6,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day21Solver implements DaySolver<Integer> {
+public class Dec2015Day21Solver extends DaySolver<Integer> {
 
     private static final int STARTING_HEALTH_PLAYER = 100;
 

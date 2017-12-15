@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2016Day8Solver implements DaySolver<String> {
+public class Dec2016Day8Solver extends DaySolver<String> {
+
     private static final String INPUT_FILE = "src/main/resources/dec2016/8-input";
 
     @Override

@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 import com.google.common.collect.Lists;
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2016Day3Solver implements DaySolver<Long> {
+public class Dec2016Day3Solver extends DaySolver<Long> {
+
     private static final String INPUT_FILE = "src/main/resources/dec2016/3-input";
 
     private static final String INPUT_REGEX = "([^\\d]*)?(\\d+)([ ]+)(\\d+)([ ]+)(\\d+)";

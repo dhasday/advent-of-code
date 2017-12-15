@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2017.solvers0x;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2017Day3Solver implements DaySolver<Integer> {
+public class Dec2017Day3Solver extends DaySolver<Integer> {
 
     private static final Integer TARGET_VALUE = 361527;
 

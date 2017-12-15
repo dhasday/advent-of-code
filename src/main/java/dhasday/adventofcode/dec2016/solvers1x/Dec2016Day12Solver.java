@@ -7,7 +7,7 @@ import java.util.Map;
 import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2016.common.AssembunnyProcessor;
 
-public class Dec2016Day12Solver implements DaySolver<Integer> {
+public class Dec2016Day12Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/12-input";
 

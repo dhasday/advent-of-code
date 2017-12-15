@@ -7,7 +7,7 @@ import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 
-public class Dec2016Day13Solver implements DaySolver<Integer> {
+public class Dec2016Day13Solver extends DaySolver<Integer> {
     private static final int INPUT_VALUE = 1358;
 
     @Override

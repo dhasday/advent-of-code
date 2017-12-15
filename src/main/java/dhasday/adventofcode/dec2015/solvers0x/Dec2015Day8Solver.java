@@ -4,7 +4,7 @@ import java.util.List;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day8Solver implements DaySolver<Integer> {
+public class Dec2015Day8Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/8-input";
 

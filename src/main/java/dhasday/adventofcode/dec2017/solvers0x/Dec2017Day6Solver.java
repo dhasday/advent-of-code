@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import com.google.common.collect.Lists;
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2017Day6Solver implements DaySolver<Integer> {
+public class Dec2017Day6Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/6-input";
 

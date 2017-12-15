@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Dec2015Day1Solver implements DaySolver<Integer> {
+public class Dec2015Day1Solver extends DaySolver<Integer> {
 
     private static final String DAY_ONE_INPUT_FILE = "src/main/resources/dec2015/1-input";
 

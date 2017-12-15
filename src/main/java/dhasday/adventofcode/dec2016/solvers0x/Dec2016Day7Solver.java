@@ -10,7 +10,8 @@ import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2016Day7Solver implements DaySolver<Long> {
+public class Dec2016Day7Solver extends DaySolver<Long> {
+
     private static final String INPUT_FILE = "src/main/resources/dec2016/7-input";
 
     @Override

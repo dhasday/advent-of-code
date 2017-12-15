@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2016.solvers2x;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2016Day20Solver implements DaySolver<Long> {
+public class Dec2016Day20Solver extends DaySolver<Long> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/20-input-sorted";
 

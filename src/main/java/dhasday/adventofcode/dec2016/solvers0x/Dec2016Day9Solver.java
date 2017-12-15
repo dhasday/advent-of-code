@@ -5,7 +5,8 @@ import java.util.regex.Pattern;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2016Day9Solver implements DaySolver<Long> {
+public class Dec2016Day9Solver extends DaySolver<Long> {
+
     private static final String INPUT_FILE = "src/main/resources/dec2016/9-input";
 
     private Pattern pattern = Pattern.compile("(\\((\\d+)x(\\d+)\\))");

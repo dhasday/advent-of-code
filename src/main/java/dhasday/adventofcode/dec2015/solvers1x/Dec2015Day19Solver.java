@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day19Solver implements DaySolver<Integer> {
+public class Dec2015Day19Solver extends DaySolver<Integer> {
 
     private static final String SUBSTITUTIONS_FILE = "src/main/resources/dec2015/19-input-substitutions";
     private static final String SEQUENCE_FILE = "src/main/resources/dec2015/19-input-sequence";

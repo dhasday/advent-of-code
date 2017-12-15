@@ -7,49 +7,43 @@ import dhasday.adventofcode.dec2017.solvers0x.*;
 import dhasday.adventofcode.dec2017.solvers1x.*;
 
 public class PuzzleRunner2017 {
-
     public static void main(String[] args) {
         Date startTime = new Date();
 
-        solveAndPrintDay(new Dec2017Day1Solver());
-        solveAndPrintDay(new Dec2017Day2Solver());
-        solveAndPrintDay(new Dec2017Day3Solver());
-        solveAndPrintDay(new Dec2017Day4Solver());
-        solveAndPrintDay(new Dec2017Day5Solver());
+        new Dec2017Day1Solver().run();
+        new Dec2017Day2Solver().run();
+        new Dec2017Day3Solver().run();
+        new Dec2017Day4Solver().run();
+        new Dec2017Day5Solver().run();
 
-        solveAndPrintDay(new Dec2017Day6Solver());
-        solveAndPrintDay(new Dec2017Day7Solver());
-        solveAndPrintDay(new Dec2017Day8Solver());
-        solveAndPrintDay(new Dec2017Day9Solver());
-        solveAndPrintDay(new Dec2017Day10Solver());
+        new Dec2017Day6Solver().run();
+        new Dec2017Day7Solver().run();
+        new Dec2017Day8Solver().run();
+        new Dec2017Day9Solver().run();
+        new Dec2017Day10Solver().run();
 
-        solveAndPrintDay(new Dec2017Day11Solver());
-        solveAndPrintDay(new Dec2017Day12Solver());
-        solveAndPrintDay(new Dec2017Day13Solver());
-        solveAndPrintDay(new Dec2017Day14Solver());
-//        solveAndPrintDay(new Dec2017Day15Solver());
+        new Dec2017Day11Solver().run();
+        new Dec2017Day12Solver().run();
+        new Dec2017Day13Solver().run();
+        new Dec2017Day14Solver().run();
+//        new Dec2017Day15Solver().run();
 //
-//        solveAndPrintDay(new Dec2017Day16Solver());
-//        solveAndPrintDay(new Dec2017Day17Solver());
-//        solveAndPrintDay(new Dec2017Day18Solver());
-//        solveAndPrintDay(new Dec2017Day19Solver());
-//        solveAndPrintDay(new Dec2017Day20Solver());
+//        new Dec2017Day16Solver().run();
+//        new Dec2017Day17Solver().run();
+//        new Dec2017Day18Solver().run();
+//        new Dec2017Day19Solver().run();
+//        new Dec2017Day20Solver().run();
 //
-//        solveAndPrintDay(new Dec2017Day21Solver());
-//        solveAndPrintDay(new Dec2017Day22Solver());
-//        solveAndPrintDay(new Dec2017Day23Solver());
-//        solveAndPrintDay(new Dec2017Day24Solver());
-//        solveAndPrintDay(new Dec2017Day25Solver());
+//        new Dec2017Day21Solver().run();
+//        new Dec2017Day22Solver().run();
+//        new Dec2017Day23Solver().run();
+//        new Dec2017Day24Solver().run();
+//        new Dec2017Day25Solver().run();
 
         Date endTime = new Date();
 
         System.out.println("Start   : " + startTime);
         System.out.println("End     : " + endTime);
         System.out.println("Elapsed : " + (endTime.getTime() - startTime.getTime()));
-    }
-
-    private static void solveAndPrintDay(DaySolver solver) {
-        System.out.println(solver.getDayNumber() + "-1: " + solver.solvePuzzleOne());
-        System.out.println(solver.getDayNumber() + "-2: " + solver.solvePuzzleTwo());
     }
 }

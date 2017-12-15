@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2017Day4Solver implements DaySolver<Long> {
+public class Dec2017Day4Solver extends DaySolver<Long> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/4-input";
 

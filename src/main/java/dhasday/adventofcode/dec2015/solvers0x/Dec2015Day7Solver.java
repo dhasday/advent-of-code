@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMap;
 import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2015Day7Solver implements DaySolver<Integer> {
+public class Dec2015Day7Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/7-input";
 

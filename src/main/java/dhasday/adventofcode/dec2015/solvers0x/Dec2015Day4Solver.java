@@ -3,7 +3,7 @@ package dhasday.adventofcode.dec2015.solvers0x;
 import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Dec2015Day4Solver implements DaySolver<Integer> {
+public class Dec2015Day4Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/4-input";
 

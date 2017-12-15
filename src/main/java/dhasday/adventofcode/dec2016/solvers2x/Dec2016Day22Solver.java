@@ -11,7 +11,7 @@ import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
 import javafx.util.Pair;
 
-public class Dec2016Day22Solver implements DaySolver<Integer> {
+public class Dec2016Day22Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/22-input-cleaned";
 

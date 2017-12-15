@@ -5,7 +5,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day11Solver implements DaySolver<String> {
+public class Dec2015Day11Solver extends DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/11-input";
 

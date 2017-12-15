@@ -6,7 +6,7 @@ import java.util.Map;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2017Day8Solver implements DaySolver<Integer> {
+public class Dec2017Day8Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/8-input";
 

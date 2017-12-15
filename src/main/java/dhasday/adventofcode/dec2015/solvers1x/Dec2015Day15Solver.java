@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import com.google.common.collect.Maps;
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day15Solver implements DaySolver<Integer> {
+public class Dec2015Day15Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/15-input";
 

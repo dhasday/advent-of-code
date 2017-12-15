@@ -9,7 +9,7 @@ import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Dec2016Day17Solver implements DaySolver<String> {
+public class Dec2016Day17Solver extends DaySolver<String> {
 
     private static final Set<Character> UNLOCKED_CHARACTERS = Sets.newHashSet('b', 'c', 'd', 'e', 'f');
 

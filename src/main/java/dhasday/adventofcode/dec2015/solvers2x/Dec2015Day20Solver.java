@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2015.solvers2x;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day20Solver implements DaySolver<Integer> {
+public class Dec2015Day20Solver extends DaySolver<Integer> {
 
     private static final Integer INPUT_PUZZLE_ONE = 29000000;
 

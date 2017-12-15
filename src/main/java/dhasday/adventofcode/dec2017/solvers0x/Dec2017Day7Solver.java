@@ -15,7 +15,7 @@ import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2017Day7Solver implements DaySolver<String> {
+public class Dec2017Day7Solver extends DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/7-input";
 

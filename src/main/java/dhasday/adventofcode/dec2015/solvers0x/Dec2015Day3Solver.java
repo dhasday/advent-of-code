@@ -8,7 +8,7 @@ import java.util.Set;
 import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 
-public class Dec2015Day3Solver implements DaySolver<Integer> {
+public class Dec2015Day3Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/3-input";
 

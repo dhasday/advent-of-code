@@ -11,7 +11,8 @@ import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2016Day5Solver implements DaySolver<String> {
+public class Dec2016Day5Solver extends DaySolver<String> {
+
     private static final String INPUT = "reyedfim";
 
     @Override

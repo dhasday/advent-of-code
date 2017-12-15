@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2016Day4Solver implements DaySolver<Integer> {
+public class Dec2016Day4Solver extends DaySolver<Integer> {
+
     private static final String INPUT_FILE = "src/main/resources/dec2016/4-input";
 
     private static final String INPUT_REGEX = "([a-z-]+)-(\\d+)\\[([a-z]{5})]";

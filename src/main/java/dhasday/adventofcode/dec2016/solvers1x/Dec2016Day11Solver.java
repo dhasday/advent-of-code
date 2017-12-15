@@ -16,7 +16,7 @@ import javafx.util.Pair;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Dec2016Day11Solver implements DaySolver<Integer> {
+public class Dec2016Day11Solver extends DaySolver<Integer> {
 //        Part One
 //        The first floor contains a thulium generator, a thulium-compatible microchip, a plutonium generator, and a strontium generator.
 //        The second floor contains a plutonium-compatible microchip and a strontium-compatible microchip.

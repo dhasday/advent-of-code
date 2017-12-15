@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2016Day19Solver implements DaySolver<Integer> {
+public class Dec2016Day19Solver extends DaySolver<Integer> {
 
     private static final Integer INPUT = 3017957;
 

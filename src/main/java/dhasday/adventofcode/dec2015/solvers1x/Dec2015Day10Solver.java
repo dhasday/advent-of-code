@@ -2,7 +2,7 @@ package dhasday.adventofcode.dec2015.solvers1x;
 
 import dhasday.adventofcode.common.DaySolver;
 
-public class Dec2015Day10Solver implements DaySolver<Integer> {
+public class Dec2015Day10Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/10-input";
 

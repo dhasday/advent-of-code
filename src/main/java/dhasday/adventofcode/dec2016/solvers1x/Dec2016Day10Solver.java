@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 
-public class Dec2016Day10Solver implements DaySolver<Integer> {
+public class Dec2016Day10Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/10-input";
 

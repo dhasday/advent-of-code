@@ -9,7 +9,7 @@ import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Dec2016Day14Solver implements DaySolver<Integer> {
+public class Dec2016Day14Solver extends DaySolver<Integer> {
 
     private static final String INPUT_VALUE = "ngcjuoqr";
 

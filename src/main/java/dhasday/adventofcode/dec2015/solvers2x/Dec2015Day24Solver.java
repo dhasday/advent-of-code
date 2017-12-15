@@ -12,7 +12,7 @@ import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 import javafx.util.Pair;
 
-public class Dec2015Day24Solver implements DaySolver<Long> {
+public class Dec2015Day24Solver extends DaySolver<Long> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/24-input";
 
@@ -112,6 +112,6 @@ public class Dec2015Day24Solver implements DaySolver<Long> {
             }
         }
 
-        return new Pair(currentMinSize, currentEntanglement);
+        return new Pair<>(currentMinSize, currentEntanglement);
     }
 }

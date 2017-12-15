@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2017.common.KnotHash;
 
-public class Dec2017Day10Solver implements DaySolver<String> {
+public class Dec2017Day10Solver extends DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/10-input";
 

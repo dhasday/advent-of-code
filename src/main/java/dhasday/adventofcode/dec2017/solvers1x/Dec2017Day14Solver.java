@@ -12,7 +12,7 @@ import dhasday.adventofcode.dec2017.common.KnotHash;
 import javafx.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2017Day14Solver implements DaySolver<Integer> {
+public class Dec2017Day14Solver extends DaySolver<Integer> {
 
     private static final String INPUT = "jxqlasbh";
 

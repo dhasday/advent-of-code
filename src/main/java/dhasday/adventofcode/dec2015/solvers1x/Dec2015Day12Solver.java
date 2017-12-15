@@ -16,7 +16,7 @@ import com.google.common.collect.Sets;
 import dhasday.adventofcode.common.DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2015Day12Solver implements DaySolver<Integer> {
+public class Dec2015Day12Solver extends DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/12-input";
 
@@ -108,13 +108,13 @@ public class Dec2015Day12Solver implements DaySolver<Integer> {
             JsonNode node = input.get(fieldName);
 
             if (node.isArray()) {
-                result.put(fieldName, processJsonArray(node));
+                result.set(fieldName, processJsonArray(node));
             } else if (node.isObject()) {
-                result.put(fieldName, processJsonObject(node));
+                result.set(fieldName, processJsonObject(node));
             } else if (node.isTextual() && "red".equalsIgnoreCase(node.textValue())) {
                 return objectMapper.createObjectNode();
             } else {
-                result.put(fieldName, node);
+                result.set(fieldName, node);
             }
         }
 
