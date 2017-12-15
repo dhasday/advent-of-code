@@ -7,12 +7,12 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.function.Function;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 import dhasday.adventofcode.dec2017.common.KnotHash;
 import javafx.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2017Day14Solver extends DaySolver<Integer> {
+public class Dec2017Day14Solver extends Dec2017DaySolver<Integer> {
 
     private static final String INPUT = "jxqlasbh";
 
@@ -21,7 +21,7 @@ public class Dec2017Day14Solver extends DaySolver<Integer> {
     private KnotHash knotHash = new KnotHash();
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 14;
     }
 

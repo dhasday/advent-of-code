@@ -1,13 +1,13 @@
 package dhasday.adventofcode.dec2017.solvers0x;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
-public class Dec2017Day3Solver extends DaySolver<Integer> {
+public class Dec2017Day3Solver extends Dec2017DaySolver<Integer> {
 
     private static final Integer TARGET_VALUE = 361527;
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 3;
     }
 

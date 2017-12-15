@@ -1,8 +1,8 @@
 package dhasday.adventofcode.dec2015.solvers2x;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day25Solver extends DaySolver<Long> {
+public class Dec2015Day25Solver extends Dec2015DaySolver<Long> {
 
     private static final long MULTIPLE_KEY = 252533;
     private static final long DIVIDE_KEY = 33554393;
@@ -12,7 +12,7 @@ public class Dec2015Day25Solver extends DaySolver<Long> {
     private static final int INPUT_COL = 3075;
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 25;
     }
 

@@ -5,13 +5,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public abstract class DaySolver<T> implements Runnable {
+public abstract class DaySolver<T> {
 
-    public abstract int getDayNumber();
+    protected abstract int getYear();
+    protected abstract int getDay();
 
     public abstract T solvePuzzleOne();
 
     public abstract T solvePuzzleTwo();
+
+    public void printResults() {
+        System.out.println(String.format("%4d Day %2d-1: %s", getYear(), getDay(), String.valueOf(solvePuzzleOne())));
+        System.out.println(String.format("%4d Day %2d-2: %s", getYear(), getDay(), String.valueOf(solvePuzzleTwo())));
+    }
 
     protected List<String> getAllFileLines(String filename) {
         try {
@@ -29,15 +35,5 @@ public abstract class DaySolver<T> implements Runnable {
         }
 
         return allLines.get(0);
-    }
-
-    @Override
-    public void run() {
-        long startMillis = System.currentTimeMillis();
-        System.out.println(String.format("%2d-1: %s", getDayNumber(), String.valueOf(solvePuzzleOne())));
-        System.out.println(String.format("%2d-2: %s", getDayNumber(), String.valueOf(solvePuzzleTwo())));
-        long endMillis = System.currentTimeMillis();
-
-        System.out.println(String.format("%2d Elapsed: %d", getDayNumber(), endMillis - startMillis));
     }
 }

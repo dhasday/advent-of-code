@@ -13,17 +13,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2015Day12Solver extends DaySolver<Integer> {
+public class Dec2015Day12Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/12-input";
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 12;
     }
 

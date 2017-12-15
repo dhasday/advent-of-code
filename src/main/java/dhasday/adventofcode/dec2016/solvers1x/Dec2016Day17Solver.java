@@ -5,18 +5,18 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Dec2016Day17Solver extends DaySolver<String> {
+public class Dec2016Day17Solver extends Dec2016DaySolver<String> {
 
     private static final Set<Character> UNLOCKED_CHARACTERS = Sets.newHashSet('b', 'c', 'd', 'e', 'f');
 
     private static final String INPUT = "pxxbnzuo";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 17;
     }
 

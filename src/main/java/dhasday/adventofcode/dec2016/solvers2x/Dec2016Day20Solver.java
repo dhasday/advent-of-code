@@ -1,13 +1,13 @@
 package dhasday.adventofcode.dec2016.solvers2x;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 
-public class Dec2016Day20Solver extends DaySolver<Long> {
+public class Dec2016Day20Solver extends Dec2016DaySolver<Long> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/20-input-sorted";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 20;
     }
 

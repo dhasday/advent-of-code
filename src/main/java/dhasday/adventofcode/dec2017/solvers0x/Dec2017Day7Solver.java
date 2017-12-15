@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2017Day7Solver extends DaySolver<String> {
+public class Dec2017Day7Solver extends Dec2017DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/7-input";
 
@@ -25,7 +25,7 @@ public class Dec2017Day7Solver extends DaySolver<String> {
 
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 7;
     }
 

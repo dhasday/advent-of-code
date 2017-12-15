@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day5Solver extends DaySolver<Integer> {
+public class Dec2015Day5Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/5-input";
 
@@ -14,7 +14,7 @@ public class Dec2015Day5Solver extends DaySolver<Integer> {
     private static final Set<String> BLACKLISTED_PAIRS = ImmutableSet.of("ab", "cd", "pq", "xy");
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 5;
     }
 

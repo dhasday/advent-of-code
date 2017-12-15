@@ -7,9 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day19Solver extends DaySolver<Integer> {
+public class Dec2015Day19Solver extends Dec2015DaySolver<Integer> {
 
     private static final String SUBSTITUTIONS_FILE = "src/main/resources/dec2015/19-input-substitutions";
     private static final String SEQUENCE_FILE = "src/main/resources/dec2015/19-input-sequence";
@@ -19,7 +19,7 @@ public class Dec2015Day19Solver extends DaySolver<Integer> {
     private static final Pattern SUBSTITUTION_PATTERN = Pattern.compile(SUBSTITUTION_REGEX);
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 19;
     }
 

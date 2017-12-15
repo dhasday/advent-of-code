@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 import dhasday.adventofcode.dec2017.common.KnotHash;
 
-public class Dec2017Day10Solver extends DaySolver<String> {
+public class Dec2017Day10Solver extends Dec2017DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/10-input";
 
     private KnotHash knotHash = new KnotHash();
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 10;
     }
 

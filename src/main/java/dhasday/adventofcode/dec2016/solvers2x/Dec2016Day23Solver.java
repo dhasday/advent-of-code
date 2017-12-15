@@ -4,17 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import dhasday.adventofcode.dec2016.common.AssembunnyProcessor;
 
-public class Dec2016Day23Solver extends DaySolver<Integer> {
+public class Dec2016Day23Solver extends Dec2016DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/23-input";
 
     private AssembunnyProcessor assembunnyProcessor = new AssembunnyProcessor();
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 23;
     }
 

@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 import javafx.util.Pair;
 
-public class Dec2015Day3Solver extends DaySolver<Integer> {
+public class Dec2015Day3Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/3-input";
 
@@ -18,7 +18,7 @@ public class Dec2015Day3Solver extends DaySolver<Integer> {
     private static final char CHAR_WEST = '<';
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 3;
     }
 

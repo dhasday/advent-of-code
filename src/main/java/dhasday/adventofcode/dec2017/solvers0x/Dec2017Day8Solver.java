@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
-public class Dec2017Day8Solver extends DaySolver<Integer> {
+public class Dec2017Day8Solver extends Dec2017DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/8-input";
 
@@ -14,7 +14,7 @@ public class Dec2017Day8Solver extends DaySolver<Integer> {
     private Integer maxValue = null;
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 8;
     }
 

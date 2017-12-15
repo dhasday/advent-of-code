@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day13Solver extends DaySolver<Integer> {
+public class Dec2015Day13Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/13-input";
 
@@ -20,7 +20,7 @@ public class Dec2015Day13Solver extends DaySolver<Integer> {
     private Pattern happinessDeltaPattern = Pattern.compile(HAPPINESS_DELTA_REGEX);
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 13;
     }
 

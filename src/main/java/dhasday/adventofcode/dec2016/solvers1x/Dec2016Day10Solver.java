@@ -6,15 +6,15 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import javafx.util.Pair;
 
-public class Dec2016Day10Solver extends DaySolver<Integer> {
+public class Dec2016Day10Solver extends Dec2016DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/10-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 10;
     }
 

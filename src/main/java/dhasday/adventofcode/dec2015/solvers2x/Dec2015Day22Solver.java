@@ -8,12 +8,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day22Solver extends DaySolver<Integer> {
+public class Dec2015Day22Solver extends Dec2015DaySolver<Integer> {
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 22;
     }
 

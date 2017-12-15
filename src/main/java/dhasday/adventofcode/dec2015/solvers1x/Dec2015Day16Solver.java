@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day16Solver extends DaySolver<Integer> {
+public class Dec2015Day16Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/16-input";
 
@@ -23,7 +23,7 @@ public class Dec2015Day16Solver extends DaySolver<Integer> {
     private Pattern inputPattern = Pattern.compile(INPUT_REGEX);
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 16;
     }
 

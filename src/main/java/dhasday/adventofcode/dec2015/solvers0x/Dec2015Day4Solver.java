@@ -1,14 +1,14 @@
 package dhasday.adventofcode.dec2015.solvers0x;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Dec2015Day4Solver extends DaySolver<Integer> {
+public class Dec2015Day4Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/4-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 4;
     }
 

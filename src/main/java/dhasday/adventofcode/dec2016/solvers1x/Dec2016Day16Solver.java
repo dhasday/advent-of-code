@@ -2,15 +2,15 @@ package dhasday.adventofcode.dec2016.solvers1x;
 
 import java.util.Arrays;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2016Day16Solver extends DaySolver<String> {
+public class Dec2016Day16Solver extends Dec2016DaySolver<String> {
 
     private static final String INPUT = "00111101111101000";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 16;
     }
 

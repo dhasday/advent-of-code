@@ -5,18 +5,18 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class Dec2016Day14Solver extends DaySolver<Integer> {
+public class Dec2016Day14Solver extends Dec2016DaySolver<Integer> {
 
     private static final String INPUT_VALUE = "ngcjuoqr";
 
     private Map<Pair<String, Integer>, Map<Integer, String>> hashCache = new HashMap<>(); // Get it?
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 14;
     }
 

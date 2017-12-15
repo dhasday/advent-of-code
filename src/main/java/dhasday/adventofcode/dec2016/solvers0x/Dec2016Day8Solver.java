@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 
-public class Dec2016Day8Solver extends DaySolver<String> {
+public class Dec2016Day8Solver extends Dec2016DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/8-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 8;
     }
 

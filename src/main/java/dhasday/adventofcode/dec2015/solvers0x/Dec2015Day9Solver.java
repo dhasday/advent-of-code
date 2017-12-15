@@ -8,16 +8,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day9Solver extends DaySolver<Integer> {
+public class Dec2015Day9Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/9-input";
 
     private Pattern inputPattern = Pattern.compile("([0-9A-Za-z]+) to ([0-9A-Za-z]+) = (\\d+)");
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 9;
     }
 

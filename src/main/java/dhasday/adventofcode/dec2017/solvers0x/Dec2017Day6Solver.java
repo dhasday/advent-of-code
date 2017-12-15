@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
-public class Dec2017Day6Solver extends DaySolver<Integer> {
+public class Dec2017Day6Solver extends Dec2017DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/6-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 6;
     }
 

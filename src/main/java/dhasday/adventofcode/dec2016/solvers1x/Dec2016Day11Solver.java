@@ -10,13 +10,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
-import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Dec2016Day11Solver extends DaySolver<Integer> {
+public class Dec2016Day11Solver extends Dec2016DaySolver<Integer> {
 //        Part One
 //        The first floor contains a thulium generator, a thulium-compatible microchip, a plutonium generator, and a strontium generator.
 //        The second floor contains a plutonium-compatible microchip and a strontium-compatible microchip.
@@ -33,7 +33,7 @@ public class Dec2016Day11Solver extends DaySolver<Integer> {
     private AStarSearch aStarSearch = new AStarSearch();
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 11;
     }
 

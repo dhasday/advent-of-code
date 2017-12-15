@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import javafx.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2016Day7Solver extends DaySolver<Long> {
+public class Dec2016Day7Solver extends Dec2016DaySolver<Long> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/7-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 7;
     }
 

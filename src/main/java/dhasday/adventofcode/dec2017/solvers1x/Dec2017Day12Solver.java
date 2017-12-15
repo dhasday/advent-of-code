@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
-public class Dec2017Day12Solver extends DaySolver<Integer> {
+public class Dec2017Day12Solver extends Dec2017DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/12-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 12;
     }
 

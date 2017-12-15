@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 
-public class Dec2016Day3Solver extends DaySolver<Long> {
+public class Dec2016Day3Solver extends Dec2016DaySolver<Long> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/3-input";
 
@@ -19,7 +19,7 @@ public class Dec2016Day3Solver extends DaySolver<Long> {
     private Pattern inputPattern = Pattern.compile(INPUT_REGEX);
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 3;
     }
 

@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day21Solver extends DaySolver<Integer> {
+public class Dec2015Day21Solver extends Dec2015DaySolver<Integer> {
 
     private static final int STARTING_HEALTH_PLAYER = 100;
 
@@ -34,7 +34,7 @@ public class Dec2015Day21Solver extends DaySolver<Integer> {
     );
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 21;
     }
 

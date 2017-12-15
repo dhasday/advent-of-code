@@ -1,22 +1,19 @@
 package dhasday.adventofcode.dec2016.solvers0x;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2016Day5Solver extends DaySolver<String> {
+public class Dec2016Day5Solver extends Dec2016DaySolver<String> {
 
     private static final String INPUT = "reyedfim";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 5;
     }
 

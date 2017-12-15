@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 
-public class Dec2016Day19Solver extends DaySolver<Integer> {
+public class Dec2016Day19Solver extends Dec2016DaySolver<Integer> {
 
     private static final Integer INPUT = 3017957;
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 19;
     }
 

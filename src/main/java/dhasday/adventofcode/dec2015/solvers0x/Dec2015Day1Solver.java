@@ -1,12 +1,12 @@
 package dhasday.adventofcode.dec2015.solvers0x;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Dec2015Day1Solver extends DaySolver<Integer> {
+public class Dec2015Day1Solver extends Dec2015DaySolver<Integer> {
 
     private static final String DAY_ONE_INPUT_FILE = "src/main/resources/dec2015/1-input";
 
@@ -14,7 +14,7 @@ public class Dec2015Day1Solver extends DaySolver<Integer> {
     private static final int LEVEL_DOWN_CHAR = ')';
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 1;
     }
 

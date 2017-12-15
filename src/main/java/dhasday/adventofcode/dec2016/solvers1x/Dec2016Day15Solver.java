@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.google.common.collect.Lists;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 
-public class Dec2016Day15Solver extends DaySolver<Integer> {
+public class Dec2016Day15Solver extends Dec2016DaySolver<Integer> {
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 15;
     }
 

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day6Solver extends DaySolver<Integer> {
+public class Dec2015Day6Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/6-input";
 
@@ -16,7 +16,7 @@ public class Dec2015Day6Solver extends DaySolver<Integer> {
     private Pattern pattern = Pattern.compile(INSTRUCTION_REGEX);
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 6;
     }
 

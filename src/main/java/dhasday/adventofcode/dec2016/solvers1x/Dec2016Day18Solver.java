@@ -1,13 +1,13 @@
 package dhasday.adventofcode.dec2016.solvers1x;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 
-public class Dec2016Day18Solver extends DaySolver<Integer> {
+public class Dec2016Day18Solver extends Dec2016DaySolver<Integer> {
 
     private static final String INPUT = "^.....^.^^^^^.^..^^.^.......^^..^^^..^^^^..^.^^.^.^....^^...^^.^^.^...^^.^^^^..^^.....^.^...^.^.^^.^";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 18;
     }
 

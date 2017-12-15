@@ -8,15 +8,15 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2016Day21Solver extends DaySolver<String> {
+public class Dec2016Day21Solver extends Dec2016DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/21-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 21;
     }
 

@@ -7,10 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.ImmutableMap;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 import org.apache.commons.lang3.StringUtils;
 
-public class Dec2015Day7Solver extends DaySolver<Integer> {
+public class Dec2015Day7Solver extends Dec2015DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/7-input";
 
@@ -20,7 +20,7 @@ public class Dec2015Day7Solver extends DaySolver<Integer> {
     private Pattern operationPattern = Pattern.compile("([a-z]+|[0-9]+) (AND|OR|LSHIFT|RSHIFT) ([a-z]+|[0-9]+) -> ([a-z]+)");
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 7;
     }
 

@@ -7,14 +7,14 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
-public class Dec2017Day4Solver extends DaySolver<Long> {
+public class Dec2017Day4Solver extends Dec2017DaySolver<Long> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/4-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 4;
     }
 

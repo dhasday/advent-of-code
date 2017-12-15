@@ -3,14 +3,14 @@ package dhasday.adventofcode.dec2015.solvers1x;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
-public class Dec2015Day11Solver extends DaySolver<String> {
+public class Dec2015Day11Solver extends Dec2015DaySolver<String> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2015/11-input";
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 11;
     }
 

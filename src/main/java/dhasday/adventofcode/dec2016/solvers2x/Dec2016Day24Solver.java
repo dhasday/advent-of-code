@@ -9,18 +9,18 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import com.google.common.collect.Sets;
-import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.common.AStarSearch;
+import dhasday.adventofcode.dec2016.Dec2016DaySolver;
 import javafx.util.Pair;
 
-public class Dec2016Day24Solver extends DaySolver<Integer> {
+public class Dec2016Day24Solver extends Dec2016DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2016/24-input";
 
     private AStarSearch aStarSearch = new AStarSearch();
 
     @Override
-    public int getDayNumber() {
+    public int getDay() {
         return 24;
     }
 
