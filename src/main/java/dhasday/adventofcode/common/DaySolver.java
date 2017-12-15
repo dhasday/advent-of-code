@@ -15,8 +15,12 @@ public abstract class DaySolver<T> {
     public abstract T solvePuzzleTwo();
 
     public void printResults() {
+        long startTime = System.currentTimeMillis();
         System.out.println(String.format("%4d Day %2d-1: %s", getYear(), getDay(), String.valueOf(solvePuzzleOne())));
         System.out.println(String.format("%4d Day %2d-2: %s", getYear(), getDay(), String.valueOf(solvePuzzleTwo())));
+        long endTime = System.currentTimeMillis();
+
+        System.out.println(String.format("Elapsed Time: %d ms", endTime - startTime));
     }
 
     protected List<String> getAllFileLines(String filename) {

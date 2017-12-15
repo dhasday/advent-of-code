@@ -5,88 +5,35 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2015.Dec2015DaySolver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day1Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day2Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day3Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day4Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day5Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day6Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day7Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day8Solver;
-import dhasday.adventofcode.dec2015.solvers0x.Dec2015Day9Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day10Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day11Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day12Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day13Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day14Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day15Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day16Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day17Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day18Solver;
-import dhasday.adventofcode.dec2015.solvers1x.Dec2015Day19Solver;
-import dhasday.adventofcode.dec2015.solvers2x.Dec2015Day20Solver;
-import dhasday.adventofcode.dec2015.solvers2x.Dec2015Day21Solver;
-import dhasday.adventofcode.dec2015.solvers2x.Dec2015Day22Solver;
-import dhasday.adventofcode.dec2015.solvers2x.Dec2015Day23Solver;
-import dhasday.adventofcode.dec2015.solvers2x.Dec2015Day24Solver;
-import dhasday.adventofcode.dec2015.solvers2x.Dec2015Day25Solver;
+import dhasday.adventofcode.dec2015.solvers0x.*;
+import dhasday.adventofcode.dec2015.solvers1x.*;
+import dhasday.adventofcode.dec2015.solvers2x.*;
 import dhasday.adventofcode.dec2016.Dec2016DaySolver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day1Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day2Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day3Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day4Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day5Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day6Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day7Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day8Solver;
-import dhasday.adventofcode.dec2016.solvers0x.Dec2016Day9Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day10Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day11Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day12Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day13Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day14Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day15Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day16Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day17Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day18Solver;
-import dhasday.adventofcode.dec2016.solvers1x.Dec2016Day19Solver;
-import dhasday.adventofcode.dec2016.solvers2x.Dec2016Day20Solver;
-import dhasday.adventofcode.dec2016.solvers2x.Dec2016Day21Solver;
-import dhasday.adventofcode.dec2016.solvers2x.Dec2016Day22Solver;
-import dhasday.adventofcode.dec2016.solvers2x.Dec2016Day23Solver;
-import dhasday.adventofcode.dec2016.solvers2x.Dec2016Day24Solver;
-import dhasday.adventofcode.dec2016.solvers2x.Dec2016Day25Solver;
+import dhasday.adventofcode.dec2016.solvers0x.*;
+import dhasday.adventofcode.dec2016.solvers1x.*;
+import dhasday.adventofcode.dec2016.solvers2x.*;
 import dhasday.adventofcode.dec2017.Dec2017DaySolver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day1Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day2Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day3Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day4Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day5Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day6Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day7Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day8Solver;
-import dhasday.adventofcode.dec2017.solvers0x.Dec2017Day9Solver;
-import dhasday.adventofcode.dec2017.solvers1x.Dec2017Day10Solver;
-import dhasday.adventofcode.dec2017.solvers1x.Dec2017Day11Solver;
-import dhasday.adventofcode.dec2017.solvers1x.Dec2017Day12Solver;
-import dhasday.adventofcode.dec2017.solvers1x.Dec2017Day13Solver;
-import dhasday.adventofcode.dec2017.solvers1x.Dec2017Day14Solver;
-import dhasday.adventofcode.dec2017.solvers1x.Dec2017Day15Solver;
+import dhasday.adventofcode.dec2017.solvers0x.*;
+import dhasday.adventofcode.dec2017.solvers1x.*;
 
 public class AdventOfCode {
     /**
      *  Slow running solvers:
      *
      *  2015
-     *    ? Day 4
+     *    * Day  4  ~  2000 ms
+     *    * Day 15  ~  1200 ms
+     *    * Day 17  ~  2000 ms
+     *    * Day 20  ~  3400 ms
      *
      *  2016
-     *    * Day 5
-     *    * Day 14
-     *    * Day 23
+     *    * Day  5  ~ 18000 ms
+     *    * Day 12  ~  1800 ms
+     *    * Day 14  ~ 26000 ms
+     *    * Day 23  ~155000 ms
      *
      *  2017
-     *    ?
+     *    * Day
      */
 
     public static void main(String[] args) {
@@ -133,9 +80,9 @@ public class AdventOfCode {
         return Lists.newArrayList(
                 Dec2017Day1Solver.class,    Dec2017Day2Solver.class,    Dec2017Day3Solver.class,    Dec2017Day4Solver.class,    Dec2017Day5Solver.class,
                 Dec2017Day6Solver.class,    Dec2017Day7Solver.class,    Dec2017Day8Solver.class,    Dec2017Day9Solver.class,    Dec2017Day10Solver.class,
-                Dec2017Day11Solver.class,   Dec2017Day12Solver.class,   Dec2017Day13Solver.class,   Dec2017Day14Solver.class,   Dec2017Day15Solver.class
+                Dec2017Day11Solver.class,   Dec2017Day12Solver.class,   Dec2017Day13Solver.class,   Dec2017Day14Solver.class,   Dec2017Day15Solver.class,
+                Dec2017Day16Solver.class
 
-//                Dec2017Day16Solver.class,
 //                Dec2017Day17Solver.class,
 //                Dec2017Day18Solver.class,
 //                Dec2017Day19Solver.class,

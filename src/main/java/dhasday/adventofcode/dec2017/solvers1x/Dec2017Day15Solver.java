@@ -12,10 +12,6 @@ public class Dec2017Day15Solver extends Dec2017DaySolver<Integer> {
     private static final int DIVIDEND = 2147483647;
     private static final long BITMASK = 0x0000ffffL;
 
-    public static void main(String[] args) {
-        new Dec2017Day15Solver().printResults();
-    }
-
     @Override
     public int getDay() {
         return 15;
