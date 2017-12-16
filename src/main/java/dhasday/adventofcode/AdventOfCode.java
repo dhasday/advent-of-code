@@ -33,14 +33,16 @@ public class AdventOfCode {
      *    * Day 23  ~155000 ms
      *
      *  2017
-     *    * Day
+     *    * Day XX  ~       ms
      */
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
 
         getSolvers2015().forEach(AdventOfCode::runSolverClass);
+        System.out.println();
         getSolvers2016().forEach(AdventOfCode::runSolverClass);
+        System.out.println();
         getSolvers2017().forEach(AdventOfCode::runSolverClass);
 
         long endTime = System.currentTimeMillis();

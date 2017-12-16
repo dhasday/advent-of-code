@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public abstract class DaySolver<T> {
+    private static final long SLOW_ELAPSED_THRESHOLD = 1000L;
 
     protected abstract int getYear();
     protected abstract int getDay();
@@ -20,7 +21,12 @@ public abstract class DaySolver<T> {
         System.out.println(String.format("%4d Day %2d-2: %s", getYear(), getDay(), String.valueOf(solvePuzzleTwo())));
         long endTime = System.currentTimeMillis();
 
-        System.out.println(String.format("Elapsed Time: %d ms", endTime - startTime));
+        long elapsedTime = endTime - startTime;
+        System.out.println(String.format(
+                "%sElapsed Time: %d ms",
+                elapsedTime >= SLOW_ELAPSED_THRESHOLD ? "*** " : "",
+                elapsedTime
+        ));
     }
 
     protected List<String> getAllFileLines(String filename) {
