@@ -22,7 +22,6 @@ public class AdventOfCode {
      *
      *  2015
      *    * Day  4  ~  2000 ms
-     *    * Day 15  ~  1200 ms
      *    * Day 17  ~  2000 ms
      *    * Day 20  ~  3400 ms
      *
@@ -83,9 +82,8 @@ public class AdventOfCode {
                 Dec2017Day1Solver.class,    Dec2017Day2Solver.class,    Dec2017Day3Solver.class,    Dec2017Day4Solver.class,    Dec2017Day5Solver.class,
                 Dec2017Day6Solver.class,    Dec2017Day7Solver.class,    Dec2017Day8Solver.class,    Dec2017Day9Solver.class,    Dec2017Day10Solver.class,
                 Dec2017Day11Solver.class,   Dec2017Day12Solver.class,   Dec2017Day13Solver.class,   Dec2017Day14Solver.class,   Dec2017Day15Solver.class,
-                Dec2017Day16Solver.class
+                Dec2017Day16Solver.class,   Dec2017Day17Solver.class
 
-//                Dec2017Day17Solver.class,
 //                Dec2017Day18Solver.class,
 //                Dec2017Day19Solver.class,
 //                Dec2017Day20Solver.class,

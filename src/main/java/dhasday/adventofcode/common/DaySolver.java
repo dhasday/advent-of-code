@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public abstract class DaySolver<T> {
-    private static final long SLOW_ELAPSED_THRESHOLD = 1000L;
+    private static final long SLOW_ELAPSED_THRESHOLD = 1500L;
 
     protected abstract int getYear();
     protected abstract int getDay();

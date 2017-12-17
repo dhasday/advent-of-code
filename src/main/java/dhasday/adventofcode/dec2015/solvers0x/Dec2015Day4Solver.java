@@ -23,7 +23,7 @@ public class Dec2015Day4Solver extends Dec2015DaySolver<Integer> {
         return getFirstLeadingMultizeroHash("000000");
     }
 
-    int getFirstLeadingMultizeroHash(String expectedPrefix) {
+    private int getFirstLeadingMultizeroHash(String expectedPrefix) {
         int currentValue = 1; // Must be positive
         while(true) {
             String encodedPrefix = DigestUtils.md5Hex(INPUT + currentValue);
