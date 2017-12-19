@@ -29,7 +29,7 @@ def get_value_if_in_field(field, x, y):
         except:
             return 0
 
-=
+
 num = 361527
 # num = 25
 

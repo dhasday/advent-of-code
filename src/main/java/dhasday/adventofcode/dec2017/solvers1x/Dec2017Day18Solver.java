@@ -55,10 +55,6 @@ public class Dec2017Day18Solver extends Dec2017DaySolver<Long> {
         return state;
     }
 
-//    2017 Day 18-1: 9423
-//    2017 Day 18-2: 7620
-
-
     private Long findFirstRecoveredValue(List<String> instructions, Map<String, Long> state) {
         Deque<Long> values = new LinkedList<>();
 
