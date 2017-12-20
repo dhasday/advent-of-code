@@ -14,7 +14,7 @@ public class Dec2017Day20Solver extends Dec2017DaySolver<Integer> {
     private static final String INPUT_FILE = "src/main/resources/dec2017/20-input";
 
     // Based on running both parts of this puzzle for a while, there isn't any relevant activity above this number.
-    private static final Integer HIGH_ENOUGH_ITERATIONS = 400;
+    private static final Integer JUST_ENOUGH_ITERATIONS = 400;
 
     @Override
     public int getDay() {
@@ -25,7 +25,7 @@ public class Dec2017Day20Solver extends Dec2017DaySolver<Integer> {
     public Integer solvePuzzleOne() {
         List<Particle> allParticles = loadAllParticles();
 
-        for (int i = 0; i < HIGH_ENOUGH_ITERATIONS; i++) {
+        for (int i = 0; i < JUST_ENOUGH_ITERATIONS; i++) {
             moveParticles(allParticles);
         }
 
@@ -36,7 +36,7 @@ public class Dec2017Day20Solver extends Dec2017DaySolver<Integer> {
     public Integer solvePuzzleTwo() {
         List<Particle> allParticles = loadAllParticles();
 
-        for (int i = 0; i < HIGH_ENOUGH_ITERATIONS; i++) {
+        for (int i = 0; i < JUST_ENOUGH_ITERATIONS; i++) {
             moveParticles(allParticles);
             removeCollisions(allParticles);
         }
@@ -53,20 +53,21 @@ public class Dec2017Day20Solver extends Dec2017DaySolver<Integer> {
     private Particle loadParticle(String line) {
         String[] vectors = line.split(", ");
 
-        // Extract the CSV blocks
-        String[] posVector = parseVector(vectors[0]);
-        String[] velVector = parseVector(vectors[1]);
-        String[] accVector = parseVector(vectors[2]);
-
         return new Particle(
-                new MutableTriple<>(Long.valueOf(posVector[0]), Long.valueOf(posVector[1]), Long.valueOf(posVector[2])),
-                new MutableTriple<>(Long.valueOf(velVector[0]), Long.valueOf(velVector[1]), Long.valueOf(velVector[2])),
-                new MutableTriple<>(Long.valueOf(accVector[0]), Long.valueOf(accVector[1]), Long.valueOf(accVector[2]))
+                parseVectorToTriple(vectors[0]),
+                parseVectorToTriple(vectors[1]),
+                parseVectorToTriple(vectors[2])
         );
     }
 
-    private String[] parseVector(String vector) {
-        return vector.substring(3, vector.length() - 1).split(",");
+    private MutableTriple<Long, Long, Long> parseVectorToTriple(String vector) {
+        String[] splitVector = vector.substring(3, vector.length() - 1).split(",");
+
+        return new MutableTriple<>(
+                Long.valueOf(splitVector[0]),
+                Long.valueOf(splitVector[1]),
+                Long.valueOf(splitVector[2])
+        );
     }
 
     private void moveParticles(List<Particle> allParticles) {
