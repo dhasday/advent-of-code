@@ -3,6 +3,7 @@ package dhasday.adventofcode;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+
 import dhasday.adventofcode.common.DaySolver;
 import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 import dhasday.adventofcode.dec2015.solvers0x.*;
@@ -15,6 +16,7 @@ import dhasday.adventofcode.dec2016.solvers2x.*;
 import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 import dhasday.adventofcode.dec2017.solvers0x.*;
 import dhasday.adventofcode.dec2017.solvers1x.*;
+import dhasday.adventofcode.dec2017.solvers2x.Dec2017Day20Solver;
 
 public class AdventOfCode {
     /**
@@ -82,7 +84,7 @@ public class AdventOfCode {
                 Dec2017Day1Solver.class,    Dec2017Day2Solver.class,    Dec2017Day3Solver.class,    Dec2017Day4Solver.class,    Dec2017Day5Solver.class,
                 Dec2017Day6Solver.class,    Dec2017Day7Solver.class,    Dec2017Day8Solver.class,    Dec2017Day9Solver.class,    Dec2017Day10Solver.class,
                 Dec2017Day11Solver.class,   Dec2017Day12Solver.class,   Dec2017Day13Solver.class,   Dec2017Day14Solver.class,   Dec2017Day15Solver.class,
-                Dec2017Day16Solver.class,   Dec2017Day17Solver.class,   Dec2017Day18Solver.class,   Dec2017Day19Solver.class    //,   Dec2017Day20Solver.class//,
+                Dec2017Day16Solver.class,   Dec2017Day17Solver.class,   Dec2017Day18Solver.class,   Dec2017Day19Solver.class,   Dec2017Day20Solver.class
 
 //                Dec2017Day21Solver.class//,   Dec2017Day22Solver.class//,   Dec2017Day23Solver.class//,   Dec2017Day24Solver.class//,   Dec2017Day25Solver.class
         );
