@@ -25,50 +25,39 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
 
     @Override
     public Integer solvePuzzleOne() {
-        Set<Pair<Integer, Integer>> infected = loadInitialInfectedNodes();
-
-        Pair<Integer, Integer> curPos = new Pair<>(12, 12);
-        Direction curDir = Direction.UP;
-
-        int numTimesInfect = 0;
-
-        for (int i = 0; i < 10000; i++) {
-            if (infected.contains(curPos)) {
-                curDir = curDir.turnRight();
-                infected.remove(curPos);
-            } else {
-                curDir = curDir.turnLeft();
-                infected.add(curPos);
-                numTimesInfect++;
-            }
-
-            curPos = new Pair<>(curPos.getKey() + curDir.xOffset, curPos.getValue() + curDir.yOffset);
-        }
-
-        return numTimesInfect;
+        return solveForNumberOfInfections(12, 12, Direction.UP, 10000, false);
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        NodeStatus[][] infectedNodes = initializeInfectedNodes(GRID_SIZE, START_OFFSET, loadInitialInfectedNodes());
+        return solveForNumberOfInfections(12, 12, Direction.UP, 10000000, true);
+    }
 
-        int curX = 12 + START_OFFSET;
-        int curY = 12 + START_OFFSET;
-        Direction curDir = Direction.UP;
+    private int solveForNumberOfInfections(int startX,
+                                           int startY,
+                                           Direction startDir,
+                                           int numCycles,
+                                           boolean isAdvancedVirus) {
+        NodeStatus[][] infectedNodes = loadInitialInfectedNodes(GRID_SIZE, START_OFFSET);
+
+        int curX = startX + START_OFFSET;
+        int curY = startY + START_OFFSET;
+        Direction curDir = startDir;
 
         int numTimesInfect = 0;
 
-        for (int i = 0; i < 10000000; i++) {
-            NodeStatus status = infectedNodes[curX][curY];
+        for (int i = 0; i < numCycles; i++) {
+            NodeStatus currentStatus = infectedNodes[curX][curY];
 
-            if (status == null) {
-                status = NodeStatus.CLEAN;
+            if (currentStatus == null) {
+                currentStatus = NodeStatus.CLEAN;
             }
 
-            switch (status) {
+            switch (currentStatus) {
                 case CLEAN:
                     curDir = curDir.turnLeft();
-                    infectedNodes[curX][curY] = NodeStatus.WEAKENED;
+                    infectedNodes[curX][curY] = isAdvancedVirus ? NodeStatus.WEAKENED : NodeStatus.INFECTED;
+                    numTimesInfect += isAdvancedVirus ? 0 : 1;
                     break;
                 case WEAKENED:
                     infectedNodes[curX][curY] = NodeStatus.INFECTED;
@@ -76,7 +65,7 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
                     break;
                 case INFECTED:
                     curDir = curDir.turnRight();
-                    infectedNodes[curX][curY] = NodeStatus.FLAGGED;
+                    infectedNodes[curX][curY] = isAdvancedVirus ? NodeStatus.FLAGGED : NodeStatus.CLEAN;
                     break;
                 case FLAGGED:
                     curDir = curDir.reverse();
@@ -93,7 +82,7 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
         return numTimesInfect;
     }
 
-    private Set<Pair<Integer, Integer>> loadInitialInfectedNodes() {
+    private NodeStatus[][] loadInitialInfectedNodes(int gridSize, int offset) {
         List<String> allFileLines = getAllFileLines(INPUT_FILE);
 
         Set<Pair<Integer, Integer>> infectedNodes = new HashSet<>();
@@ -106,10 +95,6 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
             }
         }
 
-        return infectedNodes;
-    }
-
-    private NodeStatus[][] initializeInfectedNodes(int gridSize, int offset, Set<Pair<Integer, Integer>> infectedNodes) {
         NodeStatus[][] nodeStatuses = new NodeStatus[gridSize][gridSize];
 
         infectedNodes.forEach(p -> nodeStatuses[p.getKey() + offset][p.getValue() + offset] = NodeStatus.INFECTED);
