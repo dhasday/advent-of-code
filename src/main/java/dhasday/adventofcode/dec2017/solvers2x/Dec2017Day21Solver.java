@@ -12,10 +12,6 @@ public class Dec2017Day21Solver extends Dec2017DaySolver<Long> {
     private static final String INPUT_FILE = "src/main/resources/dec2017/21-input";
     private static final String[] INITIAL_STATE = { ".#.", "..#", "###" };
 
-    public static void main(String[] args) {
-        new Dec2017Day21Solver().printResults();
-    }
-
     @Override
     public int getDay() {
         return 21;
