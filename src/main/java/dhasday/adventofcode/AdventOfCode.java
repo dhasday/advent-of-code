@@ -17,6 +17,7 @@ import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 import dhasday.adventofcode.dec2017.solvers0x.*;
 import dhasday.adventofcode.dec2017.solvers1x.*;
 import dhasday.adventofcode.dec2017.solvers2x.Dec2017Day20Solver;
+import dhasday.adventofcode.dec2017.solvers2x.Dec2017Day21Solver;
 
 public class AdventOfCode {
     /**
@@ -34,7 +35,7 @@ public class AdventOfCode {
      *    * Day 23  ~155000 ms
      *
      *  2017
-     *    * Day XX  ~       ms
+     *    * Day 21  ~ 10000 ms
      */
 
     public static void main(String[] args) {
@@ -84,9 +85,8 @@ public class AdventOfCode {
                 Dec2017Day1Solver.class,    Dec2017Day2Solver.class,    Dec2017Day3Solver.class,    Dec2017Day4Solver.class,    Dec2017Day5Solver.class,
                 Dec2017Day6Solver.class,    Dec2017Day7Solver.class,    Dec2017Day8Solver.class,    Dec2017Day9Solver.class,    Dec2017Day10Solver.class,
                 Dec2017Day11Solver.class,   Dec2017Day12Solver.class,   Dec2017Day13Solver.class,   Dec2017Day14Solver.class,   Dec2017Day15Solver.class,
-                Dec2017Day16Solver.class,   Dec2017Day17Solver.class,   Dec2017Day18Solver.class,   Dec2017Day19Solver.class,   Dec2017Day20Solver.class
-
-//                Dec2017Day21Solver.class//,   Dec2017Day22Solver.class//,   Dec2017Day23Solver.class//,   Dec2017Day24Solver.class//,   Dec2017Day25Solver.class
+                Dec2017Day16Solver.class,   Dec2017Day17Solver.class,   Dec2017Day18Solver.class,   Dec2017Day19Solver.class,   Dec2017Day20Solver.class,
+                Dec2017Day21Solver.class//,   Dec2017Day22Solver.class//,   Dec2017Day23Solver.class//,   Dec2017Day24Solver.class//,   Dec2017Day25Solver.class
         );
     }
 }
