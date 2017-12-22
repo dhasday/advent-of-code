@@ -1,7 +1,8 @@
 package dhasday.adventofcode.dec2017.solvers2x;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javafx.util.Pair;
 
@@ -10,6 +11,12 @@ import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
 
     private static final String INPUT_FILE = "src/main/resources/dec2017/22-input";
+
+    // Based on my inputs we go less than 250 in any direction, so these are way overkill, but it's
+    // late and I don't want to figure out the exact sizing to fit. Plus doing so would potentially
+    // not make this solution work for other inputs (even though it would just be changing these).
+    private static final Integer GRID_SIZE = 1000;
+    private static final Integer START_OFFSET = 500;
 
     @Override
     public int getDay() {
@@ -43,31 +50,44 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
 
     @Override
     public Integer solvePuzzleTwo() {
-        Set<Pair<Integer, Integer>> infectedNodes = loadInitialInfectedNodes();
-        Map<Pair<Integer, Integer>, NodeStatus> nodesStatus = initializeInfectedNodes(infectedNodes);
+        NodeStatus[][] infectedNodes = initializeInfectedNodes(GRID_SIZE, START_OFFSET, loadInitialInfectedNodes());
 
-        Pair<Integer, Integer> curPos = new Pair<>(12, 12);
+        int curX = 12 + START_OFFSET;
+        int curY = 12 + START_OFFSET;
         Direction curDir = Direction.UP;
 
         int numTimesInfect = 0;
 
         for (int i = 0; i < 10000000; i++) {
-            NodeStatus status = nodesStatus.getOrDefault(curPos, NodeStatus.CLEAN);
+            NodeStatus status = infectedNodes[curX][curY];
 
-            curDir = status.nextDir.apply(curDir);
-
-            status = status.nextState();
-            switch (status) {
-                case CLEAN:
-                    nodesStatus.remove(curPos);
-                    break;
-                case INFECTED:
-                    numTimesInfect++;
-                default:
-                    nodesStatus.put(curPos, status);
+            if (status == null) {
+                status = NodeStatus.CLEAN;
             }
 
-            curPos = new Pair<>(curPos.getKey() + curDir.xOffset, curPos.getValue() + curDir.yOffset);
+            switch (status) {
+                case CLEAN:
+                    curDir = curDir.turnLeft();
+                    infectedNodes[curX][curY] = NodeStatus.WEAKENED;
+                    break;
+                case WEAKENED:
+                    infectedNodes[curX][curY] = NodeStatus.INFECTED;
+                    numTimesInfect++;
+                    break;
+                case INFECTED:
+                    curDir = curDir.turnRight();
+                    infectedNodes[curX][curY] = NodeStatus.FLAGGED;
+                    break;
+                case FLAGGED:
+                    curDir = curDir.reverse();
+                    infectedNodes[curX][curY] = NodeStatus.CLEAN;
+                    break;
+                default:
+                    throw new RuntimeException("There's *shouldn't* be any way to end up here since we've cased all values in the enum");
+            }
+
+            curX += curDir.xOffset;
+            curY += curDir.yOffset;
         }
 
         return numTimesInfect;
@@ -89,78 +109,38 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
         return infectedNodes;
     }
 
-    private Map<Pair<Integer, Integer>, NodeStatus> initializeInfectedNodes(Set<Pair<Integer, Integer>> infectedNodes) {
-        Map<Pair<Integer, Integer>, NodeStatus> nodeState = new HashMap<>();
+    private NodeStatus[][] initializeInfectedNodes(int gridSize, int offset, Set<Pair<Integer, Integer>> infectedNodes) {
+        NodeStatus[][] nodeStatuses = new NodeStatus[gridSize][gridSize];
 
-        infectedNodes.forEach(n -> nodeState.put(n, NodeStatus.INFECTED));
+        infectedNodes.forEach(p -> nodeStatuses[p.getKey() + offset][p.getValue() + offset] = NodeStatus.INFECTED);
 
-        return nodeState;
+        return nodeStatuses;
     }
 
+    // Enums work great until they don't. I really wanted to just set these values as fields, but
+    // Java doesn't support forward referencing enum values (which doesn't make sense to me) so
+    // I've collapsed these overrides onto a single line each since it seems just as readable and
+    // a lot less verbose looking (same content, fewer line breaks and now it all lines up).
     private enum Direction {
         UP(0, -1) {
-            @Override
-            Direction turnLeft() {
-                return LEFT;
-            }
-
-            @Override
-            Direction turnRight() {
-                return RIGHT;
-            }
-
-            @Override
-            Direction reverse() {
-                return DOWN;
-            }
+            @Override Direction turnLeft()  { return LEFT;  }
+            @Override Direction turnRight() { return RIGHT; }
+            @Override Direction reverse()   { return DOWN;  }
         },
         DOWN(0, 1) {
-            @Override
-            Direction turnLeft() {
-                return RIGHT;
-            }
-
-            @Override
-            Direction turnRight() {
-                return LEFT;
-            }
-
-            @Override
-            Direction reverse() {
-                return UP;
-            }
+            @Override Direction turnLeft()  { return RIGHT; }
+            @Override Direction turnRight() { return LEFT;  }
+            @Override Direction reverse()   { return UP;    }
         },
         LEFT(-1, 0) {
-            @Override
-            Direction turnLeft() {
-                return DOWN;
-            }
-
-            @Override
-            Direction turnRight() {
-                return UP;
-            }
-
-            @Override
-            Direction reverse() {
-                return RIGHT;
-            }
+            @Override Direction turnLeft()  { return DOWN;  }
+            @Override Direction turnRight() { return UP;    }
+            @Override Direction reverse()   { return RIGHT; }
         },
         RIGHT(1, 0) {
-            @Override
-            Direction turnLeft() {
-                return UP;
-            }
-
-            @Override
-            Direction turnRight() {
-                return DOWN;
-            }
-
-            @Override
-            Direction reverse() {
-                return LEFT;
-            }
+            @Override Direction turnLeft()  { return UP;    }
+            @Override Direction turnRight() { return DOWN;  }
+            @Override Direction reverse()   { return LEFT;  }
         };
 
         private final int xOffset;
@@ -177,37 +157,9 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
     }
 
     private enum NodeStatus {
-        CLEAN(Direction::turnLeft) {
-            @Override
-            NodeStatus nextState() {
-                return WEAKENED;
-            }
-        },
-        WEAKENED(curDir -> curDir) {
-            @Override
-            NodeStatus nextState() {
-                return INFECTED;
-            }
-        },
-        INFECTED(Direction::turnRight) {
-            @Override
-            NodeStatus nextState() {
-                return FLAGGED;
-            }
-        },
-        FLAGGED(Direction::reverse) {
-            @Override
-            NodeStatus nextState() {
-                return CLEAN;
-            }
-        };
-
-        private Function<Direction, Direction> nextDir;
-
-        abstract NodeStatus nextState();
-
-        NodeStatus(Function<Direction, Direction> nextDir) {
-            this.nextDir = nextDir;
-        }
+        CLEAN,
+        WEAKENED,
+        INFECTED,
+        FLAGGED
     }
 }

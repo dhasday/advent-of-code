@@ -114,7 +114,7 @@ public class Dec2015Day19Solver extends Dec2015DaySolver<Integer> {
                 + input.substring(matchStartIndex).replaceFirst(substitution.replacement, substitution.original);
     }
 
-    public static class Substitution {
+    public class Substitution {
         private final String original;
         private final String replacement;
 
