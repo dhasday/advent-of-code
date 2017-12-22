@@ -35,7 +35,7 @@ public class AdventOfCode {
      *    * Day 23  ~155000 ms
      *
      *  2017
-     *    * Day 21  ~ 10000 ms
+     *    * Day XX  ~       ms
      */
 
     public static void main(String[] args) {
