@@ -18,6 +18,8 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
     private static final Integer GRID_SIZE = 1000;
     private static final Integer START_OFFSET = 500;
 
+    private static final Integer INPUT_SIZE = 25;
+
     @Override
     public int getDay() {
         return 22;
@@ -25,23 +27,22 @@ public class Dec2017Day22Solver extends Dec2017DaySolver<Integer> {
 
     @Override
     public Integer solvePuzzleOne() {
-        return solveForNumberOfInfections(12, 12, Direction.UP, 10000, false);
+        return solveForNumberOfInfections(INPUT_SIZE / 2, Direction.UP, 10000, false);
     }
 
     @Override
     public Integer solvePuzzleTwo() {
-        return solveForNumberOfInfections(12, 12, Direction.UP, 10000000, true);
+        return solveForNumberOfInfections(INPUT_SIZE / 2, Direction.UP, 10000000, true);
     }
 
-    private int solveForNumberOfInfections(int startX,
-                                           int startY,
+    private int solveForNumberOfInfections(int startLoc,
                                            Direction startDir,
                                            int numCycles,
                                            boolean isAdvancedVirus) {
         NodeStatus[][] infectedNodes = loadInitialInfectedNodes(GRID_SIZE, START_OFFSET);
 
-        int curX = startX + START_OFFSET;
-        int curY = startY + START_OFFSET;
+        int curX = startLoc + START_OFFSET;
+        int curY = startLoc + START_OFFSET;
         Direction curDir = startDir;
 
         int numTimesInfect = 0;
