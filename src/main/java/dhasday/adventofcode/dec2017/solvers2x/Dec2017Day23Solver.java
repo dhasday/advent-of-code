@@ -92,11 +92,7 @@ import dhasday.adventofcode.dec2017.Dec2017DaySolver;
  */
 public class Dec2017Day23Solver extends Dec2017DaySolver<Integer> {
 
-    private static final Integer INPUT = 79; // Input L
-
-    public static void main(String[] args) {
-        new Dec2017Day23Solver().printResults();
-    }
+    private static final Integer INPUT = 79;
 
     @Override
     public int getDay() {
