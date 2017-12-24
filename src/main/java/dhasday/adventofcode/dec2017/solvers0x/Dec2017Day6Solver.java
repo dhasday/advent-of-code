@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
+import javafx.util.Pair;
+
 import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
 public class Dec2017Day6Solver extends Dec2017DaySolver<Integer> {
@@ -18,48 +20,28 @@ public class Dec2017Day6Solver extends Dec2017DaySolver<Integer> {
     }
 
     @Override
-    public Integer solvePuzzleOne() {
+    protected Pair<Integer, Integer> solvePuzzles() {
         List<Integer> registerValues = loadRegisterValues();
-        return getNumCyclesBeforeRepeat(registerValues);
-    }
 
-    @Override
-    public Integer solvePuzzleTwo() {
-        List<Integer> registerValues = loadRegisterValues();
-        return getNumCyclesInLoop(registerValues);
+
+        List<List<Integer>> seenValues = new ArrayList<>();
+        List<Integer> currentValues = Lists.newArrayList(registerValues);
+
+        while (!seenValues.contains(currentValues)) {
+            seenValues.add(currentValues);
+            currentValues = processOnce(currentValues);
+        }
+
+        return new Pair<>(
+                seenValues.size(),
+                seenValues.size() - findFirstPatternIndex(seenValues, currentValues)
+        );
     }
 
     private List<Integer> loadRegisterValues() {
         return Arrays.stream(getOnlyFileLine(INPUT_FILE).split("\t"))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
-    }
-
-    private Integer getNumCyclesBeforeRepeat(List<Integer> registerValues) {
-        List<Integer> currentValues = Lists.newArrayList(registerValues);
-
-        List<List<Integer>> seenValues = new ArrayList<>();
-
-        int iterations = 0;
-        while (!seenValues.contains(currentValues)) {
-            seenValues.add(currentValues);
-            currentValues = processOnce(currentValues);
-            iterations++;
-        }
-
-        return iterations;
-    }
-
-    private Integer getNumCyclesInLoop(List<Integer> registerValues) {
-        List<List<Integer>> seenValues = new ArrayList<>();
-        List<Integer> currentValues = Lists.newArrayList(registerValues);
-
-        while (!seenValues.contains(currentValues)) {
-            seenValues.add(currentValues);
-            currentValues = processOnce(currentValues);
-        }
-
-        return seenValues.size() - findFirstPatternIndex(seenValues, currentValues);
     }
 
     private List<Integer> processOnce(List<Integer> currentValues) {

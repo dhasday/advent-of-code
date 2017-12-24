@@ -1,11 +1,11 @@
 package dhasday.adventofcode.dec2017.solvers2x;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
 import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 
 import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
@@ -19,33 +19,12 @@ public class Dec2017Day24Solver extends Dec2017DaySolver<Integer> {
     }
 
     @Override
-    public Integer solvePuzzleOne() {
-        Pair<Integer, Integer> strongestBridge = findStrongestBridge(
-                loadAllPairs(),
-                0,
-                new Pair<>(0, 0),
-                Comparator.comparingInt(Pair::getValue)
-        );
+    protected Pair<Integer, Integer> solvePuzzles() {
+        Set<Pair<Integer, Integer>> allPairs = loadAllPairs();
 
-        return strongestBridge.getValue();
-    }
+        Triple<Integer, Integer, Integer> strongestBridge = findStrongestBridge(allPairs, 0, Triple.of(0, 0, 0));
 
-    @Override
-    public Integer solvePuzzleTwo() {
-        Pair<Integer, Integer> strongestBridge = findStrongestBridge(
-                loadAllPairs(),
-                0,
-                new Pair<>(0, 0),
-                (b1, b2) -> {
-                    if (!b1.getKey().equals(b2.getKey())) {
-                        return Integer.compare(b1.getKey(), b2.getKey());
-                    }
-
-                    return Integer.compare(b1.getValue(), b2.getValue());
-                }
-        );
-
-        return strongestBridge.getValue();
+        return new Pair<>(strongestBridge.getLeft(), strongestBridge.getRight());
     }
 
     private Set<Pair<Integer, Integer>> loadAllPairs() {
@@ -59,15 +38,14 @@ public class Dec2017Day24Solver extends Dec2017DaySolver<Integer> {
         return allPairs;
     }
 
-    private Pair<Integer, Integer> findStrongestBridge(Set<Pair<Integer,Integer>> remainingConnectors,
-                                                       int previousConnection,
-                                                       Pair<Integer, Integer> curSizeStrength,
-                                                       Comparator<Pair<Integer, Integer>> bridgeComparator) {
+    private Triple<Integer, Integer, Integer> findStrongestBridge(Set<Pair<Integer,Integer>> remainingConnectors,
+                                                                  int previousConnection,
+                                                                  Triple<Integer, Integer, Integer> curAnswer) {
         if (remainingConnectors.isEmpty()) {
-            return curSizeStrength;
+            return curAnswer;
         }
 
-        Pair<Integer, Integer> maxSizeStrength = curSizeStrength;
+        Triple<Integer, Integer, Integer> newAnswer = curAnswer;
 
         for (Pair<Integer, Integer> pair : remainingConnectors) {
             Integer nextConnection;
@@ -82,18 +60,25 @@ public class Dec2017Day24Solver extends Dec2017DaySolver<Integer> {
             Set<Pair<Integer, Integer>> newRemainingConnectors = Sets.newHashSet(remainingConnectors);
             newRemainingConnectors.remove(pair);
 
-            Pair<Integer, Integer> newSizeStrength = new Pair<>(
-                    curSizeStrength.getKey() + 1,
-                    curSizeStrength.getValue() + pair.getKey() + pair.getValue()
+            Triple<Integer, Integer, Integer> newStrongestBridge = Triple.of(
+                    curAnswer.getLeft() + pair.getKey() + pair.getValue(),
+                    curAnswer.getMiddle() + 1,
+                    curAnswer.getRight() + pair.getKey() + pair.getValue()
             );
 
-            Pair<Integer, Integer> possiblePair = findStrongestBridge(newRemainingConnectors, nextConnection, newSizeStrength, bridgeComparator);
+            Triple<Integer, Integer, Integer> possibleAnswer = findStrongestBridge(newRemainingConnectors, nextConnection, newStrongestBridge);
 
-            if (bridgeComparator.compare(maxSizeStrength, possiblePair) < 0) {
-                maxSizeStrength = possiblePair;
+            int newLeft = Math.max(possibleAnswer.getLeft(), newAnswer.getLeft());
+
+            if (possibleAnswer.getMiddle().equals(newAnswer.getMiddle())) {
+                newAnswer = Triple.of(newLeft, newAnswer.getMiddle(), Math.max(possibleAnswer.getRight(), newAnswer.getRight()));
+            } else if (possibleAnswer.getMiddle() > newAnswer.getMiddle()) {
+                newAnswer = Triple.of(newLeft, possibleAnswer.getMiddle(), possibleAnswer.getRight());
+            } else if (newLeft != newAnswer.getLeft()){
+                newAnswer = Triple.of(newLeft, newAnswer.getMiddle(), newAnswer.getRight());
             }
         }
 
-        return maxSizeStrength;
+        return newAnswer;
     }
 }

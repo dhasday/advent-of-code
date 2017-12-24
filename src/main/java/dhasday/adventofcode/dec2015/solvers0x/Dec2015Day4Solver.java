@@ -1,8 +1,8 @@
 package dhasday.adventofcode.dec2015.solvers0x;
 
-import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
+
+import dhasday.adventofcode.dec2015.Dec2015DaySolver;
 
 public class Dec2015Day4Solver extends Dec2015DaySolver<Integer> {
 

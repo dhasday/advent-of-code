@@ -28,13 +28,13 @@ public class AdventOfCode {
      *    * Day 20  ~  3400 ms
      *
      *  2016
-     *    * Day  5  ~ 18000 ms
+     *    * Day  5  ~ 11000 ms
      *    * Day 12  ~  1800 ms
      *    * Day 14  ~ 26000 ms
      *    * Day 23  ~155000 ms
      *
      *  2017
-     *    * Day 24  ~  2500 ms
+     *    * Day XX  ~       ms
      */
 
     public static void main(String[] args) {

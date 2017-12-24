@@ -1,16 +1,15 @@
 package dhasday.adventofcode.dec2016.solvers0x;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import javafx.util.Pair;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import dhasday.adventofcode.dec2016.Dec2016DaySolver;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 
 public class Dec2016Day5Solver extends Dec2016DaySolver<String> {
 
     private static final String INPUT = "reyedfim";
+
+    private static final int PASSWORD_LENGTH = 8;
 
     @Override
     public int getDay() {
@@ -18,71 +17,44 @@ public class Dec2016Day5Solver extends Dec2016DaySolver<String> {
     }
 
     @Override
-    public String solvePuzzleOne() {
-        // return "f97c354d";
-        return determinePasswordOne(INPUT);
-    }
-
-    @Override
-    public String solvePuzzleTwo() {
-        // return "863dde27";
-        return determinePasswordTwo(INPUT);
-    }
-
-    private String determinePasswordOne(String input) {
-        String password = "";
+    protected Pair<String, String> solvePuzzles() {
+        StringBuilder passwordOne = new StringBuilder();
+        char[] passwordTwo = new char[PASSWORD_LENGTH];
 
         int index = 0;
-        while (password.length() < 8) {
-            String toHash = input + index;
+        while (passwordOne.length() < 8 || isPasswordIncomplete(passwordTwo)) {
+            String toHash = INPUT + index;
             String md5 = DigestUtils.md5Hex(toHash);
+
             if (md5.startsWith("00000")) {
-                password += md5.charAt(5);
-            }
-            index++;
-        }
-
-        return password;
-    }
-
-    private String determinePasswordTwo(String input) {
-        List<Character> passwordChars = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            passwordChars.add(null);
-        }
-
-        int index = 0;
-        while (!isPasswordComplete(passwordChars)) {
-            String toHash = input + index;
-            String md5 = DigestUtils.md5Hex(toHash);
-            if (md5.startsWith("00000")) {
-                Integer pwIndex = getIndex(md5.charAt(5));
-
-                if (pwIndex != null
-                        && pwIndex < 8
-                        && passwordChars.get(pwIndex) == null) {
-                    passwordChars.set(pwIndex, md5.charAt(6));
+                if (passwordOne.length() < 8) {
+                    passwordOne.append(md5.charAt(5));
                 }
+
+                if (isPasswordIncomplete(passwordTwo)) {
+                    Integer pwIndex = md5.charAt(5) - '0';
+
+                    if (pwIndex < PASSWORD_LENGTH
+                            && passwordTwo[pwIndex] == 0) {
+                        passwordTwo[pwIndex] = md5.charAt(6);
+                    }
+                }
+
             }
+
             index++;
         }
 
-        String password = "";
-        for (Character character : passwordChars) {
-            password += character;
-        }
-        return password;
+        return new Pair<>(passwordOne.toString(), new String(passwordTwo));
     }
 
-    private boolean isPasswordComplete(List<Character> password) {
-        return password.stream().noneMatch(Objects::isNull);
-    }
-
-    private Integer getIndex(Character character) {
-        if (StringUtils.isNumeric(character + "")) {
-            return character - '0';
-        } else {
-            return null;
+    private boolean isPasswordIncomplete(char[] password) {
+        for (char c : password) {
+            if (c == 0) {
+                return true;
+            }
         }
+
+        return false;
     }
 }
