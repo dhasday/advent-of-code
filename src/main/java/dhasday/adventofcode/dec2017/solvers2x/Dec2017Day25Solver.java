@@ -2,7 +2,6 @@ package dhasday.adventofcode.dec2017.solvers2x;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.BiConsumer;
 
 import dhasday.adventofcode.dec2017.Dec2017DaySolver;
 
@@ -72,10 +71,6 @@ public class Dec2017Day25Solver extends Dec2017DaySolver<Integer> {
         return 25;
     }
 
-    public static void main(String[] args) {
-        new Dec2017Day25Solver().printResults();
-    }
-
     @Override
     public Integer solvePuzzleOne() {
         int numSteps = 12368930;
@@ -87,14 +82,8 @@ public class Dec2017Day25Solver extends Dec2017DaySolver<Integer> {
         for (int i = 0; i < numSteps; i++) {
             boolean wasZero = !activeBits.contains(cursor);
 
-            if (wasZero) {
-                curState.zeroOp.accept(activeBits, cursor);
-                cursor += curState.zeroOffset;
-            } else {
-                curState.oneOp.accept(activeBits, cursor);
-                cursor += curState.oneOffset;
-            }
-
+            curState.processState(activeBits, cursor, wasZero);
+            cursor = curState.nextCursor(cursor, wasZero);
             curState = curState.nextState(wasZero);
         }
 
@@ -106,83 +95,126 @@ public class Dec2017Day25Solver extends Dec2017DaySolver<Integer> {
         return null;
     }
 
-    private enum Op implements BiConsumer<Set<Integer>, Integer> {
-        ADD() {
-            @Override
-            public void accept(Set<Integer> activeBits, Integer integer) {
-                activeBits.add(integer);
-            }
-        },
-        REMOVE {
-            @Override
-            public void accept(Set<Integer> activeBits, Integer integer) {
-                activeBits.remove(integer);
-            }
-        };
-    }
-
     private enum State {
-        A(Op.ADD, Op.REMOVE, 1, 1) {
-            // If the current value is 0: 1, + 1, -> B
-            // If the current value is 1: 0, + 1, -> C
+        A {
+            // If the current value is 0: 1; + 1, -> B
+            // If the current value is 1: 0; + 1, -> C
+            @Override
+            void processState(Set<Integer> activeBits, Integer cursor, boolean wasZero) {
+                if (wasZero) {
+                    activeBits.add(cursor);
+                } else {
+                    activeBits.remove(cursor);
+                }
+            }
+
+            @Override
+            int nextCursor(Integer cursor, boolean wasZero) {
+                return cursor + 1;
+            }
+
             @Override
             State nextState(boolean wasZero) {
                 return wasZero ? B : C;
             }
         },
-        B(Op.REMOVE, Op.REMOVE, -1, 1) {
+        B {
             // If the current value is 0: 0; - 1, -> A
             // If the current value is 1: 0; + 1, -> D
+            @Override
+            void processState(Set<Integer> activeBits, Integer cursor, boolean wasZero) {
+                activeBits.remove(cursor);
+            }
+
+            @Override
+            int nextCursor(Integer cursor, boolean wasZero) {
+                return wasZero ? cursor - 1 : cursor + 1;
+            }
+
             @Override
             State nextState(boolean wasZero) {
                 return wasZero ? A : D;
             }
         },
-        C(Op.ADD, Op.ADD, 1, 1) {
+        C {
             // If the current value is 0: 1, + 1, -> D
             // If the current value is 1: 1, + 1, -> A
+            @Override
+            void processState(Set<Integer> activeBits, Integer cursor, boolean wasZero) {
+                activeBits.add(cursor);
+            }
+
+            @Override
+            int nextCursor(Integer cursor, boolean wasZero) {
+                return cursor + 1;
+            }
+
             @Override
             State nextState(boolean wasZero) {
                 return wasZero ? D : A;
             }
         },
-        D(Op.ADD, Op.REMOVE, -1, -1) {
+        D {
             // If the current value is 0: 1, - 1, -> E
             // If the current value is 1: 0, - 1, -> D
+            @Override
+            void processState(Set<Integer> activeBits, Integer cursor, boolean wasZero) {
+                if (wasZero) {
+                    activeBits.add(cursor);
+                } else {
+                    activeBits.remove(cursor);
+                }
+            }
+
+            @Override
+            int nextCursor(Integer cursor, boolean wasZero) {
+                return cursor - 1;
+            }
+
             @Override
             State nextState(boolean wasZero) {
                 return wasZero ? E : D;
             }
         },
-        E(Op.ADD, Op.ADD, 1, -1) {
+        E {
             // If the current value is 0: 1, + 1, -> F
             // If the current value is 1: 1, - 1, -> B
+            @Override
+            void processState(Set<Integer> activeBits, Integer cursor, boolean wasZero) {
+                activeBits.add(cursor);
+            }
+
+            @Override
+            int nextCursor(Integer cursor, boolean wasZero) {
+                return wasZero ? cursor + 1 : cursor - 1;
+            }
+
             @Override
             State nextState(boolean wasZero) {
                 return wasZero ? F : B;
             }
         },
-        F(Op.ADD, Op.ADD, 1, 1) {
+        F {
             // If the current value is 0: 1, + 1, -> A
             // If the current value is 1: 1, + 1, -> E
+            @Override
+            void processState(Set<Integer> activeBits, Integer cursor, boolean wasZero) {
+                activeBits.add(cursor);
+            }
+
+            @Override
+            int nextCursor(Integer cursor, boolean wasZero) {
+                return cursor + 1;
+            }
+
             @Override
             State nextState(boolean wasZero) {
                 return wasZero ? A : E;
             }
         };
 
-        private final Op zeroOp;
-        private final Op oneOp;
-        private final int zeroOffset;
-        private final int oneOffset;
-
+        abstract void processState(Set<Integer> activeBits, Integer cursor, boolean wasZero);
+        abstract int nextCursor(Integer cursor, boolean wasZero);
         abstract State nextState(boolean wasZero);
-
-        State(Op zeroOp, Op oneOp, int zeroOffset, int oneOffset) {
-            this.zeroOp = zeroOp;
-            this.oneOp = oneOp;
-            this.zeroOffset = zeroOffset;
-            this.oneOffset = oneOffset;
-        }
     }
 }
