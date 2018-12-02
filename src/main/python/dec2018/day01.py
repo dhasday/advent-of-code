@@ -1,6 +1,5 @@
 from day_solver import DaySolver
 
-INPUT_FILE = '../../resources/dec2018/1-input'
 SEQUENCE_START_VALUE = 0
 
 
@@ -32,7 +31,7 @@ class Day01Solver(DaySolver):
     def _load_sequence(self):
         sequence = []
 
-        with open(INPUT_FILE) as f:
+        with open(self._get_input_filename()) as f:
             for line in f:
                 sequence.append(int(line))
 

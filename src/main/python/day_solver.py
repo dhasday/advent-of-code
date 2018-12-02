@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod, abstractproperty
 from time import time
+import os
 
 SLOW_ELAPSED_THRESHOLD = 1000
 
@@ -44,7 +45,14 @@ class DaySolver(object):
     def _get_current_time(self):
         return int(time() * 1000.0)
 
-    def _load_all_input_lines(self, filename):
+    def _get_input_filename(self):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        return '{}/../resources/dec{}/{}-input'.format(dir_path, self.year, self.day)
+
+    def _load_all_input_lines(self, filename=None):
+        if filename is None:
+            filename = self._get_input_filename()
+
         all_lines = []
 
         with open(filename) as f:

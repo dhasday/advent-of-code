@@ -1,14 +1,12 @@
 from day_solver import DaySolver
 
-INPUT_FILE = '../../resources/dec2018/2-input'
-
 
 class Day02Solver(DaySolver):
     year = 2018
     day = 2
 
     def solve_puzzle_one(self):
-        package_ids = self._load_all_input_lines(INPUT_FILE)
+        package_ids = self._load_all_input_lines()
 
         num_doubles = 0
         num_triples = 0
@@ -31,7 +29,7 @@ class Day02Solver(DaySolver):
         return num_doubles * num_triples
 
     def solve_puzzle_two(self):
-        package_ids = self._load_all_input_lines(INPUT_FILE)
+        package_ids = self._load_all_input_lines()
 
         valid_packages = self._get_valid_packages(package_ids)
 
@@ -47,7 +45,7 @@ class Day02Solver(DaySolver):
     def _count_letters(self, package_id):
         letter_counts = dict()
         for letter in package_id:
-            if not letter_counts.has_key(letter):
+            if letter not in letter_counts:
                 letter_counts[letter] = 0
 
             letter_counts[letter] = letter_counts[letter] + 1
