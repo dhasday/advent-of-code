@@ -36,10 +36,19 @@ class DaySolver(object):
 
         print('{} Day {:2d}-{}: {}'.format(self.year, self.day, 1, ans_one))
         print('{} Day {:2d}-{}: {}'.format(self.year, self.day, 2, ans_two))
-        print('{}Elapsed Time: {} ms'.format(
+        print('{}Elapsed Time: {} ms\n'.format(
             '*** ' if elapsed_time >= SLOW_ELAPSED_THRESHOLD else '',
             elapsed_time,
         ))
 
     def _get_current_time(self):
         return int(time() * 1000.0)
+
+    def _load_all_input_lines(self, filename):
+        all_lines = []
+
+        with open(filename) as f:
+            for line in f:
+                all_lines.append(line.strip('\n'))
+
+        return all_lines
