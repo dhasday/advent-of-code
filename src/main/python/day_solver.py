@@ -22,13 +22,11 @@ class DaySolver(object):
     def day(self):
         pass
 
-    @abstractmethod
     def solve_puzzle_one(self):
-        pass
+        return 'TODO'
 
-    @abstractmethod
     def solve_puzzle_two(self):
-        pass
+        return 'TODO'
 
     def print_results(self):
         start_time = self._get_current_time()
@@ -45,13 +43,18 @@ class DaySolver(object):
     def _get_current_time(self):
         return int(time() * 1000.0)
 
-    def _get_input_filename(self):
+    def _get_input_directory(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        return '{}/../resources/dec{}/{}-input'.format(dir_path, self.year, self.day)
+        return '{}/../resources/dec{}/'.format(dir_path, self.year)
+
+    def _get_input_filename(self):
+        return '{}/{}-input'.format(self._get_input_directory(), self.day)
 
     def _load_all_input_lines(self, filename=None):
         if filename is None:
             filename = self._get_input_filename()
+        elif '/' not in filename:
+            filename = self._get_input_directory() + '/' + filename
 
         all_lines = []
 
