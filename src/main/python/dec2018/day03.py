@@ -10,6 +10,15 @@ class Day03Solver(DaySolver):
     year = 2018
     day = 3
 
+    class Measurement(object):
+        def __init__(self, measurement):
+            result = INPUT_REGEX.match(measurement)
+            self.id = int(result.group(1))
+            self.start_x = int(result.group(2))
+            self.start_y = int(result.group(3))
+            self.size_x = int(result.group(4))
+            self.size_y = int(result.group(5))
+
     def solve_puzzles(self):
         measurements = self._load_all_measurements()
         fabric = dict()
@@ -24,7 +33,7 @@ class Day03Solver(DaySolver):
     def _load_all_measurements(self):
         lines = self._load_all_input_lines()
 
-        return map(lambda l: Measurement(l), lines)
+        return [self.Measurement(l) for l in lines]
 
     def _put_all_measurements_in_fabric(self, measurements, fabric):
         for measurement in measurements:
@@ -62,11 +71,4 @@ class Day03Solver(DaySolver):
         return True
 
 
-class Measurement(object):
-    def __init__(self, measurement):
-        result = INPUT_REGEX.match(measurement)
-        self.id = int(result.group(1))
-        self.start_x = int(result.group(2))
-        self.start_y = int(result.group(3))
-        self.size_x = int(result.group(4))
-        self.size_y = int(result.group(5))
+
