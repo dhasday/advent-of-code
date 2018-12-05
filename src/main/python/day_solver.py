@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractproperty
 from time import time
 import os
 
-SLOW_ELAPSED_THRESHOLD = 1000
+SLOW_ELAPSED_THRESHOLD_MS = 250
 
 
 class DaySolver(object):
@@ -36,7 +36,7 @@ class DaySolver(object):
         print('{} Day {:2d}-{}: {}'.format(self.year, self.day, 1, ans_one))
         print('{} Day {:2d}-{}: {}'.format(self.year, self.day, 2, ans_two))
         print('{}Elapsed Time: {} ms\n'.format(
-            '*** ' if elapsed_time >= SLOW_ELAPSED_THRESHOLD else '',
+            '*** ' if elapsed_time >= SLOW_ELAPSED_THRESHOLD_MS else '',
             elapsed_time,
         ))
 
@@ -47,14 +47,20 @@ class DaySolver(object):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         return '{}/../resources/dec{}/'.format(dir_path, self.year)
 
-    def _get_input_filename(self):
-        return '{}/{}-input'.format(self._get_input_directory(), self.day)
+    def _get_input_filename(self, filename=None):
+        if filename is None:
+            return '{}/{}-input'.format(self._get_input_directory(), self.day)
+        else:
+            return '{}/{}'.format(self._get_input_directory(), filename)
+
+    def _load_only_input_line(self, filename=None):
+        filename = self._get_input_filename(filename)
+
+        with open(filename) as f:
+            return f.readline()
 
     def _load_all_input_lines(self, filename=None):
-        if filename is None:
-            filename = self._get_input_filename()
-        elif '/' not in filename:
-            filename = self._get_input_directory() + '/' + filename
+        filename = self._get_input_filename(filename)
 
         all_lines = []
 
