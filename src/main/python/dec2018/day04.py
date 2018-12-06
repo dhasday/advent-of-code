@@ -1,7 +1,7 @@
 import re
 from operator import attrgetter
 
-from day_solver import DaySolver
+from common.day_solver import DaySolver
 
 INPUT_REGEX = re.compile('\[\d{4}-\d{2}-\d{2} \d{2}:(\d{2})] (.*)')
 

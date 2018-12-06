@@ -45,7 +45,7 @@ class DaySolver(object):
 
     def _get_input_directory(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        return '{}/../resources/dec{}/'.format(dir_path, self.year)
+        return '{}/../../resources/dec{}/'.format(dir_path, self.year)
 
     def _get_input_filename(self, filename=None):
         if filename is None:

@@ -1,6 +1,6 @@
 import re
 
-from day_solver import DaySolver
+from common.day_solver import DaySolver
 
 
 INPUT_REGEX = re.compile('#(\d+) @ (\d+),(\d+): (\d+)x(\d+)')

@@ -1,4 +1,4 @@
-from day_solver import DaySolver
+from common.day_solver import DaySolver
 
 PART_TWO_MAX_DISTANCE = 10000
 

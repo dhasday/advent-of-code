@@ -1,4 +1,4 @@
-from day_solver import DaySolver
+from common.day_solver import DaySolver
 
 SEQUENCE_START_VALUE = 0
 
