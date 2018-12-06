@@ -1,5 +1,7 @@
-from .day01 import *
-from .day02 import *
-from .day03 import *
-from .day04 import *
-from .day05 import *
+from .day01 import Day01Solver
+from .day02 import Day02Solver
+from .day03 import Day03Solver
+from .day04 import Day04Solver
+from .day05 import Day05Solver
+
+from .day06 import Day06Solver
