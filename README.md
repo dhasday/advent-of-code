@@ -1,10 +1,10 @@
 # Advent of Code
 
-Solutions for puzzles from https://adventofcode.com/
+Solutions for puzzles from https://adventofcode.com/.
 
-Year | Link | Status
----- | ---- | ------
-2015 | https://adventofcode.com/2015 | Day 25 Complete
-2016 | https://adventofcode.com/2016 | Day 25 Complete
-2017 | https://adventofcode.com/2017 | Day 25 Complete
-2018 | https://adventofcode.com/2018 | Day 7 Complete
+Year | Link | Java | Python
+---- | ---- | ---- | ------
+2015 | https://adventofcode.com/2015 | Day 25 | Day 4
+2016 | https://adventofcode.com/2016 | Day 25 | -
+2017 | https://adventofcode.com/2017 | Day 25 | -
+2018 | https://adventofcode.com/2018 | - | Day 8
