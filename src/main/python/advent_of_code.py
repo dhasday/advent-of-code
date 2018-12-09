@@ -5,7 +5,7 @@ import dec2018
 
 dec2015_solvers = [
     dec2015.Day01Solver(), dec2015.Day02Solver(), dec2015.Day03Solver(), dec2015.Day04Solver(), dec2015.Day05Solver(),
-    dec2015.Day06Solver(), dec2015.Day07Solver(), dec2015.Day08Solver(), dec2015.Day09Solver(),
+    dec2015.Day06Solver(), dec2015.Day07Solver(), dec2015.Day08Solver(), dec2015.Day09Solver(), dec2015.Day10Solver(),
 ]
 dec2016_solvers = [
 ]

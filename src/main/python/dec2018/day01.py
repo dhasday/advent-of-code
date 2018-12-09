@@ -29,10 +29,4 @@ class Day01Solver(DaySolver):
                     return freq
 
     def _load_sequence(self):
-        sequence = []
-
-        with open(self._get_input_filename()) as f:
-            for line in f:
-                sequence.append(int(line))
-
-        return sequence
+        return [int(l) for l in self._load_all_input_lines()]
