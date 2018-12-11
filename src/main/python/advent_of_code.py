@@ -6,6 +6,7 @@ import dec2018
 dec2015_solvers = [
     dec2015.Day01Solver(), dec2015.Day02Solver(), dec2015.Day03Solver(), dec2015.Day04Solver(), dec2015.Day05Solver(),
     dec2015.Day06Solver(), dec2015.Day07Solver(), dec2015.Day08Solver(), dec2015.Day09Solver(), dec2015.Day10Solver(),
+    dec2015.Day11Solver(),
 ]
 dec2016_solvers = [
 ]
@@ -26,6 +27,7 @@ all_solvers.extend(dec2018_solvers)
 #       Day  4  ~8000 ms
 #       Day  6  ~7000 ms
 #       Day 10  ~5000 ms
+#       Day 11  ~1300 ms
 #   2016
 #   2017
 #   2018

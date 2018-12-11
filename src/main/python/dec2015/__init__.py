@@ -9,3 +9,5 @@ from .day07 import Day07Solver
 from .day08 import Day08Solver
 from .day09 import Day09Solver
 from .day10 import Day10Solver
+
+from .day11 import Day11Solver
