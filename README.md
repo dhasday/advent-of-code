@@ -7,4 +7,4 @@ Year | Link | Java | Python
 2015 | https://adventofcode.com/2015 | Day 25 | Day 11
 2016 | https://adventofcode.com/2016 | Day 25 | -
 2017 | https://adventofcode.com/2017 | Day 25 | -
-2018 | https://adventofcode.com/2018 | - | Day 11
+2018 | https://adventofcode.com/2018 | - | Day 12
