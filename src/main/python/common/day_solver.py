@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractproperty
 from time import time
 import os
 
-SLOW_ELAPSED_THRESHOLD_MS = 1000
+SLOW_ELAPSED_THRESHOLD_MS = 5000
 
 
 class DaySolver(object):
