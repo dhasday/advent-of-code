@@ -11,10 +11,10 @@ WHOLE_NUMBERS_REGEX = re.compile('-?\d+')
 
 
 class State(Enum):
-    SPRING = 0
-    CLAY = 1
-    FLOWING_WATER = 2
-    SETTLED_WATER = 3
+    SPRING = '+'
+    CLAY = '#'
+    FLOWING_WATER = '|'
+    SETTLED_WATER = '~'
 
 
 class Day17Solver(DaySolver):
@@ -23,48 +23,55 @@ class Day17Solver(DaySolver):
 
     class Grid(object):
         grid = defaultdict()
-        min_x = None
-        max_x = None
-        min_y = None
-        max_y = None
-
-        @property
-        def size_x(self):
-            return self.max_x - self.min_x + 1
-
-        @property
-        def size_y(self):
-            return self.max_y - self.min_y + 1
 
         def get_value(self, pos):
             return self.grid.get(pos)
 
         def set_value(self, pos, value):
             self.grid[pos] = value
-            self._include_point(pos[0], pos[1])
 
         def is_above(self, pos, value):
             below_pos = (pos[0], pos[1] + 1)
             return self.grid.get(below_pos) == value
 
-        def _include_point(self, x, y):
-            if self.min_x is None or x < self.min_x:
-                self.min_x = x
-            if self.max_x is None or x > self.max_x:
-                self.max_x = x
-            if self.min_y is None or y < self.min_y:
-                self.min_y = y
-            if self.min_y is None or y > self.max_y:
-                self.max_y = y
+        def visualize(self):
+            min_x, max_x, min_y, max_y = self._find_bounds()
+            size_x = max_x - min_x + 1
+            size_y = max_y - min_y + 1
+            rows = [' ' * size_x for _ in range(size_y)]
+
+            for pos in self.grid:
+                x_offset = pos[0] - min_x
+
+                row = rows[pos[1]]
+                rows[pos[1]] = row[:x_offset] + self.get_value(pos).value + row[x_offset + 1:]
+
+            for row in rows:
+                print row
+            print
+
+        def _find_bounds(self):
+            min_x, min_y = max_x, max_y = None, None
+            for (x, y) in self.grid:
+                if min_x is None or x < min_x:
+                    min_x = x
+                if max_x is None or x > max_x:
+                    max_x = x
+                if min_y is None or y < min_y:
+                    min_y = y
+                if min_y is None or y > max_y:
+                    max_y = y
+
+            return min_x, max_x, min_y, max_y
 
     def solve_puzzles(self):
-        # grid = self._load_input('17-example')
-        grid = self._load_input()
+        grid, max_y = self._load_input()
 
         spring_pos = (500, 0)
         grid.set_value(spring_pos, State.SPRING)
 
-        self._flow_water(grid, spring_pos)
+        self._flow_water(grid, spring_pos, max_y)
+        # grid.visualize()
 
         clay_depth_values = set(p[1] for p in grid.grid if grid.get_value(p) == State.CLAY)
         min_clay, max_clay = min(clay_depth_values), max(clay_depth_values)
@@ -85,6 +92,7 @@ class Day17Solver(DaySolver):
     def _load_input(self, filename=None):
         grid = self.Grid()
 
+        max_y = 0
         for line in self._load_all_input_lines(filename=filename):
             points = map(int, WHOLE_NUMBERS_REGEX.findall(line))
 
@@ -99,28 +107,30 @@ class Day17Solver(DaySolver):
 
             for x in x_range:
                 for y in y_range:
+                    if y > max_y:
+                        max_y = y
                     grid.set_value((x, y), State.CLAY)
 
-        return grid
+        return grid, max_y
 
-    def _flow_water(self, grid, cur_pos):
-        if cur_pos[1] >= grid.max_y:
+    def _flow_water(self, grid, cur_pos, max_y):
+        if cur_pos[1] >= max_y:
             return
 
         down_pos = cur_pos[0], cur_pos[1] + 1
         if grid.get_value(down_pos) is None:
             grid.set_value(down_pos, State.FLOWING_WATER)
-            self._flow_water(grid, down_pos)
+            self._flow_water(grid, down_pos, max_y)
 
         left_pos = cur_pos[0] - 1, cur_pos[1]
         if grid.get_value(down_pos) in [State.CLAY, State.SETTLED_WATER] and grid.get_value(left_pos) is None:
             grid.set_value(left_pos, State.FLOWING_WATER)
-            self._flow_water(grid, left_pos)
+            self._flow_water(grid, left_pos, max_y)
 
         right_pos = cur_pos[0] + 1, cur_pos[1]
         if grid.get_value(down_pos) in [State.CLAY, State.SETTLED_WATER] and grid.get_value(right_pos) is None:
             grid.set_value(right_pos, State.FLOWING_WATER)
-            self._flow_water(grid, right_pos)
+            self._flow_water(grid, right_pos, max_y)
 
         wall_left, wall_right = self._find_walls(grid, cur_pos)
         if wall_left and wall_right:
