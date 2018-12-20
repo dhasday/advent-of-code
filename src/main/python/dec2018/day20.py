@@ -1,7 +1,6 @@
 import re
 from collections import defaultdict, deque
 
-from common.a_star_search import AStarSearch
 from common.day_solver import DaySolver
 
 INPUT_REGEX = re.compile('')
@@ -47,7 +46,7 @@ class Day20Solver(DaySolver):
             self.east = room
             room.west = self
 
-    def solve_puzzle_one(self):
+    def solve_puzzles(self):
         input = self._load_only_input_line().strip()[1:-1]
 
         rooms = defaultdict(lambda: self.Room())
@@ -55,13 +54,12 @@ class Day20Solver(DaySolver):
         rooms[start_pos] = self.Room()
 
         self._build_map(rooms, input, start_pos)
-        bounds = self.Bounds(rooms.keys())
-        self._print_map(rooms, bounds)
+        # self._print_map(rooms)
 
-        shortest_paths = self._find_all_shortest_paths(rooms, start_pos)
+        shortest_paths = self._find_all_shortest_path_lengths(rooms, start_pos)
 
         ans_one = max(shortest_paths.values())
-        ans_two = len([p for p in shortest_paths if shortest_paths[p] > 1000])
+        ans_two = len([p for p in shortest_paths if shortest_paths[p] >= 1000])
 
         return ans_one, ans_two
 
@@ -111,7 +109,8 @@ class Day20Solver(DaySolver):
             else:
                 raise Exception('Encountered invalid character: ' + c)
 
-    def _print_map(self, rooms, bounds):
+    def _print_map(self, rooms):
+        bounds = self.Bounds(rooms.keys())
         size_x = (bounds.max_x - bounds.min_x) * 2 + 3
 
         print '#' * size_x
@@ -131,42 +130,49 @@ class Day20Solver(DaySolver):
             print cur_row
             print doors_row
 
-    def _find_all_shortest_paths(self, rooms, start_pos):
-        paths = {}
-
-        search = AStarSearch()
-
-        def heuristic_cost_estimate(pos_one, pos_two):
-            return abs(pos_one[0] - pos_two[0]) + abs(pos_one[1] - pos_two[1])
-
+    def _find_all_shortest_path_lengths(self, rooms, start_pos):
         def find_adjacent_nodes(pos):
             room = rooms[pos]
 
             nodes = []
             if room.north:
                 north_pos = pos[0], pos[1] + 1
-                nodes.append((north_pos, 1))
+                nodes.append(north_pos)
             if room.south:
                 south_pos = pos[0], pos[1] - 1
-                nodes.append((south_pos, 1))
+                nodes.append(south_pos)
             if room.west:
                 west_pos = pos[0] - 1, pos[1]
-                nodes.append((west_pos, 1))
+                nodes.append(west_pos)
             if room.east:
                 east_pos = pos[0] + 1, pos[1]
-                nodes.append((east_pos, 1))
+                nodes.append(east_pos)
             return nodes
 
-        for pos in rooms:
-            if pos == start_pos:
+        path_lengths = {}
+
+        open_set = deque()
+
+        open_set.append(start_pos)
+
+        while open_set:
+            cur_pos = open_set.popleft()
+
+            if cur_pos in path_lengths:
                 continue
 
-            path = search.find_shortest_path(
-                start_pos,
-                pos,
-                heuristic_cost_estimate,
-                find_adjacent_nodes
-            )
-            paths[pos] = len(path)
+            adjacent_nodes = find_adjacent_nodes(cur_pos)
+            min_distance = None
+            for node in adjacent_nodes:
+                if node in path_lengths:
+                    node_distance = path_lengths[node]
+                    if min_distance is None or node_distance < min_distance:
+                        min_distance = path_lengths[node]
+                else:
+                    open_set.append(node)
+            if cur_pos == start_pos:
+                min_distance = -1
 
-        return paths
+            path_lengths[cur_pos] = min_distance + 1
+
+        return path_lengths
