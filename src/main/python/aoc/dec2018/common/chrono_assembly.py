@@ -32,7 +32,7 @@ operations = {
 }
 
 
-class ChronalAssembly(object):
+class ChronoProcessor(object):
     instructions = []
     registers = [0] * 6
 

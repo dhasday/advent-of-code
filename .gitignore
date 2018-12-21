@@ -1,5 +1,5 @@
 # Project Specific Ignores
-src/main/python/today_driver.py
+src/main/python/aoc/today_driver.py
 
 
 # Created by https://www.gitignore.io/api/vim,java,gradle,intellij,intellij+iml,python,osx

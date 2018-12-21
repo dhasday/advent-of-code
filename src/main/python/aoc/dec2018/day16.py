@@ -2,41 +2,14 @@ import re
 from collections import defaultdict
 
 from aoc.common.day_solver import DaySolver
+from aoc.dec2018.common.chrono_assembly import operations as chrono_ops
 
 ALL_NUMBERS_REGEX = re.compile('-?\d+')
-
-
-def _execute(func):
-    def cmd(cur_registers, instruction):
-        output = cur_registers[::]
-        output[instruction[3]] = func(cur_registers, instruction[1], instruction[2])
-        return output
-
-    return cmd
 
 
 class Day16Solver(DaySolver):
     year = 2018
     day = 16
-
-    operations = [
-        _execute(lambda r, a, b: r[a] + r[b]),                  # addr
-        _execute(lambda r, a, b: r[a] + b),                     # addi
-        _execute(lambda r, a, b: r[a] * r[b]),                  # mulr
-        _execute(lambda r, a, b: r[a] * b),                     # muli
-        _execute(lambda r, a, b: r[a] & r[b]),                  # banr
-        _execute(lambda r, a, b: r[a] & b),                     # bani
-        _execute(lambda r, a, b: r[a] | r[b]),                  # borr
-        _execute(lambda r, a, b: r[a] | b),                     # bori
-        _execute(lambda r, a, b: r[a]),                         # setr
-        _execute(lambda r, a, b: a),                            # seti
-        _execute(lambda r, a, b: 1 if a > r[b] else 0),         # gtir
-        _execute(lambda r, a, b: 1 if r[a] > b else 0),         # gtri
-        _execute(lambda r, a, b: 1 if r[a] > r[b] else 0),      # gtrr
-        _execute(lambda r, a, b: 1 if a == r[b] else 0),        # eqir
-        _execute(lambda r, a, b: 1 if r[a] == b else 0),        # eqri
-        _execute(lambda r, a, b: 1 if r[a] == r[b] else 0),     # eqrr
-    ]
 
     def solve_puzzles(self):
         part_one_input, part_two_input = self._load_input()
@@ -71,7 +44,7 @@ class Day16Solver(DaySolver):
             start_registers, instruction, end_registers = s
 
             matching_count = 0
-            for m in self.operations:
+            for m in chrono_ops.values():
                 op_result = m(start_registers, instruction)
                 if op_result == end_registers:
                     matching_count += 1
