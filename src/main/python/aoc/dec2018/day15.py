@@ -81,6 +81,7 @@ class Day15Solver(DaySolver):
 
     class EnemyBFS(BreadthFirstSearch):
         def __init__(self, start, barriers, enemy_positions):
+            super(self.__class__, self).__init__(self._adjacent_positions)
             self.start = start
             self.barriers = barriers
 
@@ -91,7 +92,7 @@ class Day15Solver(DaySolver):
                     self.targets.append(target_pos)
 
         def find_next_position(self):
-            shortest_path = self.find_path_multiple_targets(self.start, self.targets, self._adjacent_positions)
+            shortest_path = self.find_path_to_any(self.start, self.targets)
 
             if shortest_path is None or len(shortest_path) < 2:
                 return None

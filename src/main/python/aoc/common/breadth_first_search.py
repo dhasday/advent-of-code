@@ -13,33 +13,36 @@ class BreadthFirstSearch(object):
 
             cur_node = self
             while cur_node is not None:
-                path.insert(0, cur_node.value)
+                value = cur_node.value
+                path.insert(0, value)
                 cur_node = cur_node.previous_node
 
             return path
 
-    def find_path(self, start, end, find_adjacent_nodes):
+    def __init__(self, find_adjacent_nodes):
+        """
+        :param find_adjacent_nodes: A function that takes 1 node and returns a list containing pairs
+                                    of all nodes that are directly accessible from that node and
+                                    their distance from the current node ( node, distance )
+        """
+        self.find_adjacent_nodes = find_adjacent_nodes
+
+    def find_path(self, start, end):
         """
         Returns the shortest path from start to end using Breadth First Search Algorithm
 
         :param start: The initial node
         :param end: The target node
-        :param find_adjacent_nodes: A function that takes 1 node and returns a list containing pairs
-                                    of all nodes that are directly accessible from that node and
-                                    their distance from the current node ( node, distance )
         :return: The shortest path from start to end
         """
-        return self.find_path_multiple_targets(start, [end], find_adjacent_nodes)
+        return self.find_path_to_any(start, [end])
 
-    def find_path_multiple_targets(self, start, targets, find_adjacent_nodes):
+    def find_path_to_any(self, start, targets):
         """
         Returns the shortest path from start to any target using Breadth First Search Algorithm
 
         :param start: The initial node
         :param targets: The target nodes
-        :param find_adjacent_nodes: A function that takes 1 node and returns a list containing pairs
-                                    of all nodes that are directly accessible from that node and
-                                    their distance from the current node ( node, distance )
         :return: The shortest path from start to any target
         """
         closed_set = set()
@@ -56,7 +59,7 @@ class BreadthFirstSearch(object):
 
             closed_set.add(current_node.value)
 
-            adjacent_values = find_adjacent_nodes(current_node.value)
+            adjacent_values = self.find_adjacent_nodes(current_node.value)
             for adjacent_value in adjacent_values:
 
                 if adjacent_value in closed_set:

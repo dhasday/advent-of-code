@@ -1,8 +1,7 @@
-from collections import deque
-
 from enum import Enum
 
 from aoc.common.day_solver import DaySolver
+from aoc.common.dijkstra_search import DijkstraSearch
 
 INPUT_DEPTH = 5355
 INPUT_TARGET = 14, 796
@@ -16,16 +15,15 @@ class Terrain(Enum):
     NARROW = 2
 
 
-class Tools(Enum):
-    NEITHER = 0
-    TORCH = 1
-    GEAR = 2
+TOOL_NEITHER = 0
+TOOL_TORCH = 1
+TOOL_GEAR = 2
 
 
 TERRAIN_TO_TOOLS = {
-    Terrain.ROCKY: [Tools.TORCH, Tools.GEAR],
-    Terrain.WET: [Tools.NEITHER, Tools.GEAR],
-    Terrain.NARROW: [Tools.NEITHER, Tools.TORCH],
+    Terrain.ROCKY: [TOOL_TORCH, TOOL_GEAR],
+    Terrain.WET: [TOOL_NEITHER, TOOL_GEAR],
+    Terrain.NARROW: [TOOL_NEITHER, TOOL_TORCH],
 }
 
 
@@ -46,11 +44,7 @@ class Day22Solver(DaySolver):
         return sum([r.risk_level for r in region_map.values()])
 
     def solve_puzzle_two(self):
-        # Wrong Answers
-        # 1195
-        # 1491
-        # 1493 Too High
-        outer_bounds = int(INPUT_TARGET[0] + 100), int(INPUT_TARGET[1] + 100)
+        outer_bounds = int(INPUT_TARGET[0] + 15), int(INPUT_TARGET[1] + 15)
         region_map = self._build_region_map(outer_bounds)
         return self._find_shortest_path(region_map, (0, 0), INPUT_TARGET, outer_bounds)
 
@@ -85,65 +79,44 @@ class Day22Solver(DaySolver):
         region_map[pos] = self.Region(pos, geologic_index)
 
     def _find_shortest_path(self, region_map, start, target, outer_edge):
-        open_set = deque()
-        distances = {}
+        def find_adjacent_nodes(node):
+            pos, tool = node
+            region = region_map[pos]
 
-        open_set.append((start, Tools.TORCH))
-        ctr = 0
-        min_distance_to_target = None
-        target_states = [(target, t) for t in Tools]
-        while open_set:
-            cur_node = open_set.popleft()
-            ctr += 1
+            adjacent_nodes = []
 
-            if cur_node not in distances:
-                cur_distance = 0
+            # Either switch tool
+            available_tools = TERRAIN_TO_TOOLS[region.terrain]
+            if available_tools[0] == tool:
+                adj_node = pos, available_tools[1]
+                adjacent_nodes.append((adj_node, 7))
             else:
-                cur_distance = distances[cur_node]
+                adj_node = pos, available_tools[0]
+                adjacent_nodes.append((adj_node, 7))
 
-            if min_distance_to_target and min_distance_to_target <= cur_distance:
-                continue
+            # Or move to a valid adjacent node
+            for offset in ADJACENT_OFFSETS:
+                adjacent_pos = pos[0] + offset[0], pos[1] + offset[1]
+                if adjacent_pos[0] < 0 or adjacent_pos[1] < 0 \
+                        or adjacent_pos[0] > outer_edge[0] or adjacent_pos[1] > outer_edge[1]:
+                    continue
 
-            for n in self.find_adjacent_nodes(region_map, cur_node, outer_edge):
-                node_pos = n[0]
-                node_distance = cur_distance + n[1]
+                adjacent_region = region_map[adjacent_pos]
 
-                if not min_distance_to_target or node_distance < min_distance_to_target:
-                    if node_pos in target_states:
-                        min_distance_to_target = node_distance
+                if tool in TERRAIN_TO_TOOLS[adjacent_region.terrain]:
+                    adj_node = adjacent_pos, tool
+                    adjacent_nodes.append((adj_node, 1))
 
-                    if node_pos not in distances or node_distance < distances[node_pos]:
-                        distances[node_pos] = node_distance
-                        open_set.append(node_pos)
+            return adjacent_nodes
 
-        return min_distance_to_target
+        search = DijkstraSearch(find_adjacent_nodes)
 
-    def find_adjacent_nodes(self, region_map, node, outer_edge):
-        pos, tool = node
-        region = region_map[pos]
+        start_node = (start, TOOL_TORCH)
+        end_nodes = [
+            (target, TOOL_TORCH),
+            (target, TOOL_GEAR),
+        ]
 
-        adjacent_nodes = []
+        path, distance = search.find_shortest_path_to_any(start_node, end_nodes)
 
-        # Either switch tool
-        available_tools = TERRAIN_TO_TOOLS[region.terrain]
-        if available_tools[0] == tool:
-            adj_node = pos, available_tools[1]
-            adjacent_nodes.append((adj_node, 7))
-        else:
-            adj_node = pos, available_tools[0]
-            adjacent_nodes.append((adj_node, 7))
-
-        # Or move to a valid adjacent node
-        for offset in ADJACENT_OFFSETS:
-            adjacent_pos = pos[0] + offset[0], pos[1] + offset[1]
-            if adjacent_pos[0] < 0 or adjacent_pos[1] < 0 \
-                    or adjacent_pos[0] > outer_edge[0] or adjacent_pos[1] > outer_edge[1]:
-                continue
-
-            adjacent_region = region_map[adjacent_pos]
-
-            if tool in TERRAIN_TO_TOOLS[adjacent_region.terrain]:
-                adj_node = adjacent_pos, tool
-                adjacent_nodes.append((adj_node, 1))
-
-        return adjacent_nodes
+        return distance

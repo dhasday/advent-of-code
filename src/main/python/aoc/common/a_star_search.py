@@ -9,34 +9,51 @@ class AStarSearch(object):
             self.h_score = h_score
             self.f_score = g_score + h_score
 
-    def find_shortest_path(self, start, end, heuristic_cost_estimate, find_adjacent_nodes):
-        """
-        Returns the shortest path from start to end using A* Search Algorithm
+        def build_path(self):
+            path = list()
 
-        :param start: The initial node
-        :param end: The target node
+            cur_node = self
+            while cur_node is not None:
+                value = cur_node.value
+                path.insert(0, value)
+                cur_node = cur_node.previous_node
+
+            return path
+
+    def __init__(self, heuristic_cost_estimate, find_adjacent_nodes):
+        """
         :param heuristic_cost_estimate: A function that takes 2 nodes and calculates the expected
                                         cost to get from the first to the second
         :param find_adjacent_nodes: A function that takes 1 node and returns pairs of all nodes
                                     that are directly accessible from that node and their distance
                                     ( node, distance )
+        """
+        self.heuristic_cost_estimate = heuristic_cost_estimate
+        self.find_adjacent_nodes = find_adjacent_nodes
+
+    def find_shortest_path(self, start, end):
+        """
+        Returns the shortest path from start to end using A* Search Algorithm
+
+        :param start: The initial node
+        :param end: The target node
         :return: The shortest path from start to end
         """
         closed_set = dict()
-        open_set = dict()
+        open_set = dict()  # TODO: Use a priority queue instead
 
-        start_node = self.AStarNode(start, None, 0, heuristic_cost_estimate(start, end))
+        start_node = self.AStarNode(start, None, 0, self.heuristic_cost_estimate(start, end))
         open_set[start] = start_node
 
         while open_set:
             current_node = self._get_node_with_lowest_f_score(open_set)
             if current_node.value == end:
-                return self._reconstruct_path_to_node(current_node)
+                return current_node.build_path()
 
             del open_set[current_node.value]
             closed_set[current_node.value] = current_node
 
-            adjacent_values = find_adjacent_nodes(current_node.value)
+            adjacent_values = self.find_adjacent_nodes(current_node.value)
             for (adjacent_value, adjacent_distance) in adjacent_values:
                 if adjacent_value in closed_set:
                     continue
@@ -49,7 +66,7 @@ class AStarSearch(object):
                         adjacent_value,
                         current_node,
                         possible_g_score,
-                        heuristic_cost_estimate(adjacent_value, end)
+                        self.heuristic_cost_estimate(adjacent_value, end)
                     )
 
                 open_set[adjacent_value] = adjacent_node
@@ -65,13 +82,3 @@ class AStarSearch(object):
                 lowest_node = node
 
         return lowest_node
-
-    def _reconstruct_path_to_node(self, node):
-        path = list()
-
-        cur_node = node
-        while cur_node is not None:
-            path.insert(0, cur_node.value)
-            cur_node = cur_node.previous_node
-
-        return path
