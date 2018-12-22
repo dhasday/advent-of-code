@@ -1,30 +1,24 @@
-from enum import Enum
-
 from aoc.common.day_solver import DaySolver
 from aoc.common.dijkstra_search import DijkstraSearch
 
 INPUT_DEPTH = 5355
 INPUT_TARGET = 14, 796
 
-ADJACENT_OFFSETS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-
-
-class Terrain(Enum):
-    ROCKY = 0
-    WET = 1
-    NARROW = 2
-
+TERRAIN_ROCKY = 0
+TERRAIN_WET = 1
+TERRAIN_NARROW = 2
 
 TOOL_NEITHER = 0
 TOOL_TORCH = 1
 TOOL_GEAR = 2
 
-
 TERRAIN_TO_TOOLS = {
-    Terrain.ROCKY: [TOOL_TORCH, TOOL_GEAR],
-    Terrain.WET: [TOOL_NEITHER, TOOL_GEAR],
-    Terrain.NARROW: [TOOL_NEITHER, TOOL_TORCH],
+    TERRAIN_ROCKY: [TOOL_TORCH, TOOL_GEAR],
+    TERRAIN_WET: [TOOL_NEITHER, TOOL_GEAR],
+    TERRAIN_NARROW: [TOOL_NEITHER, TOOL_TORCH],
 }
+
+ADJACENT_OFFSETS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
 class Day22Solver(DaySolver):
@@ -36,8 +30,7 @@ class Day22Solver(DaySolver):
             self.pos = pos
             self.geologic_index = geologic_index
             self.erosion_level = (self.geologic_index + INPUT_DEPTH) % 20183
-            self.risk_level = self.erosion_level % 3
-            self.terrain = Terrain(self.risk_level)
+            self.terrain = self.risk_level = self.erosion_level % 3
 
     def solve_puzzle_one(self):
         region_map = self._build_region_map(INPUT_TARGET)
