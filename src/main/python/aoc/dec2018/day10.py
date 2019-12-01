@@ -110,10 +110,10 @@ class Day10Solver(DaySolver):
 
         # Text height is 10 characters
         if num_in_range > 5 and relevant_bounds.max_y - relevant_bounds.min_y == 9:
-            print ''
+            print('')
             for l in range(relevant_bounds.min_y, relevant_bounds.max_y + 1):
                 line = grid[l]
-                print line[relevant_bounds.min_x:relevant_bounds.max_x + 1]
-            print ''
+                print(line[relevant_bounds.min_x:relevant_bounds.max_x + 1])
+            print('')
             return True
         return False

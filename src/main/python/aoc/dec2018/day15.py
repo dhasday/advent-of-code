@@ -241,12 +241,12 @@ class Day15Solver(DaySolver):
             unit_char = 'E' if u.type == Day15Solver.UnitType.ELF else 'G'
             board[u.pos[0]][u.pos[1]] = unit_char
 
-        print 'Round {}'.format(rounds)
+        print('Round {}'.format(rounds))
         for row in board:
             line = ''
             for col in row:
                 line += col
-            print line
+            print(line)
         for u in units:
-            print u
-        print ''
+            print(u)
+        print('')

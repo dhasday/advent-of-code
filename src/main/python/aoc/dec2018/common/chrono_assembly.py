@@ -99,7 +99,7 @@ class ChronoProcessor(object):
             old_registers,
             new_registers
         )
-        print msg
+        print(msg)
 
 
 

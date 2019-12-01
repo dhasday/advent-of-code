@@ -47,8 +47,8 @@ class Day17Solver(DaySolver):
                 rows[pos[1]] = row[:x_offset] + self.get_value(pos).value + row[x_offset + 1:]
 
             for row in rows:
-                print row
-            print
+                print(row)
+            print()
 
         def _find_bounds(self):
             min_x, min_y = max_x, max_y = None, None

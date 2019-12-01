@@ -113,7 +113,7 @@ class Day20Solver(DaySolver):
         bounds = self.Bounds(rooms.keys())
         size_x = (bounds.max_x - bounds.min_x) * 2 + 3
 
-        print '#' * size_x
+        print('#' * size_x)
 
         for y in range(bounds.max_y, bounds.min_y - 1, -1):
             cur_row = '#'
@@ -127,8 +127,8 @@ class Day20Solver(DaySolver):
                 else:
                     cur_row += '##'
                     doors_row += '##'
-            print cur_row
-            print doors_row
+            print(cur_row)
+            print(doors_row)
 
     def _find_all_shortest_path_lengths(self, rooms, start_pos):
         def find_adjacent_nodes(pos):
