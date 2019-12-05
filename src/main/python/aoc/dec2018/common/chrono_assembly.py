@@ -100,6 +100,3 @@ class ChronoProcessor(object):
             new_registers
         )
         print(msg)
-
-
-

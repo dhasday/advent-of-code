@@ -17,8 +17,7 @@ dec2018_solvers = [
     dec2018.Day21Solver, dec2018.Day22Solver, dec2018.Day23Solver, dec2018.Day24Solver, dec2018.Day25Solver,
 ]
 dec2019_solvers = [
-    # dec2019.Day01Solver, dec2019.Day02Solver, dec2019.Day03Solver,
-    dec2019.Day04Solver,
+    dec2019.Day01Solver, dec2019.Day02Solver, dec2019.Day03Solver, dec2019.Day04Solver, dec2019.Day05Solver,
 ]
 
 all_solvers = []
