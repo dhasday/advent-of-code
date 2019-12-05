@@ -37,7 +37,7 @@ class IntcodeProcessor(object):
         self.reset()
 
     def reset(self):
-        self.program = self._program.copy()
+        self.program = self._program[:]
         self.ctr = 0
         self.last_output = None
 
