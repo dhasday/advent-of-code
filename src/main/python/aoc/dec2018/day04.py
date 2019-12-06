@@ -37,8 +37,9 @@ class Day04Solver(DaySolver):
         guards = self._read_input()
 
         guard_sleep_profiles = map(lambda g: self.GuardSleepProfile(g, guards[g]), guards)
-
         sleepiest_guard = sorted(guard_sleep_profiles, key=attrgetter('total_sleep_time'), reverse=True)[0]
+
+        guard_sleep_profiles = map(lambda g: self.GuardSleepProfile(g, guards[g]), guards)
         consistent_guard = sorted(guard_sleep_profiles, key=attrgetter('max_minute_count'), reverse=True)[0]
 
         return sleepiest_guard.calculate_answer(), consistent_guard.calculate_answer()

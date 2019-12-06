@@ -52,4 +52,4 @@ class Day21Solver(DaySolver):
             if 256 > registers[4]:
                 return
 
-            registers[4] = registers[3] = registers[4] / 256
+            registers[4] = registers[3] = registers[4] // 256

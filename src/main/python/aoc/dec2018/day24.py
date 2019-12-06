@@ -37,7 +37,7 @@ class Day24Solver(DaySolver):
 
         def deal_damage(self, target):
             damage = self.get_enemy_damage(target)
-            lost_units = damage / target.hit_points
+            lost_units = damage // target.hit_points
             target.num_units -= lost_units
 
     def solve_puzzles(self):
@@ -125,7 +125,7 @@ class Day24Solver(DaySolver):
                 damage = attacker.get_enemy_damage(enemy)
                 if damage:
                     new_target = (damage, enemy.effective_power, enemy.initiative, enemy)
-                    if target is None or cmp(target, new_target) < 0:
+                    if target is None or self._compare(target, new_target) < 0:
                         target = new_target
             if target:
                 targeted_enemies[target[3]] = (attacker, target[0])
@@ -137,3 +137,6 @@ class Day24Solver(DaySolver):
 
     def _count_units(self, immune_units, infection_units):
         return sum([u.num_units for u in immune_units]) + sum([u.num_units for u in infection_units])
+
+    def _compare(self, first, second):
+        return (first > second) - (first < second)

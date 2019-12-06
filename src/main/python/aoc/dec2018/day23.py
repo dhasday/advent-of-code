@@ -1,5 +1,6 @@
 import re
 from collections import defaultdict
+from six.moves import range
 
 from aoc.common.day_solver import DaySolver
 
@@ -12,7 +13,7 @@ class Day23Solver(DaySolver):
 
     class Nanobot(object):
         def __init__(self, line):
-            numbers = map(int, INPUT_REGEX.findall(line))
+            numbers = [int(v) for v in INPUT_REGEX.findall(line)]
             self.pos = tuple(numbers[:-1])
             self.radius = numbers[-1]
 
@@ -55,20 +56,20 @@ class Day23Solver(DaySolver):
 
             mins = [p - cur_step for p in max_pos]
             maxs = [p + cur_step for p in max_pos]
-            cur_step /= 2
+            cur_step //= 2
 
         return max_dist
 
     def _find_max_for_step(self, nanobots, step, mins, maxs):
         max_count, max_pos, max_dist = 0, None, 0
-        for x in xrange(mins[0], maxs[0], step):
-            for y in xrange(mins[1], maxs[1], step):
-                for z in xrange(mins[2], maxs[2], step):
+        for x in range(mins[0], maxs[0], step):
+            for y in range(mins[1], maxs[1], step):
+                for z in range(mins[2], maxs[2], step):
                     cur_pos = (x, y, z)
                     cur_count = 0
                     for bot in nanobots:
                         distance = self._calculate_distance(bot.pos, cur_pos)
-                        if (distance - bot.radius) / step <= 0:
+                        if (distance - bot.radius) // step <= 0:
                             cur_count += 1
 
                     if cur_count > max_count:

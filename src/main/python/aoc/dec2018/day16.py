@@ -20,6 +20,9 @@ class Day16Solver(DaySolver):
         return ans_one, ans_two
 
     def _load_input(self):
+        def find_all_numbers(input_str):
+            return [int(v) for v in ALL_NUMBERS_REGEX.findall(input_str)]
+
         filename = self._get_input_filename()
 
         samples, program = open(filename).read().strip().split('\n\n\n\n')
@@ -28,12 +31,12 @@ class Day16Solver(DaySolver):
 
         part_one_input = []
         for i in range(0, len(samples), 4):
-            start = map(int, ALL_NUMBERS_REGEX.findall(samples[i]))
-            instruction = map(int, ALL_NUMBERS_REGEX.findall(samples[i + 1]))
-            end = map(int, ALL_NUMBERS_REGEX.findall(samples[i + 2]))
+            start = find_all_numbers(samples[i])
+            instruction = find_all_numbers(samples[i + 1])
+            end = find_all_numbers(samples[i + 2])
             part_one_input.append([start, instruction, end])
 
-        part_two_input = [map(int, ALL_NUMBERS_REGEX.findall(i)) for i in program]
+        part_two_input = [find_all_numbers(i) for i in program]
 
         return part_one_input, part_two_input
 

@@ -74,7 +74,7 @@ class Day11Solver(DaySolver):
                     max_power = local_max
                     max_size = local_size
                     max_pos = x + 1, y + 1
-                    min_size_for_cur_max = (max_power / 4)
+                    min_size_for_cur_max = (max_power // 4)
 
         return '{},{},{}'.format(max_pos[0], max_pos[1], max_size)
 

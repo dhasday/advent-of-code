@@ -19,7 +19,7 @@ class Day04Solver(DaySolver):
         cur_index = start_value
         while True:
             cur_index += 1
-            md5_hex = hashlib.md5(PUZZLE_INPUT + str(cur_index)).hexdigest()
+            md5_hex = hashlib.md5((PUZZLE_INPUT + str(cur_index)).encode()).hexdigest()
 
             if md5_hex.startswith(expected_prefix):
                 return cur_index

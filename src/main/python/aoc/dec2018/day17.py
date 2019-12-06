@@ -94,7 +94,7 @@ class Day17Solver(DaySolver):
 
         max_y = 0
         for line in self._load_all_input_lines(filename=filename):
-            points = map(int, WHOLE_NUMBERS_REGEX.findall(line))
+            points = [int(v) for v in WHOLE_NUMBERS_REGEX.findall(line)]
 
             if line[0] == 'x':
                 x_range = range(points[0], points[0] + 1)

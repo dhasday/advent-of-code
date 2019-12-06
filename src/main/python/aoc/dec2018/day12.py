@@ -58,7 +58,7 @@ class Day12Solver(DaySolver):
                 remaining_iters = num_iterations - cur_iters
 
                 # Find where we'll end up and how many loops it'll take
-                loop_cycles = remaining_iters / loop_size
+                loop_cycles = remaining_iters // loop_size
                 loop_end_index = remaining_iters % loop_size
 
                 loop_state = cur_state

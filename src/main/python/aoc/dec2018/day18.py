@@ -54,11 +54,11 @@ class Day18Solver(DaySolver):
                     counts = Counter(neighbors)
 
                     next_val = cur_val
-                    if cur_val == OPEN_GROUND and counts.get(TREES) >= 3:
+                    if cur_val == OPEN_GROUND and counts.get(TREES, 0) >= 3:
                         next_val = TREES
-                    elif cur_val == TREES and counts.get(LUMBERYARD) >= 3:
+                    elif cur_val == TREES and counts.get(LUMBERYARD, 0) >= 3:
                         next_val = LUMBERYARD
-                    elif cur_val == LUMBERYARD and (counts.get(LUMBERYARD) < 1 or counts.get(TREES) < 1):
+                    elif cur_val == LUMBERYARD and (counts.get(LUMBERYARD, 0) < 1 or counts.get(TREES, 0) < 1):
                         next_val = OPEN_GROUND
                     MEMO[neighbors][cur_val] = next_val
                     neighbors_memo = MEMO[neighbors]

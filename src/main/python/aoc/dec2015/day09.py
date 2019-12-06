@@ -12,7 +12,7 @@ class Day09Solver(DaySolver):
     def solve_puzzles(self):
         distances = self._load_distances()
 
-        return self._travel_time(distances, distances.keys())
+        return self._travel_time(distances, list(distances.keys()))
 
     def _load_distances(self):
         distances = dict()
