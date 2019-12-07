@@ -29,6 +29,7 @@ class IntcodeProcessor(object):
     program = [99]
     ctr = 0
     last_output = None
+    last_opcode = None
 
     def __init__(self, program_str, input_value=0):
         self._program = [int(v) for v in program_str.split(',')]
@@ -40,12 +41,15 @@ class IntcodeProcessor(object):
         self.program = self._program[:]
         self.ctr = 0
         self.last_output = None
+        self.last_opcode = None
 
-    def run_until_completion(self):
-        while True:
+    def run_until_instruction(self, target_opcode):
+        opcode = None
+        while opcode != target_opcode:
             instruction = self.program[self.ctr]
 
             opcode = instruction % 100
+            self.last_opcode = opcode
             if opcode == 99:
                 return
 
@@ -60,7 +64,11 @@ class IntcodeProcessor(object):
                 self.program[args[-1]] = result
             elif opcode == 4:
                 self.last_output = result
+
             self.ctr = operation.get_next_ctr(self.ctr, self.input_value, *args)
+
+    def run_until_completion(self):
+        self.run_until_instruction(99)
 
     def _get_args(self, num_args, has_output):
         modes = self.program[self.ctr] // 100
