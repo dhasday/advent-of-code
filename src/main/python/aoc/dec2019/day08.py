@@ -1,9 +1,4 @@
-import re
-
 from aoc.common.day_solver import DaySolver
-from aoc.dec2019.common.intcode_processor import IntcodeProcessor
-
-ALL_NUMBERS_REGEX = re.compile('-?\d+')
 
 LAYER_WIDTH = 25
 LAYER_HEIGHT = 6
