@@ -1,8 +1,9 @@
 import re
 
 from aoc.common.day_solver import DaySolver
+from aoc.dec2019.common.intcode_processor import IntcodeProcessor
 
-ALL_NUMBERS_REGEX = re.compile('-?\d+')
+ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
 
 
 class Day09Solver(DaySolver):
@@ -10,7 +11,15 @@ class Day09Solver(DaySolver):
     day = 9
 
     def solve_puzzle_one(self):
-        return None
+        line = self._load_only_input_line()
+
+        processor = IntcodeProcessor(line, input_value=1)
+        processor.run_until_completion()
+        return processor.last_output
 
     def solve_puzzle_two(self):
-        return None
+        line = self._load_only_input_line()
+
+        processor = IntcodeProcessor(line, input_value=2)
+        processor.run_until_completion()
+        return processor.last_output

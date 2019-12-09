@@ -5,6 +5,21 @@ LAYER_HEIGHT = 6
 LAYER_SIZE = LAYER_HEIGHT * LAYER_WIDTH
 
 
+LETTER_MAPS = {
+    # TODO: DEGIMNOPQRSTUVWX
+    #     2    3    4    5    6
+    ' 00  0  0 0  0 0000 0  0 0  0 ': 'A',
+    '000  0  0 000  0  0 0  0 000  ': 'B',
+    ' 00  0  0 0    0    0  0  00  ': 'C',
+    '0000 0    000  0    0    0    ': 'F',
+    '0  0 0  0 0000 0  0 0  0 0  0 ': 'H',
+    '  00    0    0    0 0  0  00  ': 'J',
+    '0  0 0 0  00   0 0  0 0  0  0 ': 'K',
+    '0    0    0    0    0    0000 ': 'L',
+    '0   00   0 0 0   0    0    0  ': 'Y',
+    '0000    0   0   0   0    0000 ': 'Z',
+}
+
 class Day08Solver(DaySolver):
     year = 2019
     day = 8
@@ -39,8 +54,6 @@ class Day08Solver(DaySolver):
         for row in self.split_layers(output, 25):
             output_str = ''
             for idx, v in enumerate(row):
-                if idx != 0 and idx % 5 == 0:
-                    output_str += ' '
                 output_str += v
             print(output_str)
         print('')
