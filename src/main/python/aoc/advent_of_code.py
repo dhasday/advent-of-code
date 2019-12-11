@@ -19,6 +19,7 @@ dec2018_solvers = [
 dec2019_solvers = [
     dec2019.Day01Solver, dec2019.Day02Solver, dec2019.Day03Solver, dec2019.Day04Solver, dec2019.Day05Solver,
     dec2019.Day06Solver, dec2019.Day07Solver, dec2019.Day08Solver, dec2019.Day09Solver, dec2019.Day10Solver,
+    dec2019.Day11Solver,
 ]
 
 all_solvers = []
@@ -28,13 +29,14 @@ all_solvers.extend(dec2019_solvers)
 
 # Slow Days (>5000 ms)
 #   2015
-#       Day  4  ~ 8500 ms
-#       Day  6  ~ 7500 ms
-#       Day 10  ~ 5000 ms
+#       Day  4  ~  6300 ms
+#       Day  6  ~ 10000 ms
+#       Day 10  ~  7500 ms
 #   2016
 #   2017
 #   2018
-#       Day 14  ~15000 ms
+#       Day 11  ~  5300 ms
+#       Day 14  ~ 22000 ms
 #   2019
 
 for solver in all_solvers:

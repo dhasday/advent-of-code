@@ -1,12 +1,6 @@
 import math
-import re
-from collections import defaultdict
-from fractions import Fraction
 
 from aoc.common.day_solver import DaySolver
-from aoc.dec2019.common.intcode_processor import IntcodeProcessor
-
-ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
 
 
 class Day10Solver(DaySolver):
