@@ -16,7 +16,7 @@ class Day02Solver(DaySolver):
         processor.program[1] = 12
         processor.program[2] = 2
 
-        processor.run_until_completion()
+        processor.run_to_completion()
         return processor.program[0]
 
     def solve_puzzle_two(self):
@@ -30,7 +30,7 @@ class Day02Solver(DaySolver):
                 processor.program[1] = i
                 processor.program[2] = j
 
-                processor.run_until_completion()
+                processor.run_to_completion()
 
                 if processor.program[0] == 19690720:
                     return (i * 100) + j

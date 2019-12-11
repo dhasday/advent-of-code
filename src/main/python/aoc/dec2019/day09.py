@@ -10,12 +10,12 @@ class Day09Solver(DaySolver):
         line = self._load_only_input_line()
 
         processor = IntcodeProcessor(line, input_value=1)
-        processor.run_until_completion()
+        processor.run_to_completion()
         return processor.last_output
 
     def solve_puzzle_two(self):
         line = self._load_only_input_line()
 
         processor = IntcodeProcessor(line, input_value=2)
-        processor.run_until_completion()
+        processor.run_to_completion()
         return processor.last_output

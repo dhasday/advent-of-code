@@ -63,12 +63,12 @@ class Day07Solver(DaySolver):
 
     def _run_initial_execution(self, line, seed, input_value):
         processor = IntcodeProcessor(line, seed)
-        processor.run_until_instruction(3)
+        processor.stop_after_instruction(3)
         processor.input_value = input_value
-        processor.run_until_instruction(4)
+        processor.stop_after_instruction(4)
         return processor, processor.last_output
 
     def _run_until_output(self, processor, next_input):
         processor.input_value = next_input
-        processor.run_until_instruction(4)
+        processor.stop_after_instruction(4)
         return processor.last_output

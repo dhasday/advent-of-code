@@ -1,28 +1,9 @@
 from aoc.common.day_solver import DaySolver
+from aoc.dec2019.common.letter_reader import read_output
 
 LAYER_WIDTH = 25
 LAYER_HEIGHT = 6
 LAYER_SIZE = LAYER_HEIGHT * LAYER_WIDTH
-
-
-LETTER_MAPS = {
-    # TODO: D I M N O Q R S T V W X
-    #     2    3    4    5    6
-    ' 00  0  0 0  0 0000 0  0 0  0 ': 'A',
-    '000  0  0 000  0  0 0  0 000  ': 'B',
-    ' 00  0  0 0    0    0  0  00  ': 'C',
-    '0000 0    000  0    0    0000 ': 'E',
-    '0000 0    000  0    0    0    ': 'F',
-    ' 00  0  0 0    0 00 0  0  000 ': 'G',
-    '0  0 0  0 0000 0  0 0  0 0  0 ': 'H',
-    '  00    0    0    0 0  0  00  ': 'J',
-    '0  0 0 0  00   0 0  0 0  0  0 ': 'K',
-    '0    0    0    0    0    0000 ': 'L',
-    '000  0  0 0  0 000  0    0    ': 'P',
-    '0  0 0  0 0  0 0  0 0  0  00  ': 'U',
-    '0   00   0 0 0   0    0    0  ': 'Y',
-    '0000    0   0   0   0    0000 ': 'Z',
-}
 
 
 class Day08Solver(DaySolver):
@@ -55,15 +36,17 @@ class Day08Solver(DaySolver):
 
         output = [self._determine_color(layers, i) for i in range(layer_size)]
 
-        print('')
-        for row in self.split_layers(output, 25):
-            output_str = ''
-            for idx, v in enumerate(row):
-                output_str += v
-            print(output_str)
-        print('')
-
-        return 'Read Output'
+        lines = [''.join(l) for l in self.split_layers(output, 25)]
+        return read_output(lines)
+        # print('')
+        # for row in self.split_layers(output, 25):
+        #     output_str = ''
+        #     for idx, v in enumerate(row):
+        #         output_str += v
+        #     print(output_str)
+        # print('')
+        #
+        # return 'Read Output'
 
     def split_layers(self, lst, n):
         for i in range(0, len(lst), n):

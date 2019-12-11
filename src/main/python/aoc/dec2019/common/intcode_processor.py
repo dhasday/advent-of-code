@@ -47,24 +47,35 @@ class IntcodeProcessor(object):
         if index > self.program_length - 1:
             self.program.extend([0] * (index - self.program_length + 1))
 
-    def run_until_instruction(self, target_opcode):
+    def stop_after_instruction(self, target_opcode):
         opcode = None
         while opcode != target_opcode:
-            instruction = self.get_program_value(self.ctr)
-
-            opcode = instruction % 100
+            opcode = self.get_next_opcode()
             self.last_opcode = opcode
             if opcode == 99:
                 return
 
-            operation = self.OPERATION_MAP.get(opcode)
-            if not operation:
-                raise Exception('Unable to execute opcode {}'.format(opcode))
+            self.execute_current_step()
 
-            operation()
+    def run_to_completion(self):
+        self.stop_after_instruction(99)
 
-    def run_until_completion(self):
-        self.run_until_instruction(99)
+    def execute_current_step(self, input_value=None):
+        if input_value is not None:
+            self.input_value = input_value
+
+        opcode = self.get_next_opcode()
+        if opcode == 99:
+            return
+
+        operation = self.OPERATION_MAP.get(opcode)
+        if not operation:
+            raise Exception('Unable to execute opcode {}'.format(opcode))
+        operation()
+
+    def get_next_opcode(self):
+        instruction = self.get_program_value(self.ctr)
+        return instruction % 100
 
     def _get_args(self, num_args, has_output):
         modes = self.get_program_value(self.ctr) // 100
