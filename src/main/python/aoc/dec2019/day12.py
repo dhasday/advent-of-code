@@ -2,8 +2,6 @@ import math
 import re
 
 from aoc.common.day_solver import DaySolver
-from aoc.dec2019.common.intcode_processor import IntcodeProcessor
-from aoc.dec2019.common.letter_reader import read_output
 
 ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
 
@@ -18,11 +16,11 @@ class Day12Solver(DaySolver):
             self.velocity = [0, 0, 0]
 
         def gravitate(self, moon):
-            self._gravitate(moon, 0)
-            self._gravitate(moon, 1)
-            self._gravitate(moon, 2)
+            self._gravitate_direction(moon, 0)
+            self._gravitate_direction(moon, 1)
+            self._gravitate_direction(moon, 2)
 
-        def _gravitate(self, moon, idx):
+        def _gravitate_direction(self, moon, idx):
             if self.position[idx] < moon.position[idx]:
                 self.velocity[idx] += 1
                 moon.velocity[idx] -= 1
