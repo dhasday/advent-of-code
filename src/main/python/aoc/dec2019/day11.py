@@ -61,32 +61,26 @@ class Day11Solver(DaySolver):
         return read_output(grid)
 
     def _run_robot(self, processor, cur_spot, white_spots, painted_spots):
-        next_opcode = None
         direction = 0, 1
 
-        color_next = True
-        while next_opcode != 99:
-            next_opcode = processor.get_next_opcode()
-            if next_opcode == 3:
-                processor.execute_current_step(
-                    input_value=1 if cur_spot in white_spots else 0
-                )
-            elif next_opcode == 4:
-                processor.execute_current_step()
-                output = processor.last_output
-                if color_next:
-                    painted_spots.add(cur_spot)
-                    if output == 1:
-                        white_spots.add(cur_spot)
-                    else:
-                        white_spots.discard(cur_spot)
-                else:
-                    if output == 0:
-                        direction = - direction[1], direction[0]
-                    else:
-                        direction = direction[1], - direction[0]
-                    cur_spot = cur_spot[0] + direction[0], cur_spot[1] + direction[1]
-
-                color_next = not color_next
+        processor.input_func = lambda: 1 if cur_spot in white_spots else 0
+        while True:
+            # Update color
+            output = processor.get_next_output()
+            if processor.last_opcode == 99:
+                break
+            painted_spots.add(cur_spot)
+            if output == 1:
+                white_spots.add(cur_spot)
             else:
-                processor.execute_current_step()
+                white_spots.discard(cur_spot)
+
+            # Turn & move
+            output = processor.get_next_output()
+            if processor.last_opcode == 99:
+                break
+            if output == 0:
+                direction = - direction[1], direction[0]
+            else:
+                direction = direction[1], - direction[0]
+            cur_spot = cur_spot[0] + direction[0], cur_spot[1] + direction[1]

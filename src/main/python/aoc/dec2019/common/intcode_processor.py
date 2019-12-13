@@ -6,9 +6,10 @@ class IntcodeProcessor(object):
     last_opcode = None
     program_length = 0
 
-    def __init__(self, program_str, input_value=0):
+    def __init__(self, program_str, input_value=0, input_func=None):
         self._program = [int(v) for v in program_str.split(',')]
         self.input_value = input_value
+        self.input_func = input_func
 
         self.reset()
 
@@ -72,10 +73,15 @@ class IntcodeProcessor(object):
         if not operation:
             raise Exception('Unable to execute opcode {}'.format(opcode))
         operation()
+        self.last_opcode = opcode
 
     def get_next_opcode(self):
         instruction = self.get_program_value(self.ctr)
         return instruction % 100
+
+    def get_next_output(self):
+        self.stop_after_instruction(4)
+        return self.last_output
 
     def _get_args(self, num_args, has_output):
         modes = self.get_program_value(self.ctr) // 100
@@ -120,13 +126,17 @@ class IntcodeProcessor(object):
     def _input(self):
         args = self._get_args(1, True)
 
-        self.set_program_value(args[0], self.input_value)
+        if self.input_func:
+            next_val = self.input_func()
+        else:
+            next_val = self.input_value
+
+        self.set_program_value(args[0], next_val)
         self.ctr += 2
 
     def _output(self):
         args = self._get_args(1, False)
 
-        # print('OUT: {}'.format(args[0]))
         self.last_output = args[0]
         self.ctr += 2
 
