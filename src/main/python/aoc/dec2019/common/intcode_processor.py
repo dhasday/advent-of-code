@@ -6,8 +6,13 @@ class IntcodeProcessor(object):
     last_opcode = None
     program_length = 0
 
-    def __init__(self, program_str, input_value=0, input_func=None):
-        self._program = [int(v) for v in program_str.split(',')]
+    def __init__(self, program_str=None, _program=None, input_value=0, input_func=None):
+        if not program_str and not _program:
+            raise Exception('Can''t initialize processor')
+        elif program_str:
+            self._program = [int(v) for v in program_str.split(',')]
+        else:
+            self._program = _program
         self.input_value = input_value
         self.input_func = input_func
 
@@ -32,6 +37,16 @@ class IntcodeProcessor(object):
         self.last_output = None
         self.last_opcode = None
         self.program_length = len(self.program)
+
+    def copy(self):
+        other = IntcodeProcessor(_program=self._program)
+        other.program = self.program[:]
+        other.ctr = self.ctr
+        other.relative_base = self.relative_base
+        other.last_output = self.last_output
+        other.last_opcode = self.last_opcode
+        other.program_length = self.program_length
+        return other
 
     def get_program_value(self, index):
         self._ensure_program_addessable(index)
@@ -79,7 +94,9 @@ class IntcodeProcessor(object):
         instruction = self.get_program_value(self.ctr)
         return instruction % 100
 
-    def get_next_output(self):
+    def get_next_output(self, input_value=None):
+        if input_value is not None:
+            self.input_value = input_value
         self.stop_after_instruction(4)
         return self.last_output
 
