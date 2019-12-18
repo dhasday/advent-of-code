@@ -1,13 +1,11 @@
-import re
 import sys
 from collections import defaultdict
-
 from enum import Enum
 
 from aoc.common.day_solver import DaySolver
+from aoc.common.helpers import ALL_NUMBERS_REGEX
 
 sys.setrecursionlimit(3000)
-WHOLE_NUMBERS_REGEX = re.compile('-?\d+')
 
 
 class State(Enum):
@@ -94,7 +92,7 @@ class Day17Solver(DaySolver):
 
         max_y = 0
         for line in self._load_all_input_lines(filename=filename):
-            points = [int(v) for v in WHOLE_NUMBERS_REGEX.findall(line)]
+            points = [int(v) for v in ALL_NUMBERS_REGEX.findall(line)]
 
             if line[0] == 'x':
                 x_range = range(points[0], points[0] + 1)

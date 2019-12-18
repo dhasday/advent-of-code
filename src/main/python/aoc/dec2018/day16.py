@@ -1,10 +1,8 @@
-import re
 from collections import defaultdict
 
 from aoc.common.day_solver import DaySolver
+from aoc.common.helpers import ALL_NUMBERS_REGEX
 from aoc.dec2018.common.chrono_assembly import operations as chrono_ops
-
-ALL_NUMBERS_REGEX = re.compile('-?\d+')
 
 
 class Day16Solver(DaySolver):

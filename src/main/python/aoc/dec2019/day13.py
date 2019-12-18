@@ -1,11 +1,5 @@
-import math
-import re
-
 from aoc.common.day_solver import DaySolver
 from aoc.dec2019.common.intcode_processor import IntcodeProcessor
-from aoc.dec2019.common.letter_reader import read_output
-
-ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
 
 
 class Day13Solver(DaySolver):

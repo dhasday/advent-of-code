@@ -1,8 +1,6 @@
-import itertools
 import re
 
 from aoc.common.day_solver import DaySolver
-
 
 MIN_VALUE = 245182
 MAX_VALUE = 790572

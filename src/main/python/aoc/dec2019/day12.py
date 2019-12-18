@@ -1,9 +1,7 @@
 import math
-import re
 
 from aoc.common.day_solver import DaySolver
-
-ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
+from aoc.common.helpers import ALL_NUMBERS_REGEX
 
 
 class Day12Solver(DaySolver):

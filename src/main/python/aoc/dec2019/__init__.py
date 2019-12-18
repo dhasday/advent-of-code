@@ -18,3 +18,4 @@ from .day15 import Day15Solver
 
 from .day16 import Day16Solver
 from .day17 import Day17Solver
+from .day18 import Day18Solver
