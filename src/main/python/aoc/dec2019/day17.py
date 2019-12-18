@@ -1,6 +1,7 @@
 import math
 import re
 from collections import deque
+from functools import reduce
 from itertools import islice, cycle
 
 from aoc.common.day_solver import DaySolver
@@ -10,11 +11,16 @@ from aoc.dec2019.common.intcode_processor import IntcodeProcessor
 ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
 
 DIRECTIONS = {
-    '^': (0, 1),
-    'v': (0, -1),
+    '^': (0, -1),
+    'v': (0, 1),
     '>': (1, 0),
     '<': (-1, 0),
 }
+
+UP = 1
+DOWN = 2
+LEFT = 3
+RIGHT = 4
 
 
 class Day17Solver(DaySolver):
@@ -35,13 +41,35 @@ class Day17Solver(DaySolver):
         processor.reset()
         processor.program[0] = 2
 
+        # Manually Calculated
+        main_routine = 'A,B,A,B,C,C,B,A,B,C'
+        patterns = {
+            'A': 'L,12,L,10,R,8,L,12',
+            'B': 'R,8,R,10,R,12',
+            'C': 'L,10,R,12,R,8',
+        }
+        expected_path = []
+        for p in main_routine.split(','):
+            expected_path.extend(patterns[p].split(','))
         path = self._find_path(vents, bot)
+        assert expected_path == path
 
-        return ans_one, None
+        input_queue = deque()
+        self._add_to_queue(input_queue, main_routine)
+        self._add_to_queue(input_queue, patterns['A'])
+        self._add_to_queue(input_queue, patterns['B'])
+        self._add_to_queue(input_queue, patterns['C'])
+        self._add_to_queue(input_queue, 'n')
+
+        processor.input_func = lambda: input_queue.popleft()
+        processor.run_to_completion()
+        ans_two = processor.last_output
+
+        return ans_one, ans_two
 
     def _load_layout(self, processor=None):
         if not processor:
-            return self._load_all_input_lines('17-processed')
+            return self._load_all_input_lines('17-p1')
 
         layout = ''
         while True:
@@ -73,88 +101,93 @@ class Day17Solver(DaySolver):
 
     def _is_intersection(self, vents, vent):
         for offset in DIRECTIONS.values():
-            pos = vent[0] + offset[0], vent[1] + offset[1]
-            if pos not in vents:
+            if self._next_pos(vent, offset) not in vents:
                 return False
         return True
 
     def _find_path(self, vents, bot):
         cur_pos = bot[0]
-        direction = DIRECTIONS.get(bot[1])
+        cur_dir = DIRECTIONS.get(bot[1])
 
-        cur_moves = 0
         path = []
-        visited = set()
         while True:
-            visited.add(cur_pos)
+            # Advance to next corner/intersection
+            cur_pos, distance = self._advance_forward(vents, cur_pos, cur_dir)
+            if distance:
+                path.append(str(distance))
 
-            # Try to move first
-            next_pos = self._next_pos(cur_pos, direction)
-            if next_pos in vents:
-                cur_moves += 1
-                cur_pos = next_pos
-                continue
-
-            # Then attempt to turn left
-            left_direction = -direction[1], -direction[0]
-            left_pos = self._next_pos(cur_pos, left_direction)
-            if left_pos not in visited and left_pos in vents:
-                if cur_moves > 0:
-                    path.append(cur_moves)
-                    cur_moves = 0
+            # Try to turn left
+            left_dir = cur_dir[1], -cur_dir[0]
+            left_pos = self._try_turn(vents, cur_pos, left_dir)
+            if left_pos:
                 path.append('L')
-                direction = left_direction
+                cur_dir = left_dir
                 continue
 
-            # Then attempt to turn right
-            right_direction = direction[1], direction[0]
-            right_pos = self._next_pos(cur_pos, right_direction)
-            if right_pos not in visited and right_pos in vents:
-                if cur_moves > 0:
-                    path.append(cur_moves)
-                    cur_moves = 0
+            # Try to turn right
+            right_dir = -cur_dir[1], cur_dir[0]
+            right_pos = self._try_turn(vents, cur_pos, right_dir)
+            if right_pos:
                 path.append('R')
-                direction = right_direction
+                cur_dir = right_dir
                 continue
-
-            if cur_moves > 0:
-                path.append(cur_moves)
 
             return path
+
+    def _advance_forward(self, vents, start_pos, cur_dir):
+        cur_pos = start_pos
+        moves = 0
+
+        while True:
+            next_pos = self._next_pos(cur_pos, cur_dir)
+            if next_pos not in vents:
+                return cur_pos, moves
+            cur_pos = next_pos
+            moves += 1
+
+    def _try_turn(self, vents, cur_pos, next_dir):
+        next_pos = self._next_pos(cur_pos, next_dir)
+        return next_pos if next_pos in vents else None
 
     def _next_pos(self, cur_pos, direction):
         return cur_pos[0] + direction[0], cur_pos[1] + direction[1]
 
-# L 12
-# L 10
-# L 8
-# L 12
-# L 8
-# R 10
-# L 12
-# L 12
-# R 10
-# R 8
-# R 12
-# R 8
-# L 10
-# R 12
-# R 10
-# R 12
-# L 8
-# L 10
-# L 12
-# R 8
-# L 8
-# R 10
-# L 12
-# L 12
-# R 10
-# R 8
-# R 12
-# R 8
-# L 10
-# R 12
-# R 10
-# R 12
-# L 8
+    def _add_to_queue(self, queue, values):
+        for v in values:
+            queue.append(ord(v))
+        queue.append(10)
+
+# L 12,
+# L 10,
+# R  8,
+# L 12,
+# R  8,
+# R 10,
+# R 12,
+# L 12,
+# L 10,
+# R  8,
+# L 12,
+# R  8,
+# R 10,
+# R 12,
+# L 10,
+# R 12,
+# R  8,
+# L 10,
+# R 12,
+# R  8,
+# R  8,
+# R 10,
+# R 12,
+# L 12,
+# L 10,
+# R  8,
+# L 12,
+# R  8,
+# R 10,
+# R 12,
+# L 10,
+# R 12,
+# R  8
+
