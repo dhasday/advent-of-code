@@ -4,6 +4,7 @@ from collections import deque, defaultdict
 from functools import reduce
 from itertools import islice, cycle
 
+from aoc.common.a_star_search import AStarSearch
 from aoc.common.breadth_first_search import BreadthFirstSearch
 from aoc.common.day_solver import DaySolver
 from aoc.common.dijkstra_search import DijkstraSearch
@@ -40,17 +41,24 @@ class Day18Solver(DaySolver):
         # puzzle_map = self._load_map(filename='18-ex4')
 
         start = list(puzzle_map.starts)[0]
-        mappings = self._build_mappings(puzzle_map, start)
-        return self._find_shortest_path(mappings)[1]
+        mappings = self._build_mappings(puzzle_map, '@', start)
+        ans_one = self._find_shortest_path_part_1(mappings, '@')[1]
+        print(ans_one)
+        return ans_one
 
     def solve_puzzle_two(self):
         puzzle_map = self._load_map(filename='18-input-2')
 
-        # mappings = [self._build_mappings(puzzle_map, s) for s in puzzle_map.starts]
+        starts = ''
+        mappings = {}
+        for i, start in enumerate(puzzle_map.starts):
+            start_id = str(i)
+            starts += start_id
+            mappings.update(self._build_mappings(puzzle_map, start_id, start))
 
-        import pdb; pdb.set_trace()
-
-        return None
+        ans_two = self._find_shortest_path_part_2(mappings, starts)[1]
+        print(ans_two)
+        return ans_two
 
     def _load_map(self, filename=None):
         lines = self._load_all_input_lines(filename=filename)
@@ -74,9 +82,9 @@ class Day18Solver(DaySolver):
                     doors[val] = pos
         return self.PuzzleMap(walls, keys, doors, starts)
 
-    def _build_mappings(self, puzzle_map, start):
+    def _build_mappings(self, puzzle_map, startId, start):
         mappings = {}
-        for key, pos in list(puzzle_map.keys.items()) + list({"@": start}.items()):
+        for key, pos in list(puzzle_map.keys.items()) + list({startId: start}.items()):
             pos = tuple(pos)
 
             dists = self._find_distances(puzzle_map, pos)
@@ -86,10 +94,9 @@ class Day18Solver(DaySolver):
                 if other_key == key:
                     continue
                 other_pos = tuple(other_pos)
-                assert other_pos in dists
-                dist, keys_needed = dists[other_pos]
-
-                cur_dists[other_key] = (dist, frozenset(keys_needed))
+                if other_pos in dists:
+                    dist, keys_needed = dists[other_pos]
+                    cur_dists[other_key] = (dist, frozenset(keys_needed))
 
             mappings[key] = cur_dists
         return mappings
@@ -133,14 +140,16 @@ class Day18Solver(DaySolver):
 
         return g_values
 
-    def _find_shortest_path(self, mappings):
+    def _find_shortest_path_part_1(self, mappings, start):
+        num_keys_to_collect = len(mappings.keys()) - 1
+
         def _find_adjacent(node):
             if node == END:
                 return []
 
             cur_key, collected_keys = node
 
-            if len(collected_keys) == len(mappings.keys()) - 1:
+            if len(collected_keys) == num_keys_to_collect:
                 return [(END, 0)]
 
             adj_nodes = []
@@ -159,28 +168,43 @@ class Day18Solver(DaySolver):
 
             return adj_nodes
 
-        START = ('@', frozenset())
+        START = (start, frozenset())
         END = ('$', frozenset())
 
         search = DijkstraSearch(_find_adjacent)
         return search.find_shortest_path(START, END)
 
-# key_to_key = {}
-# for key, key_pos in list(keys.items()) + list({"@": cur_pos}.items()):
-#     key_l = key.lower()
-#     key_u = key.upper()
-#     key_pos = tuple(key_pos)
-#
-#     dists = bfs(key_pos, expand)
-#
-#     cur_dists = {}
-#     for other_key, other_key_pos in keys.items():
-#         if other_key == key:
-#             continue
-#         other_key_pos = tuple(other_key_pos)
-#         assert other_key_pos in dists
-#         dist, keys_needed = dists[other_key_pos]
-#
-#         cur_dists[other_key] = (dist, frozenset(keys_needed))
-#
-#     key_to_key[key] = cur_dists
+    def _find_shortest_path_part_2(self, mappings, starts):
+        num_keys_to_collect = len(mappings.keys()) - len(starts)
+
+        def _find_adjacent(node):
+            if node == END:
+                return []
+
+            cur_keys, collected_keys = node
+
+            if len(collected_keys) == num_keys_to_collect:
+                return [(END, 0)]
+
+            adj_nodes = []
+            for cur_key in cur_keys:
+                for next_key, (distance, doors) in mappings[cur_key].items():
+                    # If we've already collected this key, skip it
+                    if next_key in collected_keys:
+                        continue
+
+                    # If we don't have the required keys, skip it
+                    if len(doors - collected_keys) != 0:
+                        continue
+
+                    new_keys = collected_keys | frozenset(next_key.upper())
+                    new_node = cur_keys.replace(cur_key, next_key), new_keys
+                    adj_nodes.append((new_node, distance))
+
+            return adj_nodes
+
+        START = (starts, frozenset())
+        END = ('$', frozenset())
+
+        search = DijkstraSearch(_find_adjacent)
+        return search.find_shortest_path(START, END)
