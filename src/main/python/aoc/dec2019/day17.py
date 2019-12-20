@@ -17,6 +17,19 @@ LEFT = 3
 RIGHT = 4
 
 
+# Part 2 Notes
+#   A   L 12 L 10 R  8 L 12
+#   B   R  8 R 10 R 12
+#   A   L 12 L 10 R  8 L 12
+#   B   R  8 R 10 R 12
+#   C   L 10 R 12 R  8
+#   C   L 10 R 12 R  8
+#   B   R  8 R 10 R 12
+#   A   L 12 L 10 R  8 L 12
+#   B   R  8 R 10 R 12
+#   C   L 10 R 12 R  8
+
+
 class Day17Solver(DaySolver):
     year = 2019
     day = 17
@@ -25,7 +38,6 @@ class Day17Solver(DaySolver):
         line = self._load_only_input_line()
 
         processor = IntcodeProcessor(program_str=line)
-        # layout = self._load_layout(processor)
         layout = self._load_layout()
         vents, bot = self._find_vents_and_bot(layout)
         intersections = self._find_intersections(vents)
@@ -150,38 +162,3 @@ class Day17Solver(DaySolver):
         for v in values:
             queue.append(ord(v))
         queue.append(10)
-
-# L 12,
-# L 10,
-# R  8,
-# L 12,
-# R  8,
-# R 10,
-# R 12,
-# L 12,
-# L 10,
-# R  8,
-# L 12,
-# R  8,
-# R 10,
-# R 12,
-# L 10,
-# R 12,
-# R  8,
-# L 10,
-# R 12,
-# R  8,
-# R  8,
-# R 10,
-# R 12,
-# L 12,
-# L 10,
-# R  8,
-# L 12,
-# R  8,
-# R 10,
-# R 12,
-# L 10,
-# R 12,
-# R  8
-

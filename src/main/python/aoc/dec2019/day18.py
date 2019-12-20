@@ -1,15 +1,6 @@
-import math
-import re
-from collections import deque, defaultdict
-from functools import reduce
-from itertools import islice, cycle
-
-from aoc.common.a_star_search import AStarSearch
-from aoc.common.breadth_first_search import BreadthFirstSearch
 from aoc.common.day_solver import DaySolver
 from aoc.common.dijkstra_search import DijkstraSearch
-from aoc.common.helpers import ALL_NUMBERS_REGEX, STANDARD_DIRECTIONS
-from aoc.dec2019.common.intcode_processor import IntcodeProcessor
+from aoc.common.helpers import STANDARD_DIRECTIONS
 
 
 class Day18Solver(DaySolver):
@@ -35,15 +26,10 @@ class Day18Solver(DaySolver):
 
     def solve_puzzle_one(self):
         puzzle_map = self._load_map()
-        # puzzle_map = self._load_map(filename='18-ex1')
-        # puzzle_map = self._load_map(filename='18-ex2')
-        # puzzle_map = self._load_map(filename='18-ex3')
-        # puzzle_map = self._load_map(filename='18-ex4')
 
         start = list(puzzle_map.starts)[0]
         mappings = self._build_mappings(puzzle_map, '@', start)
         ans_one = self._find_shortest_path_part_1(mappings, '@')[1]
-        print(ans_one)
         return ans_one
 
     def solve_puzzle_two(self):
@@ -57,7 +43,6 @@ class Day18Solver(DaySolver):
             mappings.update(self._build_mappings(puzzle_map, start_id, start))
 
         ans_two = self._find_shortest_path_part_2(mappings, starts)[1]
-        print(ans_two)
         return ans_two
 
     def _load_map(self, filename=None):

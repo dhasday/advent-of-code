@@ -21,6 +21,7 @@ dec2019_solvers = [
     dec2019.Day06Solver, dec2019.Day07Solver, dec2019.Day08Solver, dec2019.Day09Solver, dec2019.Day10Solver,
     dec2019.Day11Solver, dec2019.Day12Solver, dec2019.Day13Solver, dec2019.Day14Solver, dec2019.Day15Solver,
     dec2019.Day16Solver, dec2019.Day17Solver, dec2019.Day18Solver, dec2019.Day19Solver, dec2019.Day20Solver,
+    dec2019.Day21Solver,
 ]
 
 all_solvers = []
@@ -30,16 +31,21 @@ all_solvers.extend(dec2019_solvers)
 
 # Slow Days (>5000 ms)
 #   2015
-#       Day  4  ~  6300 ms
-#       Day  6  ~ 10000 ms
-#       Day 10  ~  7500 ms
+#       Day  4  ~   6300 ms
+#       Day  6  ~  10000 ms
+#       Day 10  ~   7500 ms
 #   2016
 #   2017
 #   2018
-#       Day 11  ~  5300 ms
-#       Day 14  ~ 22000 ms
+#       Day 11  ~   5300 ms
+#       Day 14  ~  22000 ms
 #   2019
-#       Day 12  ~  6100 ms
+#       Day 12  ~   8500 ms
+#       Day 13  ~   7000 ms
+#       Day 16  ~  32000 ms
+#       Day 17  ~   6000 ms
+#       Day 18  ~ 450000 ms
+#       Day 19  ~   7000 ms
 
 for solver in all_solvers:
     solver().print_results()

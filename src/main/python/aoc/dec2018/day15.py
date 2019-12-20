@@ -81,7 +81,7 @@ class Day15Solver(DaySolver):
 
     class EnemyBFS(BreadthFirstSearch):
         def __init__(self, start, barriers, enemy_positions):
-            super(self.__class__, self).__init__(self._adjacent_positions)
+            super(self.__class__, self).__init__(find_adjacent_nodes=self._adjacent_positions)
             self.start = start
             self.barriers = barriers
 
@@ -106,7 +106,7 @@ class Day15Solver(DaySolver):
                 offset = POS_OFFSET[d]
                 next_pos = pos[0] + offset[0], pos[1] + offset[1]
                 if next_pos not in self.barriers:
-                    adj_positions.append(next_pos)
+                    adj_positions.append((next_pos, 1))
 
             return adj_positions
 
