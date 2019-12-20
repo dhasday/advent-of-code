@@ -142,44 +142,5 @@ class Day20Solver(DaySolver):
 
         return mappings
 
-    def _find_distances(self, puzzle_map, start_pos):
-        def get_adjacent_nodes(_node):
-            adj_nodes = []
-
-            for delta in STANDARD_DIRECTIONS:
-                next_pos = delta[0] + _node[0], delta[1] + _node[1]
-
-                if next_pos in visited:
-                    continue
-
-                if puzzle_map.is_passable(next_pos):
-                    door = puzzle_map.is_door(next_pos)
-                    adj_nodes.append((next_pos, door))
-
-            return adj_nodes
-
-        g_values = {start_pos: (0, tuple())}
-        todo = [(start_pos, tuple())]
-        distance = 0
-        visited = set()
-
-        while todo:
-            new_todo = []
-            distance += 1
-            for cur_node, keys_used in todo:
-                visited.add(cur_node)
-                for new_node, new_key in get_adjacent_nodes(cur_node):
-                    if new_node not in g_values:
-                        if new_key:
-                            next_keys = keys_used + tuple(new_key)
-                        else:
-                            next_keys = keys_used
-
-                        new_todo.append((new_node, next_keys))
-                        g_values[new_node] = (distance, next_keys)
-            todo = new_todo
-
-        return g_values
-
     def _is_on_edge(self, pos):
         return pos[0] in [0, 118] or pos[1] in [0, 118]
