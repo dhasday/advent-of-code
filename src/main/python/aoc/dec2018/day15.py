@@ -106,7 +106,7 @@ class Day15Solver(DaySolver):
                 offset = POS_OFFSET[d]
                 next_pos = pos[0] + offset[0], pos[1] + offset[1]
                 if next_pos not in self.barriers:
-                    adj_positions.append((next_pos, 1))
+                    adj_positions.append(next_pos)
 
             return adj_positions
 
