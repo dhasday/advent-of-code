@@ -74,7 +74,7 @@ class Day20Solver(DaySolver):
         return len(search.find_path(start, end)) - 1
 
     def _load_input(self, filename=INPUT_FILE):
-        lines = self._load_all_input_lines(filename=filename)
+        lines = self.load_all_input_lines(filename=filename)
 
         warps = defaultdict(lambda: [])
         spaces = set()

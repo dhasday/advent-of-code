@@ -50,7 +50,7 @@ class Day21Solver(DaySolver):
                     return output
 
     def solve_puzzle_one(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         program = self.Springdroid(program_str=line)
 
@@ -65,7 +65,7 @@ class Day21Solver(DaySolver):
         return output
 
     def solve_puzzle_two(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         program = self.Springdroid(line)
 

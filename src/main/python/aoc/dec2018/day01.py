@@ -29,4 +29,4 @@ class Day01Solver(DaySolver):
                     return freq
 
     def _load_sequence(self):
-        return [int(l) for l in self._load_all_input_lines()]
+        return [int(l) for l in self.load_all_input_lines()]

@@ -53,13 +53,13 @@ class DaySolver(object):
         else:
             return '{}/{}'.format(self._get_input_directory(), filename)
 
-    def _load_only_input_line(self, filename=None):
+    def load_only_input_line(self, filename=None):
         filename = self._get_input_filename(filename)
 
         with open(filename) as f:
             return f.readline()
 
-    def _load_all_input_lines(self, filename=None):
+    def load_all_input_lines(self, filename=None):
         filename = self._get_input_filename(filename)
 
         all_lines = []

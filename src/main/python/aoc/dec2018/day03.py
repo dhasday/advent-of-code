@@ -31,7 +31,7 @@ class Day03Solver(DaySolver):
         return ans_one, ans_two
 
     def _load_all_measurements(self):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
 
         return [self.Measurement(l) for l in lines]
 

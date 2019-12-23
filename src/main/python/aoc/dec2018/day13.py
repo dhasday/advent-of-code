@@ -110,7 +110,7 @@ class Day13Solver(DaySolver):
     def _load_input(self):
         carts = list()
 
-        for y, line in enumerate(self._load_all_input_lines()):
+        for y, line in enumerate(self.load_all_input_lines()):
             for x, token in enumerate(line):
                 if token in ['/', '\\', '+']:
                     self.junctions[(x, y)] = token

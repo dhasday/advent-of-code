@@ -11,7 +11,7 @@ class Day08Solver(DaySolver):
         escaped_regex = re.compile('\\\\(\\\\|"|x[0-9a-fA-F]{2})')
 
         removed_chars = 0
-        for line in self._load_all_input_lines():
+        for line in self.load_all_input_lines():
             cleaned_line = escaped_regex.sub('?', line[1:-1])
             removed_chars += len(line) - len(cleaned_line)
 
@@ -19,7 +19,7 @@ class Day08Solver(DaySolver):
 
     def solve_puzzle_two(self):
         added_chars = 0
-        for line in self._load_all_input_lines():
+        for line in self.load_all_input_lines():
             added_chars += line.count('\\') + line.count('"') + 2
 
         return added_chars

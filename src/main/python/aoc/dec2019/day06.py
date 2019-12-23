@@ -19,7 +19,7 @@ class Day06Solver(DaySolver):
         return min_distance - 2
 
     def _load_orbits(self, symmetric):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
 
         orbits = dict()
         for line in lines:

@@ -62,7 +62,7 @@ class Day24Solver(DaySolver):
         immune_units = []
         infection_units = []
 
-        for l in self._load_all_input_lines(filename='24-parsed'):
+        for l in self.load_all_input_lines(filename='24-parsed'):
             unit_config = l.split(';')
 
             unit = self.Unit(

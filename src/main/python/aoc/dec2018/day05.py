@@ -11,14 +11,14 @@ class Day05Solver(DaySolver):
     day = 5
 
     def solve_puzzle_one(self):
-        full_polymer = self._load_only_input_line()
+        full_polymer = self.load_only_input_line()
 
         processed_polymer = self._process_polymer(full_polymer)
 
         return len(processed_polymer)
 
     def solve_puzzle_two(self):
-        full_polymer = self._load_only_input_line()
+        full_polymer = self.load_only_input_line()
 
         min_length = len(full_polymer)
 
@@ -40,7 +40,7 @@ class Day05Solver(DaySolver):
         return min_length
 
     def _load_input(self):
-        return [self._load_line(l) for l in self._load_all_input_lines()]
+        return [self._load_line(l) for l in self.load_all_input_lines()]
 
     def _process_polymer(self, full_polymer):
         output = full_polymer

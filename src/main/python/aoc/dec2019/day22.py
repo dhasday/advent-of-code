@@ -32,7 +32,7 @@ class Day22Solver(DaySolver):
         return (offset + (target_index * increment)) % card_count
 
     def get_coefficients(self, num_cards, num_iters):
-        instructions = self._load_all_input_lines()
+        instructions = self.load_all_input_lines()
 
         increment_mul = 1
         offset_diff = 0

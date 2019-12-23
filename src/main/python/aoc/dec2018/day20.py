@@ -47,7 +47,7 @@ class Day20Solver(DaySolver):
             room.west = self
 
     def solve_puzzles(self):
-        input = self._load_only_input_line().strip()[1:-1]
+        input = self.load_only_input_line().strip()[1:-1]
 
         rooms = defaultdict(lambda: self.Room())
         start_pos = (0, 0)

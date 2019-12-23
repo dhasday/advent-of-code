@@ -7,7 +7,7 @@ class Day13Solver(DaySolver):
     day = 13
 
     def solve_puzzle_one(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
         processor = IntcodeProcessor(program_str=line)
 
         num_blocks = 0
@@ -30,7 +30,7 @@ class Day13Solver(DaySolver):
             else:
                 return 1
 
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
         processor = IntcodeProcessor(program_str=line, input_func=determine_input)
         processor.program[0] = 2
 

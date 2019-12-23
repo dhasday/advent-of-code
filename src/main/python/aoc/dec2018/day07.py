@@ -73,7 +73,7 @@ class Day07Solver(DaySolver):
     def _load_input(self):
         requirements = dict()
 
-        for l in self._load_all_input_lines():
+        for l in self.load_all_input_lines():
             step, req = self._load_line(l)
 
             if req not in requirements:

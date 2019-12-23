@@ -35,7 +35,7 @@ class Day19Solver(DaySolver):
 
     def _solve_puzzles_by_instructions(self):
         processor = ChronoProcessor(INSTRUCTION_POINTER)
-        processor.load_instructions(self._load_all_input_lines())
+        processor.load_instructions(self.load_all_input_lines())
 
         # Part One
         processor.reset()

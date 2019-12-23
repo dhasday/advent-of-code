@@ -7,7 +7,7 @@ class Day07Solver(DaySolver):
     day = 7
 
     def solve_puzzle_one(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         options = self._generate_phase_options({0, 1, 2, 3, 4})
         max_output = None
@@ -24,7 +24,7 @@ class Day07Solver(DaySolver):
         return max_output
 
     def solve_puzzle_two(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         max_output = None
 

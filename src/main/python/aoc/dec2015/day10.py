@@ -6,7 +6,7 @@ class Day10Solver(DaySolver):
     day = 10
 
     def solve_puzzles(self):
-        current = self._load_only_input_line()
+        current = self.load_only_input_line()
 
         for _ in range(40):
             current = self._look_say(current)

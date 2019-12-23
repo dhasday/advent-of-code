@@ -46,7 +46,7 @@ class Day06Solver(DaySolver):
         return count_within_distance
 
     def _load_input(self):
-        return [self._load_line(l) for l in self._load_all_input_lines()]
+        return [self._load_line(l) for l in self.load_all_input_lines()]
 
     def _load_line(self, line):
         result = line.split(', ')

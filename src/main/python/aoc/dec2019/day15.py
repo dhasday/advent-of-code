@@ -16,7 +16,7 @@ class Day15Solver(DaySolver):
     day = 15
 
     def solve_puzzles(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         processor = IntcodeProcessor(line)
 

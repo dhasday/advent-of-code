@@ -11,7 +11,7 @@ class Day14Solver(DaySolver):
     day = 14
 
     def solve_puzzles(self):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
 
         parsed = [self._parse_line(line) for line in lines]
         reactions = {p[1][1]: (p[0], p[1][0]) for p in parsed}

@@ -11,7 +11,7 @@ class Day08Solver(DaySolver):
     day = 8
 
     def solve_puzzle_one(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         layers = list(self.split_layers(line, LAYER_SIZE))
 
@@ -28,7 +28,7 @@ class Day08Solver(DaySolver):
         return result
 
     def solve_puzzle_two(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         layer_size = LAYER_HEIGHT * LAYER_WIDTH
 

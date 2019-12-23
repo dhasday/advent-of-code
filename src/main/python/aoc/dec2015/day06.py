@@ -46,7 +46,7 @@ class Day06Solver(DaySolver):
         return ans_one, ans_two
 
     def _load_instructions(self):
-        return [self.Instruction(l) for l in self._load_all_input_lines()]
+        return [self.Instruction(l) for l in self.load_all_input_lines()]
 
     def _count_trues(self, field):
         count = 0

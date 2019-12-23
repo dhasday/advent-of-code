@@ -7,7 +7,7 @@ class Day19Solver(DaySolver):
     day = 19
 
     def solve_puzzle_one(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         affected = set()
         min_previous = 0
@@ -31,7 +31,7 @@ class Day19Solver(DaySolver):
         return len(affected)
 
     def solve_puzzle_two(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         processor = IntcodeProcessor(line)
 

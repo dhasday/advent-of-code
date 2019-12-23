@@ -94,7 +94,7 @@ class Day07Solver(DaySolver):
             return int(value) % 65536
 
     def solve_puzzles(self):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
 
         registers = dict()
         for l in lines:

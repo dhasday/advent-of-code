@@ -91,7 +91,7 @@ class Day17Solver(DaySolver):
         grid = self.Grid()
 
         max_y = 0
-        for line in self._load_all_input_lines(filename=filename):
+        for line in self.load_all_input_lines(filename=filename):
             points = [int(v) for v in ALL_NUMBERS_REGEX.findall(line)]
 
             if line[0] == 'x':

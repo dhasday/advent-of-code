@@ -6,7 +6,7 @@ class Day02Solver(DaySolver):
     day = 2
 
     def solve_puzzle_one(self):
-        package_ids = self._load_all_input_lines()
+        package_ids = self.load_all_input_lines()
 
         num_doubles = 0
         num_triples = 0
@@ -29,7 +29,7 @@ class Day02Solver(DaySolver):
         return num_doubles * num_triples
 
     def solve_puzzle_two(self):
-        package_ids = self._load_all_input_lines()
+        package_ids = self.load_all_input_lines()
 
         valid_packages = self._get_valid_packages(package_ids)
 

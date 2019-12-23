@@ -8,7 +8,7 @@ class Day10Solver(DaySolver):
     day = 10
 
     def solve_puzzles(self):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
 
         asteroids = set()
         for y, row in enumerate(lines):

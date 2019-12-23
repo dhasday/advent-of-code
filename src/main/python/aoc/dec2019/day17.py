@@ -35,7 +35,7 @@ class Day17Solver(DaySolver):
     day = 17
 
     def solve_puzzles(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         processor = IntcodeProcessor(program_str=line)
         layout = self._load_layout()
@@ -75,7 +75,7 @@ class Day17Solver(DaySolver):
 
     def _load_layout(self, processor=None):
         if not processor:
-            return self._load_all_input_lines('17-p1')
+            return self.load_all_input_lines('17-p1')
 
         layout = ''
         while True:

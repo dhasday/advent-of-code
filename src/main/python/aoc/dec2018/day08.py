@@ -43,7 +43,7 @@ class Day08Solver(DaySolver):
             return total
 
     def solve_puzzles(self):
-        values = [int(v) for v in self._load_only_input_line().split(' ')]
+        values = [int(v) for v in self.load_only_input_line().split(' ')]
 
         root_node, _ = self._build_node(values=values, parent=None)
 

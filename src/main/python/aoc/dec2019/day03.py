@@ -37,7 +37,7 @@ class Day03Solver(DaySolver):
                     self.visited_pos[self.cur_pos] = self.cur_distance
 
     def solve_puzzles(self):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
 
         wire_one = self.WireMovement(lines[0].split(','))
         wire_two = self.WireMovement(lines[1].split(','))

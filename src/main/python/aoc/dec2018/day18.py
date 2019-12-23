@@ -21,7 +21,7 @@ class Day18Solver(DaySolver):
     day = 18
 
     def solve_puzzle_one(self):
-        area = self._load_all_input_lines()
+        area = self.load_all_input_lines()
         size = len(area)
 
         for _ in range(10):
@@ -32,7 +32,7 @@ class Day18Solver(DaySolver):
 
     def solve_puzzle_two(self):
         total_iters = 1000000000
-        area = self._load_all_input_lines()
+        area = self.load_all_input_lines()
         size = len(area)
 
         loop_states, loop_start = self._find_loop(area, size)

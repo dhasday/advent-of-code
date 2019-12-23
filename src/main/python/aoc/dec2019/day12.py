@@ -41,7 +41,7 @@ class Day12Solver(DaySolver):
             return pot * kin
 
     def solve_puzzle_one(self):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
         moons = list(self.Moon(line) for line in lines)
 
         for i in range(1000):
@@ -50,7 +50,7 @@ class Day12Solver(DaySolver):
         return sum(m.total_energy for m in moons)
 
     def solve_puzzle_two(self):
-        lines = self._load_all_input_lines()
+        lines = self.load_all_input_lines()
         moons = list(self.Moon(line) for line in lines)
 
         targets = [' '.join(m.format_pair(i) for m in moons) for i in range(3)]

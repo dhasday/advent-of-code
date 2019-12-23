@@ -74,7 +74,7 @@ class Day10Solver(DaySolver):
         return 'READ OUTPUT', ans_two
 
     def _load_lights(self):
-        return [self.Light(l) for l in self._load_all_input_lines()]
+        return [self.Light(l) for l in self.load_all_input_lines()]
 
     def _determine_bounds(self, lights):
         bounds = self.Bounds()

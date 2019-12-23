@@ -28,7 +28,7 @@ class Day11Solver(DaySolver):
             return grid
 
     def solve_puzzle_one(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         processor = IntcodeProcessor(line)
 
@@ -42,7 +42,7 @@ class Day11Solver(DaySolver):
         return len(painted_spots)
 
     def solve_puzzle_two(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         processor = IntcodeProcessor(line)
 

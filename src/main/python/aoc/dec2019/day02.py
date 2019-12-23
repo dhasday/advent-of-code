@@ -9,7 +9,7 @@ class Day02Solver(DaySolver):
     day = 2
 
     def solve_puzzle_one(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         processor = IntcodeProcessor(program_str=line)
 
@@ -20,7 +20,7 @@ class Day02Solver(DaySolver):
         return processor.program[0]
 
     def solve_puzzle_two(self):
-        line = self._load_only_input_line()
+        line = self.load_only_input_line()
 
         processor = IntcodeProcessor(program_str=line)
 

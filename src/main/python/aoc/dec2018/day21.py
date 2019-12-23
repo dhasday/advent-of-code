@@ -11,7 +11,7 @@ class Day21Solver(DaySolver):
 
     def solve_puzzles(self):
         processor = ChronoProcessor(INSTRUCION_POINTER)
-        processor.load_instructions(self._load_all_input_lines())
+        processor.load_instructions(self.load_all_input_lines())
 
         processor.run_until_instruction(R0_COMPARE_INSTRUCTION)
         ans_one = processor.registers[5]

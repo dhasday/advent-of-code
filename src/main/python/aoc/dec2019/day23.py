@@ -17,6 +17,8 @@ class Day23Solver(DaySolver):
     day = 23
 
     def solve_puzzle_one(self):
+        # lines = self.load_all_input_lines()
+        # line = self.load_only_input_line()
         return None
 
     def solve_puzzle_two(self):

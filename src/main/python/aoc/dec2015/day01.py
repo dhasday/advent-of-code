@@ -6,7 +6,7 @@ class Day01Solver(DaySolver):
     day = 1
 
     def solve_puzzle_one(self):
-        instructions = self._load_only_input_line()
+        instructions = self.load_only_input_line()
 
         floor = 0
         for c in instructions:
@@ -18,7 +18,7 @@ class Day01Solver(DaySolver):
         return floor
 
     def solve_puzzle_two(self):
-        instructions = self._load_only_input_line()
+        instructions = self.load_only_input_line()
 
         floor = 0
         for i in range(len(instructions)):

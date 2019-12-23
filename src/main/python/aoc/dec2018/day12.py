@@ -28,7 +28,7 @@ class Day12Solver(DaySolver):
     def _load_transitions(self):
         transitions = {}
 
-        for line in self._load_all_input_lines():
+        for line in self.load_all_input_lines():
             parsed = INPUT_REGEX.match(line)
 
             transitions[parsed.group(1)] = parsed.group(2)

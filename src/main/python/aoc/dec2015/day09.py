@@ -16,7 +16,7 @@ class Day09Solver(DaySolver):
 
     def _load_distances(self):
         distances = dict()
-        for line in self._load_all_input_lines():
+        for line in self.load_all_input_lines():
             parsed = INPUT_REGEX.match(line)
 
             place_one = parsed.group(1)

@@ -142,7 +142,7 @@ class Day15Solver(DaySolver):
 
         size = 0
 
-        for x, row in enumerate(self._load_all_input_lines(filename=filename)):
+        for x, row in enumerate(self.load_all_input_lines(filename=filename)):
             for y, value in enumerate(row):
                 pos = (x, y)
 

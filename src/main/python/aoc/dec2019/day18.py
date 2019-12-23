@@ -46,7 +46,7 @@ class Day18Solver(DaySolver):
         return ans_two
 
     def _load_map(self, filename=None):
-        lines = self._load_all_input_lines(filename=filename)
+        lines = self.load_all_input_lines(filename=filename)
 
         key_values = [chr(ord('a') + i) for i in range(26)]
         door_values = [chr(ord('A') + i) for i in range(26)]

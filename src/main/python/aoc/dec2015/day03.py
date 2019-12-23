@@ -16,7 +16,7 @@ class Day03Solver(DaySolver):
         return self._follow_orders(2)
 
     def _follow_orders(self, num_workers):
-        orders = self._load_only_input_line()
+        orders = self.load_only_input_line()
 
         pos = [(0, 0) for _ in range(num_workers)]
         visited = set()

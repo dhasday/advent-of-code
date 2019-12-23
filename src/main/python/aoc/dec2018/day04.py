@@ -46,7 +46,7 @@ class Day04Solver(DaySolver):
 
     def _read_input(self):
         # Leading timestamps allow us to just sort the input and then process it
-        entries = map(self._parse_line, sorted(self._load_all_input_lines()))
+        entries = map(self._parse_line, sorted(self.load_all_input_lines()))
 
         guards = {}
         current_guard = None

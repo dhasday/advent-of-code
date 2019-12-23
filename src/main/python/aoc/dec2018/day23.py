@@ -84,7 +84,7 @@ class Day23Solver(DaySolver):
         return max_pos, max_dist
 
     def _load_input(self):
-        return [self.Nanobot(l) for l in self._load_all_input_lines()]
+        return [self.Nanobot(l) for l in self.load_all_input_lines()]
 
     def _find_bot_with_largest_signal(self, nanobots):
         max_bot = nanobots[0]

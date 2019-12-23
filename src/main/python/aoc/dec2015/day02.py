@@ -33,7 +33,7 @@ class Day02Solver(DaySolver):
         return ans_one, ans_two
 
     def _load_input(self):
-        return [self._parse_line(l) for l in self._load_all_input_lines()]
+        return [self._parse_line(l) for l in self.load_all_input_lines()]
 
     def _parse_line(self, line):
         result = INPUT_REGEX.match(line)

@@ -9,7 +9,7 @@ class Day16Solver(DaySolver):
     day = 16
 
     def solve_puzzle_one(self):
-        values = [int(c) for c in self._load_only_input_line()]
+        values = [int(c) for c in self.load_only_input_line()]
 
         for i in range(100):
             values = self._iterate_values(values)
@@ -17,7 +17,7 @@ class Day16Solver(DaySolver):
         return ''.join(str(v) for v in values[:8])
 
     def solve_puzzle_two(self):
-        values = [int(c) for c in self._load_only_input_line()] * 10000
+        values = [int(c) for c in self.load_only_input_line()] * 10000
         message_offset = int(''.join(str(v) for v in values[:7]))
 
         values = values[message_offset:]
