@@ -25,4 +25,3 @@ class Day25Solver(DaySolver):
 
 if __name__ == '__main__':
     Day25Solver().print_results()
-

@@ -62,10 +62,5 @@ class DaySolver(object):
     def load_all_input_lines(self, filename=None):
         filename = self._get_input_filename(filename)
 
-        all_lines = []
-
         with open(filename) as f:
-            for line in f:
-                all_lines.append(line.strip('\n'))
-
-        return all_lines
+            return [line.strip('\n') for line in f]
