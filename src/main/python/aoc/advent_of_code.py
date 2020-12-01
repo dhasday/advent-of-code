@@ -57,6 +57,7 @@ all_solvers.extend(dec2020_solvers)
 #       Day 18  ~ 710000 ms
 #       Day 19  ~  12500 ms
 #       Day 21  ~  11900 ms
+#   2020
 
 for solver in all_solvers:
     solver().print_results()
