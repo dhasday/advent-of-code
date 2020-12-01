@@ -1,4 +1,4 @@
-from aoc import dec2015, dec2016, dec2017, dec2018, dec2019
+from aoc import dec2015, dec2016, dec2017, dec2018, dec2019, dec2020
 
 dec2015_solvers = [
     dec2015.Day01Solver, dec2015.Day02Solver, dec2015.Day03Solver, dec2015.Day04Solver, dec2015.Day05Solver,
@@ -23,11 +23,15 @@ dec2019_solvers = [
     dec2019.Day16Solver, dec2019.Day17Solver, dec2019.Day18Solver, dec2019.Day19Solver, dec2019.Day20Solver,
     dec2019.Day21Solver, dec2019.Day22Solver, dec2019.Day23Solver, dec2019.Day24Solver, dec2019.Day25Solver,
 ]
+dec2020_solvers = [
+    dec2020.Day01Solver,
+]
 
 all_solvers = []
 all_solvers.extend(dec2015_solvers)
 all_solvers.extend(dec2018_solvers)
 all_solvers.extend(dec2019_solvers)
+all_solvers.extend(dec2020_solvers)
 
 # Slow Days (>5000 ms)
 #   2015

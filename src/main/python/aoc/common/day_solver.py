@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractproperty
+from abc import ABCMeta, abstractmethod, abstractproperty
 from time import time
 import os
 
@@ -14,11 +14,13 @@ class DaySolver(object):
     def solve_puzzles(self):
         return self.solve_puzzle_one(), self.solve_puzzle_two()
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def year(self):
         pass
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def day(self):
         pass
 
