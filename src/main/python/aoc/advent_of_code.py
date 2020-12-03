@@ -24,11 +24,13 @@ dec2019_solvers = [
     dec2019.Day21Solver, dec2019.Day22Solver, dec2019.Day23Solver, dec2019.Day24Solver, dec2019.Day25Solver,
 ]
 dec2020_solvers = [
-    dec2020.Day01Solver, dec2020.Day02Solver,
+    dec2020.Day01Solver, dec2020.Day02Solver, dec2020.Day03Solver,
 ]
 
 all_solvers = []
 all_solvers.extend(dec2015_solvers)
+all_solvers.extend(dec2016_solvers)
+all_solvers.extend(dec2017_solvers)
 all_solvers.extend(dec2018_solvers)
 all_solvers.extend(dec2019_solvers)
 all_solvers.extend(dec2020_solvers)
