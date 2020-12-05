@@ -4,6 +4,8 @@ import os
 
 SLOW_ELAPSED_THRESHOLD_MS = 5000
 
+RESULT_FORMAT = '{} Day {:2d}-{}: {}'
+
 
 class DaySolver(object):
     __metaclass__ = ABCMeta
@@ -30,17 +32,22 @@ class DaySolver(object):
     def solve_puzzle_two(self):
         return 'TODO'
 
-    def print_results(self):
-        start_time = self._get_current_time()
-        ans_one, ans_two = self.solve_puzzles()
-        elapsed_time = self._get_current_time() - start_time
+    def print_results(self, enable_timer=True):
+        if enable_timer:
+            start_time = self._get_current_time()
+            ans_one, ans_two = self.solve_puzzles()
+            elapsed_time = self._get_current_time() - start_time
 
-        print('{} Day {:2d}-{}: {}'.format(self.year, self.day, 1, ans_one))
-        print('{} Day {:2d}-{}: {}'.format(self.year, self.day, 2, ans_two))
-        print('{}Elapsed Time: {} ms\n'.format(
-            '*** ' if elapsed_time >= SLOW_ELAPSED_THRESHOLD_MS else '',
-            elapsed_time,
-        ))
+            print(RESULT_FORMAT.format(self.year, self.day, 1, ans_one))
+            print(RESULT_FORMAT.format(self.year, self.day, 2, ans_two))
+            print('{}Elapsed Time: {} ms\n'.format(
+                '*** ' if elapsed_time >= SLOW_ELAPSED_THRESHOLD_MS else '',
+                elapsed_time,
+            ))
+        else:
+            ans_one, ans_two = self.solve_puzzles()
+            print(RESULT_FORMAT.format(self.year, self.day, 1, ans_one))
+            print(RESULT_FORMAT.format(self.year, self.day, 2, ans_two))
 
     def _get_current_time(self):
         return int(time() * 1000.0)
