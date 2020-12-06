@@ -25,6 +25,7 @@ dec2019_solvers = [
 ]
 dec2020_solvers = [
     dec2020.Day01Solver, dec2020.Day02Solver, dec2020.Day03Solver, dec2020.Day04Solver, dec2020.Day05Solver,
+    dec2020.Day06Solver,
 ]
 
 all_solvers = []
