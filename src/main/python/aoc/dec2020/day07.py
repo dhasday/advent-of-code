@@ -14,27 +14,23 @@ class Day07Solver(DaySolver):
     year = 2020
     day = 7
 
-    def solve_puzzle_one(self):
+    def solve_puzzles(self):
         lines = self.load_all_input_lines()
 
-        bags = defaultdict(lambda: set())
+        containing_bags = defaultdict(lambda: set())
+        bag_contents = {}
+
         for line in lines:
             outer, inner = self._parse_line(line)
+            bag_contents[outer] = inner
             for color in inner:
-                bags[color].add(outer)
+                containing_bags[color].add(outer)
 
-        return self._count_containing_colors(bags, TARGET_COLOR)
-
-    def solve_puzzle_two(self):
-        lines = self.load_all_input_lines()
-
-        bags = {}
-        for line in lines:
-            outer, inner = self._parse_line(line)
-            bags[outer] = inner
-
+        ans_one = self._count_containing_colors(containing_bags, TARGET_COLOR)
         # Remove one since we don't want to count the outer bag
-        return self._count_total_contained_bags(bags, TARGET_COLOR) - 1
+        ans_two = self._count_total_contained_bags(bag_contents, TARGET_COLOR) - 1
+
+        return ans_one, ans_two
 
     def _parse_line(self, line):
         result = INPUT_REGEX.match(line)
