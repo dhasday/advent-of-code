@@ -32,11 +32,11 @@ dec2020_solvers = [
 ]
 
 all_solvers = []
-# all_solvers.extend(dec2015_solvers)
-# all_solvers.extend(dec2016_solvers)
-# all_solvers.extend(dec2017_solvers)
-# all_solvers.extend(dec2018_solvers)
-# all_solvers.extend(dec2019_solvers)
+all_solvers.extend(dec2015_solvers)
+all_solvers.extend(dec2016_solvers)
+all_solvers.extend(dec2017_solvers)
+all_solvers.extend(dec2018_solvers)
+all_solvers.extend(dec2019_solvers)
 all_solvers.extend(dec2020_solvers)
 
 # Slow Days (>5000 ms)
@@ -64,7 +64,7 @@ all_solvers.extend(dec2020_solvers)
 #       Day 19  ~  12500 ms
 #       Day 21  ~  11900 ms
 #   2020
-#       Day 11  ~   7500 ms
+#       Day 11  ~   5900 ms
 
 for solver in all_solvers:
     solver().print_results()

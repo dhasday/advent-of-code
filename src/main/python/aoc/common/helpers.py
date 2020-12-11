@@ -15,3 +15,14 @@ VERTICAL_FLIPPED_DIRECTIONS = [
     (-1, 0),  # Left
     (0, -1),  # Up
 ]
+
+STANDARD_DIRECTIONAL_OFFSETS = [
+    (-1, -1),
+    (-1, 0),
+    (-1, 1),
+    (0, -1),
+    (0, 1),
+    (1, -1),
+    (1, 0),
+    (1, 1),
+]
