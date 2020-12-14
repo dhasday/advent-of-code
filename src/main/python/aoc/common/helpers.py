@@ -26,3 +26,27 @@ STANDARD_DIRECTIONAL_OFFSETS = [
     (1, 0),
     (1, 1),
 ]
+
+
+def decimal_to_binary(value, min_length=None):
+    result = ''
+
+    cur_value = value
+    while cur_value > 0:
+        result = str(cur_value % 2) + result
+        cur_value //= 2
+
+    if min_length:
+        result = result.zfill(min_length)
+
+    return result
+
+
+def binary_to_decimal(value):
+    cur_val = 0
+    cur_mult = 1
+    for i in value[::-1]:
+        if i == '1':
+            cur_val += cur_mult
+        cur_mult *= 2
+    return cur_val
