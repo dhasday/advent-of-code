@@ -1,10 +1,4 @@
-import re
-from collections import defaultdict
-
-from aoc.common import helpers
 from aoc.common.day_solver import DaySolver
-
-INPUT_REGEX = re.compile(r'')
 
 
 class Day15Solver(DaySolver):
@@ -15,7 +9,7 @@ class Day15Solver(DaySolver):
         line = self.load_only_input_line()
         numbers = [int(n) for n in line.split(',')]
 
-        ans_one = self._run_n_times(numbers, 2000)
+        ans_one = self._run_n_times(numbers, 2020)
         ans_two = self._run_n_times(numbers, 30000000)
 
         return ans_one, ans_two
