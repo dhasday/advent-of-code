@@ -9,4 +9,4 @@ Year | Link | Java | Python
 2017 | https://adventofcode.com/2017 | Day 25 | -
 2018 | https://adventofcode.com/2018 | - | Day 25
 2019 | https://adventofcode.com/2019 | - | Day 25
-2020 | https://adventofcode.com/2020 | - | Day 14
+2020 | https://adventofcode.com/2020 | - | Day 15

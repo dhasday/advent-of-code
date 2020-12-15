@@ -27,7 +27,7 @@ dec2020_solvers = [
     dec2020.Day01Solver, dec2020.Day02Solver, dec2020.Day03Solver, dec2020.Day04Solver, dec2020.Day05Solver,
     dec2020.Day06Solver, dec2020.Day07Solver, dec2020.Day08Solver, dec2020.Day09Solver, dec2020.Day10Solver,
     dec2020.Day11Solver, dec2020.Day12Solver, dec2020.Day13Solver, dec2020.Day14Solver, dec2020.Day15Solver,
-    # dec2020.Day16Solver,
+    dec2020.Day16Solver,
     # dec2020.Day17Solver,
     # dec2020.Day18Solver,
     # dec2020.Day19Solver,
@@ -73,6 +73,7 @@ all_solvers.extend(dec2020_solvers)
 #       Day 21  ~  11900 ms
 #   2020
 #       Day 11  ~   5900 ms
+#       Day 15  ~  14000 ms
 
 for solver in all_solvers:
     solver().print_results()
