@@ -4,52 +4,23 @@ from collections import defaultdict
 
 from aoc.common.day_solver import DaySolver
 
-
 TILE_SIZE = 10
 GRID_SIZE = 12
-
-# Rotate
-# XXXX. > X.X.X > ....X > ..X..     | XXXX. ..X.. ....X X.X.X
-# .XXX. > .X.XX > .X.X. > XX.X.     | X.X.X XXXX. ..X.. ....X
-# X...X > ...XX > X...X > XX...     | ....X X.X.X XXXX. ..X..
-# .X.X. > .X.XX > .XXX. > XX.X.     | ..X.. ....X X.X.X XXXX.
-# X.... > ..X.. > .XXXX > X.X.X
-
-# Fliped
-# X.... > X.X.X > .XXXX > ..X..     | X.... ..X.. .XXXX X.X.X
-# .X.X. > XX.X. > .XXX. > .X.XX     | X.X.X X.... ..X.. .XXXX
-# X...X > XX... > X...X > ...XX     | .XXXX X.X.X X.... ..X..
-# .XXX. > XX.X. > .X.X. > .X.XX     | ..X.. .XXXX X.X.X X....
-# XXXX. > ..X.. > ....X > X.X.X
-
-# 2657
-#   #.##..##..
-#   ....#.#...
-#   #...#.....
-#   ..##..####
-#   .#.......#
-#   ##......##
-#   ..#.#.#..#
-#   ...#.....#
-#   #..#......
-#   #.##..#...
-
-# 1609
-#   ##..##.##.
-#   .#.#...##.
-#   #........#
-#   #....#...#
-#   .#......##
-#   ..#......#
-#   #...#.....
-#   .#........
-#   ...#.....#
-#   ..#.###...
+MONSTER_LENGTH = 20
 
 SIDE_TOP = 0
 SIDE_RIGHT = 1
 SIDE_BOTTOM = 2
 SIDE_LEFT = 3
+
+
+def rotate(image):
+    rotated_values = list(zip(*image[::-1]))
+    return [''.join(i) for i in rotated_values]
+
+
+def flip(image):
+    return [i[::-1] for i in image]
 
 
 class Day20Solver(DaySolver):
@@ -96,10 +67,10 @@ class Day20Solver(DaySolver):
             raise Exception('unknown side')
 
         def rotate(self):
-            return self.__class__(self.id, list(zip(*self.lines[::-1])))
+            return self.__class__(self.id, rotate(self.lines))
 
         def flip(self):
-            return self.__class__(self.id, [i[::-1] for i in self.lines])
+            return self.__class__(self.id, flip(self.lines))
 
         def __hash__(self):
             return self.id
@@ -115,16 +86,12 @@ class Day20Solver(DaySolver):
     def solve_puzzle_two(self):
         all_tiles = self._load_tiles()
 
-        from ipdb import set_trace as bp
-        bp()
         start_tile = next(iter(all_tiles.values()))
         grid = self._find_grid(all_tiles, start_tile)
+        image = self._expand_image(grid)
 
-        # TODO: Convert grid into resulting picture
-        #       Scan for shape and count others in all rotations and flipped
-        #       Return count others when most found shape
-
-        return 'TODO'
+        num_monsters = self._find_max_monsters(image)
+        return sum(line.count('#') for line in image) - (num_monsters * 15)
 
     def _load_tiles(self):
         all_tiles = {}
@@ -138,7 +105,7 @@ class Day20Solver(DaySolver):
                 all_tiles[cur_id] = self.Tile(cur_id, cur_tile)
                 cur_tile = []
             else:
-                cur_tile.append(line)
+                cur_tile.append(line.replace('.', ' '))
 
         if cur_tile:
             all_tiles[cur_id] = self.Tile(cur_id, cur_tile)
@@ -164,10 +131,6 @@ class Day20Solver(DaySolver):
         return corner_tiles
 
     def _find_grid(self, all_tiles, start_tile):
-        grid = {
-            (0, 0): start_tile,
-        }
-
         placed_tiles = {
             start_tile: (0, 0),
         }
@@ -175,6 +138,12 @@ class Day20Solver(DaySolver):
         to_check = set()
         to_check.add(start_tile)
 
+        adjacent_checks = [
+            (SIDE_TOP, SIDE_BOTTOM, 0, -1),
+            (SIDE_BOTTOM, SIDE_TOP, 0, 1),
+            (SIDE_LEFT, SIDE_RIGHT, -1, 0),
+            (SIDE_RIGHT, SIDE_LEFT, 1, 0),
+        ]
         while to_check:
             cur_tile = to_check.pop()
             cur_x, cur_y = placed_tiles.get(cur_tile)
@@ -183,32 +152,17 @@ class Day20Solver(DaySolver):
                 if next_tile in placed_tiles:
                     continue
 
-                if cur_tile.get_side(SIDE_TOP) in next_tile.edges:
-                    rotated_tile = self._fix_orientation(next_tile, SIDE_BOTTOM, cur_tile.get_side(SIDE_TOP))
-                    next_pos = cur_x, cur_y - 1
-                    grid[next_pos] = rotated_tile
-                    placed_tiles[rotated_tile] = next_pos
-                    to_check.add(rotated_tile)
-                elif cur_tile.get_side(SIDE_BOTTOM) in next_tile.edges:
-                    rotated_tile = self._fix_orientation(next_tile, SIDE_TOP, cur_tile.get_side(SIDE_BOTTOM))
-                    next_pos = cur_x, cur_y + 1
-                    grid[next_pos] = rotated_tile
-                    placed_tiles[rotated_tile] = next_pos
-                    to_check.add(rotated_tile)
-                elif cur_tile.get_side(SIDE_LEFT) in next_tile.edges:
-                    rotated_tile = self._fix_orientation(next_tile, SIDE_RIGHT, cur_tile.get_side(SIDE_LEFT))
-                    next_pos = cur_x - 1, cur_y
-                    grid[next_pos] = rotated_tile
-                    placed_tiles[rotated_tile] = next_pos
-                    to_check.add(rotated_tile)
-                elif cur_tile.get_side(SIDE_RIGHT) in next_tile.edges:
-                    rotated_tile = self._fix_orientation(next_tile, SIDE_LEFT, cur_tile.get_side(SIDE_RIGHT))
-                    next_pos = cur_x + 1, cur_y
-                    grid[next_pos] = rotated_tile
-                    placed_tiles[rotated_tile] = next_pos
-                    to_check.add(rotated_tile)
+                for cur_side, next_side, d_x, d_y in adjacent_checks:
+                    expected_side = cur_tile.get_side(cur_side)
 
-        return grid
+                    if expected_side in next_tile.edges:
+                        rotated_tile = self._fix_orientation(next_tile, next_side, expected_side)
+                        next_pos = cur_x + d_x, cur_y + d_y
+                        placed_tiles[rotated_tile] = next_pos
+                        to_check.add(rotated_tile)
+                        break
+
+        return {v: k for k, v in placed_tiles.items()}
 
     def _fix_orientation(self, tile, side, expected_value):
         if tile.get_side(side) == expected_value:
@@ -229,3 +183,60 @@ class Day20Solver(DaySolver):
                 return tile
 
         raise Exception('No matching orientation found')
+
+    def _expand_image(self, grid):
+        min_x = min(p[0] for p in grid.keys())
+        max_x = max(p[0] for p in grid.keys())
+
+        min_y = min(p[1] for p in grid.keys())
+        max_y = max(p[1] for p in grid.keys())
+
+        image = ['' for _ in range((TILE_SIZE - 2) * GRID_SIZE)]
+        cur_row = 0
+        for y in range(min_y, max_y + 1):
+            for tile_line in range(1, TILE_SIZE - 1):
+                for x in range(min_x, max_x + 1):
+                    image[cur_row] += grid[x, y].lines[tile_line][1:TILE_SIZE - 1]
+
+                cur_row += 1
+
+        return image
+
+    def _find_max_monsters(self, image):
+        ops = [rotate, rotate, rotate, flip, rotate, rotate, rotate]
+
+        max_monsters = self._find_monsters(image)
+        for op in ops:
+            image = op(image)
+            monsters = self._find_monsters(image)
+            max_monsters = max(max_monsters, monsters)
+        return max_monsters
+
+    def _find_monsters(self, image):
+        count = 0
+        for y in range(0, len(image) - 3):
+            for x in range(0, len(image) - MONSTER_LENGTH):
+                if self._does_shape_match(
+                            image[y][x:x+MONSTER_LENGTH],
+                            image[y+1][x:x+MONSTER_LENGTH],
+                            image[y + 2][x:x + MONSTER_LENGTH],
+                        ):
+                    count += 1
+
+        return count
+
+    def _does_shape_match(self, *lines):
+        # Sea Monster
+        # |                  # |
+        # |#    ##    ##    ###|
+        # | #  #  #  #  #  #   |
+        monster_shape = [
+            (0, 18),
+            (1, 0), (1, 5), (1, 6), (1, 11), (1, 12), (1, 17), (1, 18), (1, 19),
+            (2, 1), (2, 4), (2, 7), (2, 10), (2, 13), (2, 16),
+        ]
+
+        for x, y in monster_shape:
+            if lines[x][y] != '#':
+                return False
+        return True
