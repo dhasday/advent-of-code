@@ -28,6 +28,16 @@ STANDARD_DIRECTIONAL_OFFSETS = [
 ]
 
 
+HEX_DIRECTION_OFFSETS = {
+    'e': lambda p: (p[0] - 1, p[1] + 1, p[2]),
+    'se': lambda p: (p[0], p[1] + 1, p[2] - 1),
+    'sw': lambda p: (p[0] + 1, p[1], p[2] - 1),
+    'w': lambda p: (p[0] + 1, p[1] - 1, p[2]),
+    'nw': lambda p: (p[0], p[1] - 1, p[2] + 1),
+    'ne': lambda p: (p[0] - 1, p[1], p[2] + 1),
+}
+
+
 def decimal_to_binary(value, min_length=None):
     result = ''
 
