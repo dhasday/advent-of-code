@@ -10,15 +10,16 @@ class Day25Solver(DaySolver):
     year = 2018
     day = 25
 
-    def solve_puzzles(self):
+    def solve_puzzle_one(self):
         points = [tuple(map(int, INPUT_REGEX.findall(l))) for l in self.load_all_input_lines()]
 
         neighbors = self._find_neighbors(points)
         constellations = self._build_constellations(neighbors)
 
-        ans_one = len(constellations)
-        ans_two = 'N/A'
-        return ans_one, ans_two
+        return len(constellations)
+
+    def solve_puzzle_two(self):
+        return 'ALL DONE!'
 
     def _find_neighbors(self, points):
         neighbors = {p: set() for p in points}
