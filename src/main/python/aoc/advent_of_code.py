@@ -1,4 +1,4 @@
-from aoc import dec2015, dec2016, dec2017, dec2018, dec2019, dec2020
+from aoc import dec2015, dec2016, dec2017, dec2018, dec2019, dec2020, dec2021
 
 dec2015_solvers = [
     dec2015.Day01Solver, dec2015.Day02Solver, dec2015.Day03Solver, dec2015.Day04Solver, dec2015.Day05Solver,
@@ -30,6 +30,13 @@ dec2020_solvers = [
     dec2020.Day16Solver, dec2020.Day17Solver, dec2020.Day18Solver, dec2020.Day19Solver, dec2020.Day20Solver,
     dec2020.Day21Solver, dec2020.Day22Solver, dec2020.Day23Solver, dec2020.Day24Solver, dec2020.Day25Solver,
 ]
+dec2021_solvers = [
+    dec2021.Day01Solver,  # dec2021.Day02Solver,  # dec2021.Day03Solver,  # dec2021.Day04Solver,  # dec2021.Day05Solver,
+    # dec2021.Day06Solver,  # dec2021.Day07Solver,  # dec2021.Day08Solver,  # dec2021.Day09Solver,  # dec2021.Day10Solver,
+    # dec2021.Day11Solver,  # dec2021.Day12Solver,  # dec2021.Day13Solver,  # dec2021.Day14Solver,  # dec2021.Day15Solver,
+    # dec2021.Day16Solver,  # dec2021.Day17Solver,  # dec2021.Day18Solver,  # dec2021.Day19Solver,  # dec2021.Day20Solver,
+    # dec2021.Day21Solver,  # dec2021.Day22Solver,  # dec2021.Day23Solver,  # dec2021.Day24Solver,  # dec2021.Day25Solver,
+]
 
 all_solvers = []
 all_solvers.extend(dec2015_solvers)
@@ -38,6 +45,7 @@ all_solvers.extend(dec2017_solvers)
 all_solvers.extend(dec2018_solvers)
 all_solvers.extend(dec2019_solvers)
 all_solvers.extend(dec2020_solvers)
+all_solvers.extend(dec2021_solvers)
 
 # Slow Days (>5000 ms)
 #   2015
@@ -68,6 +76,7 @@ all_solvers.extend(dec2020_solvers)
 #       Day 15  ~  14000 ms
 #       Day 22  ~  12000 ms
 #       Day 23  ~  10000 ms
+#   2021
 
 for solver in all_solvers:
     solver().print_results()
