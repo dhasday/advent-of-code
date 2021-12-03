@@ -38,16 +38,19 @@ class DaySolver(object):
             ans_one, ans_two = self.solve_puzzles()
             elapsed_time = self._get_current_time() - start_time
 
-            print(RESULT_FORMAT.format(self.year, self.day, 1, ans_one))
-            print(RESULT_FORMAT.format(self.year, self.day, 2, ans_two))
+            self._print_answer_part(1, ans_one)
+            self._print_answer_part(2, ans_two)
             print('{}Elapsed Time: {} ms\n'.format(
                 '*** ' if elapsed_time >= SLOW_ELAPSED_THRESHOLD_MS else '',
                 elapsed_time,
             ))
         else:
             ans_one, ans_two = self.solve_puzzles()
-            print(RESULT_FORMAT.format(self.year, self.day, 1, ans_one))
-            print(RESULT_FORMAT.format(self.year, self.day, 2, ans_two))
+            self._print_answer_part(1, ans_one)
+            self._print_answer_part(2, ans_two)
+
+    def _print_answer_part(self, part_num, ans):
+        print(RESULT_FORMAT.format(self.year, self.day, part_num, ans))
 
     def _get_current_time(self):
         return int(time() * 1000.0)
