@@ -53,10 +53,4 @@ def decimal_to_binary(value, min_length=None):
 
 
 def binary_to_decimal(value):
-    cur_val = 0
-    cur_mult = 1
-    for i in value[::-1]:
-        if i == '1':
-            cur_val += cur_mult
-        cur_mult *= 2
-    return cur_val
+    return int(value, 2)
