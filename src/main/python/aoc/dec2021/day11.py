@@ -54,6 +54,3 @@ class Day11Solver(DaySolver):
                         to_flash.add(adj_pos)
 
         return grid, len(seen)
-
-
-Day11Solver().print_results()
