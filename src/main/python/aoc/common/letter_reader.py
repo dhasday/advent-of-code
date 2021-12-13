@@ -19,6 +19,17 @@ LETTER_MAPS = {
 }
 
 
+def read_output_from_points(points, size_x, size_y):
+    lines = []
+    for y in range(size_y):
+        line = ''
+        for x in range(size_x):
+            line += '0' if (x, y) in points else ' '
+        lines.append(line)
+
+    return read_output(lines)
+
+
 def read_output(lines):
     chars = []
     for line in lines:

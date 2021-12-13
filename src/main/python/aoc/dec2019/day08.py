@@ -1,5 +1,5 @@
 from aoc.common.day_solver import DaySolver
-from aoc.dec2019.common.letter_reader import read_output
+from aoc.common.letter_reader import read_output
 
 LAYER_WIDTH = 25
 LAYER_HEIGHT = 6
@@ -38,15 +38,6 @@ class Day08Solver(DaySolver):
 
         lines = [''.join(l) for l in self.split_layers(output, 25)]
         return read_output(lines)
-        # print('')
-        # for row in self.split_layers(output, 25):
-        #     output_str = ''
-        #     for idx, v in enumerate(row):
-        #         output_str += v
-        #     print(output_str)
-        # print('')
-        #
-        # return 'Read Output'
 
     def split_layers(self, lst, n):
         for i in range(0, len(lst), n):
