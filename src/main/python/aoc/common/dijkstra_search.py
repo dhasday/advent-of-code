@@ -1,6 +1,15 @@
 import heapq
 
 
+def _cmp(v1, v2):
+    if v1 < v2:
+        return -1
+    elif v1 > v2:
+        return 1
+    else:
+        return 0
+
+
 class DijkstraSearch(object):
 
     class DijkstraNode(object):
@@ -10,11 +19,11 @@ class DijkstraSearch(object):
             self.previous_node = previous_node
 
         def __cmp__(self, other):
-            cmp_distance = cmp(self.distance, other.distance)
+            cmp_distance = _cmp(self.distance, other.distance)
             if cmp_distance:
                 return cmp_distance
             else:
-                return cmp(self.value, other.value)
+                return _cmp(self.value, other.value)
 
         def set_distance(self, distance, previous_node):
             self.distance = distance
