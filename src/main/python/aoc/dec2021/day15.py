@@ -1,4 +1,3 @@
-from aoc.common.a_star_search import AStarSearch
 from aoc.common.day_solver import DaySolver
 from aoc.common.dijkstra_search import DijkstraSearch
 from aoc.common.helpers import STANDARD_DIRECTIONS
@@ -19,8 +18,11 @@ class Day15Solver(DaySolver):
             for x in range(size_x):
                 risk_levels[x, y] = int(lines[y][x])
 
+        start = 0, 0
+        end = size_x - 1, size_y - 1
+
         search = DijkstraSearch(self._build_find_adj_nodes(risk_levels))
-        _, total = search.find_shortest_path((0, 0), (size_x - 1, size_y - 1))
+        _, total = search.find_shortest_path(start, end)
         return total
 
     def solve_puzzle_two(self):

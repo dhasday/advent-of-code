@@ -54,3 +54,11 @@ def decimal_to_binary(value, min_length=None):
 
 def binary_to_decimal(value):
     return int(value, 2)
+
+
+def hex_to_binary(value):
+    out = str(bin(int(value, 16)))[2:]
+    missing = len(out) % 8
+    if missing:
+        out = '0' * (8-missing) + out
+    return out
