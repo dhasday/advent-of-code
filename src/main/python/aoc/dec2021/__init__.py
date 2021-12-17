@@ -17,7 +17,7 @@ from .day14 import Day14Solver
 from .day15 import Day15Solver
 
 from .day16 import Day16Solver
-# from .day17 import Day17Solver
+from .day17 import Day17Solver
 # from .day18 import Day18Solver
 # from .day19 import Day19Solver
 # from .day20 import Day20Solver
