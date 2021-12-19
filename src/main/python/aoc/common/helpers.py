@@ -27,7 +27,6 @@ STANDARD_DIRECTIONAL_OFFSETS = [
     (1, 1),
 ]
 
-
 HEX_DIRECTION_OFFSETS = {
     'e': lambda p: (p[0] - 1, p[1] + 1, p[2]),
     'se': lambda p: (p[0], p[1] + 1, p[2] - 1),
