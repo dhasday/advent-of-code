@@ -35,7 +35,7 @@ dec2021_solvers = [
     dec2021.Day06Solver, dec2021.Day07Solver, dec2021.Day08Solver, dec2021.Day09Solver, dec2021.Day10Solver,
     dec2021.Day11Solver, dec2021.Day12Solver, dec2021.Day13Solver, dec2021.Day14Solver, dec2021.Day15Solver,
     dec2021.Day16Solver, dec2021.Day17Solver, dec2021.Day18Solver, dec2021.Day19Solver, dec2021.Day20Solver,
-    dec2021.Day21Solver,  # dec2021.Day22Solver,  # dec2021.Day23Solver,  # dec2021.Day24Solver,  # dec2021.Day25Solver,
+    dec2021.Day21Solver, dec2021.Day22Solver,  # dec2021.Day23Solver,  # dec2021.Day24Solver,  # dec2021.Day25Solver,
 ]
 
 all_solvers = []
@@ -77,6 +77,8 @@ all_solvers.extend(dec2021_solvers)
 #       Day 22  ~  12000 ms
 #       Day 23  ~  10000 ms
 #   2021
+#       Day 19  ~   7000 ms
+
 
 for solver in all_solvers:
     solver().print_results()
