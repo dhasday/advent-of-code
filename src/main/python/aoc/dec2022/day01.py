@@ -21,6 +21,3 @@ class Day01Solver(DaySolver):
         all_totals = sorted(all_totals, reverse=True)
 
         return all_totals[0], (all_totals[0] + all_totals[1] + all_totals[2])
-
-
-Day01Solver().print_results()

@@ -13,15 +13,20 @@ def load_solvers_for_year(year_package):
     return solvers
 
 
+years = [
+    # dec2015,
+    # dec2016,
+    # dec2017,
+    # dec2018,
+    # dec2019,
+    # dec2020,
+    # dec2021,
+    dec2022,
+]
+
 all_solvers = []
-# all_solvers.extend(load_solvers_for_year(dec2015))
-# all_solvers.extend(load_solvers_for_year(dec2016))
-# all_solvers.extend(load_solvers_for_year(dec2017))
-# all_solvers.extend(load_solvers_for_year(dec2018))
-# all_solvers.extend(load_solvers_for_year(dec2019))
-# all_solvers.extend(load_solvers_for_year(dec2020))
-# all_solvers.extend(load_solvers_for_year(dec2021))
-all_solvers.extend(load_solvers_for_year(dec2022))
+for year in years:
+    all_solvers.extend(load_solvers_for_year(year))
 
 # Slow Days (>5000 ms)
 #   2015
