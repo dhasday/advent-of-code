@@ -11,3 +11,4 @@ Year | Link | Java | Python
 2019 | https://adventofcode.com/2019 | - | Day 25
 2020 | https://adventofcode.com/2020 | - | Day 25
 2021 | https://adventofcode.com/2021 | - | Day 25 (except 23)
+2022 | https://adventofcode.com/2022 | - | -

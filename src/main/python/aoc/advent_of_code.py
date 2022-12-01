@@ -1,51 +1,27 @@
-from aoc import dec2015, dec2016, dec2017, dec2018, dec2019, dec2020, dec2021
+from aoc import (
+    dec2015, dec2016, dec2017, dec2018, dec2019,
+    dec2020, dec2021, dec2022,
+)
 
-dec2015_solvers = [
-    dec2015.Day01Solver, dec2015.Day02Solver, dec2015.Day03Solver, dec2015.Day04Solver, dec2015.Day05Solver,
-    dec2015.Day06Solver, dec2015.Day07Solver, dec2015.Day08Solver, dec2015.Day09Solver, dec2015.Day10Solver,
-    dec2015.Day11Solver,
-]
-dec2016_solvers = [
-]
-dec2017_solvers = [
-]
-dec2018_solvers = [
-    dec2018.Day01Solver, dec2018.Day02Solver, dec2018.Day03Solver, dec2018.Day04Solver, dec2018.Day05Solver,
-    dec2018.Day06Solver, dec2018.Day07Solver, dec2018.Day08Solver, dec2018.Day09Solver, dec2018.Day10Solver,
-    dec2018.Day11Solver, dec2018.Day12Solver, dec2018.Day13Solver, dec2018.Day14Solver, dec2018.Day15Solver,
-    dec2018.Day16Solver, dec2018.Day17Solver, dec2018.Day18Solver, dec2018.Day19Solver, dec2018.Day20Solver,
-    dec2018.Day21Solver, dec2018.Day22Solver, dec2018.Day23Solver, dec2018.Day24Solver, dec2018.Day25Solver,
-]
-dec2019_solvers = [
-    dec2019.Day01Solver, dec2019.Day02Solver, dec2019.Day03Solver, dec2019.Day04Solver, dec2019.Day05Solver,
-    dec2019.Day06Solver, dec2019.Day07Solver, dec2019.Day08Solver, dec2019.Day09Solver, dec2019.Day10Solver,
-    dec2019.Day11Solver, dec2019.Day12Solver, dec2019.Day13Solver, dec2019.Day14Solver, dec2019.Day15Solver,
-    dec2019.Day16Solver, dec2019.Day17Solver, dec2019.Day18Solver, dec2019.Day19Solver, dec2019.Day20Solver,
-    dec2019.Day21Solver, dec2019.Day22Solver, dec2019.Day23Solver, dec2019.Day24Solver, dec2019.Day25Solver,
-]
-dec2020_solvers = [
-    dec2020.Day01Solver, dec2020.Day02Solver, dec2020.Day03Solver, dec2020.Day04Solver, dec2020.Day05Solver,
-    dec2020.Day06Solver, dec2020.Day07Solver, dec2020.Day08Solver, dec2020.Day09Solver, dec2020.Day10Solver,
-    dec2020.Day11Solver, dec2020.Day12Solver, dec2020.Day13Solver, dec2020.Day14Solver, dec2020.Day15Solver,
-    dec2020.Day16Solver, dec2020.Day17Solver, dec2020.Day18Solver, dec2020.Day19Solver, dec2020.Day20Solver,
-    dec2020.Day21Solver, dec2020.Day22Solver, dec2020.Day23Solver, dec2020.Day24Solver, dec2020.Day25Solver,
-]
-dec2021_solvers = [
-    dec2021.Day01Solver, dec2021.Day02Solver, dec2021.Day03Solver, dec2021.Day04Solver, dec2021.Day05Solver,
-    dec2021.Day06Solver, dec2021.Day07Solver, dec2021.Day08Solver, dec2021.Day09Solver, dec2021.Day10Solver,
-    dec2021.Day11Solver, dec2021.Day12Solver, dec2021.Day13Solver, dec2021.Day14Solver, dec2021.Day15Solver,
-    dec2021.Day16Solver, dec2021.Day17Solver, dec2021.Day18Solver, dec2021.Day19Solver, dec2021.Day20Solver,
-    dec2021.Day21Solver, dec2021.Day22Solver, dec2021.Day23Solver, dec2021.Day24Solver, dec2021.Day25Solver,
-]
+
+def load_solvers_for_year(year_package):
+    solvers = []
+    for i in range(1, 26):
+        solver_name = 'Day{:02d}Solver'.format(i)
+        if hasattr(year_package, solver_name):
+            solvers.append(getattr(year_package, solver_name))
+    return solvers
+
 
 all_solvers = []
-all_solvers.extend(dec2015_solvers)
-all_solvers.extend(dec2016_solvers)
-all_solvers.extend(dec2017_solvers)
-all_solvers.extend(dec2018_solvers)
-all_solvers.extend(dec2019_solvers)
-all_solvers.extend(dec2020_solvers)
-all_solvers.extend(dec2021_solvers)
+# all_solvers.extend(load_solvers_for_year(dec2015))
+# all_solvers.extend(load_solvers_for_year(dec2016))
+# all_solvers.extend(load_solvers_for_year(dec2017))
+# all_solvers.extend(load_solvers_for_year(dec2018))
+# all_solvers.extend(load_solvers_for_year(dec2019))
+# all_solvers.extend(load_solvers_for_year(dec2020))
+# all_solvers.extend(load_solvers_for_year(dec2021))
+all_solvers.extend(load_solvers_for_year(dec2022))
 
 # Slow Days (>5000 ms)
 #   2015
@@ -79,6 +55,7 @@ all_solvers.extend(dec2021_solvers)
 #   2021
 #       Day 19  ~   7000 ms
 #       Day 23  ~ ?????? ms
+#   2022
 
 
 for solver in all_solvers:

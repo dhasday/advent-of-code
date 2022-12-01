@@ -218,6 +218,3 @@ class Day23Solver(DaySolver):
             next_holes[col_2][idx_2] = cur_top[idx_1] if col_1 == 'T' else cur_holes[col_1][idx_1]
 
         return self._stringify_state(next_top, next_holes)
-
-
-Day23Solver().print_results()

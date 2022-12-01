@@ -1,6 +1,5 @@
 import re
 from collections import defaultdict
-from six.moves import range
 
 from aoc.common.day_solver import DaySolver
 
