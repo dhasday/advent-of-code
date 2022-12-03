@@ -14,6 +14,7 @@ class DaySolver(object):
         super(DaySolver, self).__init__()
 
     def solve_puzzles(self):
+        self.setup()
         return self.solve_puzzle_one(), self.solve_puzzle_two()
 
     @property
@@ -24,6 +25,9 @@ class DaySolver(object):
     @property
     @abstractmethod
     def day(self):
+        pass
+
+    def setup(self):
         pass
 
     def solve_puzzle_one(self):
