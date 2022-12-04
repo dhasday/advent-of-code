@@ -57,7 +57,7 @@ class Day{day:02d}Solver(DaySolver):
 Day{day:02d}Solver().print_results()
     """
 
-    filename = _build_filename(f'dec{year}/day{day:02d}.py')
+    filename = _build_filename(f'src/main/python/aoc/dec{year}/day{day:02d}.py')
     if exists(filename):
         if force:
             print('Overwriting existing solver class because --force was specified')
@@ -70,7 +70,7 @@ Day{day:02d}Solver().print_results()
 
 
 def _create_input_file(year, day, force):
-    filename = _build_filename(f'../../resources/dec{year}/{day}-input')
+    filename = _build_filename(f'src/main/resources/dec{year}/{day}-input')
 
     if exists(filename):
         if force:
@@ -84,7 +84,7 @@ def _create_input_file(year, day, force):
 
 
 def _uncomment_class_in_init(year, day):
-    filename = _build_filename(f'dec{year}/__init__.py')
+    filename = _build_filename(f'src/main/python/aoc/dec{year}/__init__.py')
 
     with open(filename) as f:
         all_lines = [line for line in f]
