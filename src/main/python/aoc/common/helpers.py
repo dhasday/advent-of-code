@@ -1,5 +1,6 @@
 import re
 
+ALL_DIGITS_REGEX = re.compile(r'\d+')
 ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
 
 STANDARD_DIRECTIONS = [
