@@ -29,6 +29,3 @@ class Day04Solver(DaySolver):
                     p2_count += 1
 
         return p1_count, p2_count
-
-
-Day04Solver().print_results()
