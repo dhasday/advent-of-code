@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('year', type=int)
 parser.add_argument('day', type=int)
 parser.add_argument('--force', required=False, action='store_true', default=False)
+parser.add_argument('--skip', required=False, action='store_true', default=False)
 
 
 def run():
@@ -16,9 +17,17 @@ def run():
     year = parsed.year
     day = parsed.day
     force = parsed.force
+    skip = parsed.skip
 
-    _create_solver_file(year, day, force)
-    _create_input_file(year, day, force)
+    solver_file = _build_filename(f'src/main/python/aoc/dec{year}/day{day:02d}.py')
+    solver_contents = _get_solver_file_contents(year, day)
+    _create_file(solver_file, solver_contents, 'solver class', force, skip)
+
+    input_file = _build_filename(f'src/main/resources/dec{year}/{day}-input')
+    _create_file(input_file, '', 'input file', force, skip)
+
+    example_file = input_file + '-example'
+    _create_file(example_file, '', 'example input file', force, skip)
     _uncomment_class_in_init(year, day)
 
 
@@ -26,8 +35,8 @@ def _build_filename(path):
     return f'{os.path.dirname(__file__)}/{path}'
 
 
-def _create_solver_file(year, day, force):
-    contents = f"""from aoc.common.day_solver import DaySolver
+def _get_solver_file_contents(year, day):
+    return f"""from aoc.common.day_solver import DaySolver
 
 
 class Day{day:02d}Solver(DaySolver):
@@ -55,32 +64,21 @@ class Day{day:02d}Solver(DaySolver):
 
 
 Day{day:02d}Solver().print_results()
-    """
+"""
 
-    filename = _build_filename(f'src/main/python/aoc/dec{year}/day{day:02d}.py')
+
+def _create_file(filename, contents, display_name, force, skip):
     if exists(filename):
-        if force:
-            print('Overwriting existing solver class because --force was specified')
+        if skip:
+            print(f'Skipping existing {display_name} because --skip was specified')
+        elif force:
+            print(f'Overwriting existing {display_name} because --force was specified')
         else:
-            print('FAIL: Solver class already exists, re-run with --force to overwrite')
+            print(f'FAIL: {display_name} already exists, re-run with --force to overwrite')
             exit(1)
 
     with open(filename, 'w') as f:
         f.write(contents)
-
-
-def _create_input_file(year, day, force):
-    filename = _build_filename(f'src/main/resources/dec{year}/{day}-input')
-
-    if exists(filename):
-        if force:
-            print('Overwriting existing input file because --force was specified')
-        else:
-            print('FAIL: Input file already exists, re-run with --force to overwrite')
-            exit(1)
-
-    with open(filename, 'w'):
-        pass
 
 
 def _uncomment_class_in_init(year, day):
