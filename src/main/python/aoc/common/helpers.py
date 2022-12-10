@@ -62,3 +62,9 @@ def hex_to_binary(value):
     if missing:
         out = '0' * (8-missing) + out
     return out
+
+
+def split_layers(full_output, layer_size):
+    """Splits a single list into layers of the specified size"""
+    for i in range(0, len(full_output), layer_size):
+        yield full_output[i:i + layer_size]

@@ -1,3 +1,5 @@
+from aoc.common.helpers import split_layers
+
 LETTER_MAPS = {
     # TODO: D I M N O Q S T V W X
     #     2    3    4    5    6
@@ -34,10 +36,10 @@ def read_output(lines):
     chars = []
     for line in lines:
         if not chars:
-            for segment in _split_layers(line, 5):
+            for segment in split_layers(line, 5):
                 chars.append(segment)
         else:
-            for idx, segment in enumerate(_split_layers(line, 5)):
+            for idx, segment in enumerate(split_layers(line, 5)):
                 chars[idx] += segment.ljust(5, ' ')
 
     output = ''
@@ -45,8 +47,3 @@ def read_output(lines):
         letter = LETTER_MAPS.get(char)
         output += letter if letter else '?'
     return output
-
-
-def _split_layers(lst, n):
-    for i in range(0, len(lst), n):
-        yield lst[i:i + n]
