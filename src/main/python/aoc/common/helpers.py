@@ -1,3 +1,4 @@
+import math
 import re
 
 ALL_DIGITS_REGEX = re.compile(r'\d+')
@@ -68,3 +69,12 @@ def split_layers(full_output, layer_size):
     """Splits a single list into layers of the specified size"""
     for i in range(0, len(full_output), layer_size):
         yield full_output[i:i + layer_size]
+
+
+def lcm(values):
+    _lcm = values[0]
+    for v in values[1:]:
+        gcd = math.gcd(_lcm, v)
+        _lcm = abs(_lcm * v) // gcd
+
+    return _lcm
