@@ -59,5 +59,3 @@ class Day12Solver(DaySolver):
         part_2 = min(closed_set[p].distance for p in start_options if p in closed_set)
 
         return part_1, part_2
-
-Day12Solver().print_results()
