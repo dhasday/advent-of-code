@@ -50,6 +50,3 @@ class Day13Solver(DaySolver):
             if item_result != 0:
                 return item_result
         return len(a) - len(b)
-
-
-Day13Solver().print_results()
