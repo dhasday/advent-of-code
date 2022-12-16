@@ -6,141 +6,111 @@ from aoc.common.dijkstra_search import DijkstraSearch
 INPUT_REGEX = re.compile(r'Valve ([A-Z][A-Z]) has flow rate=(\d+); tunnels? leads? to valves? ([A-Z, ]+)')
 
 
+class Valve(object):
+    def __init__(self, name, rate, connections):
+        self.name = name
+        self.rate = rate
+        self.connections = connections
+        self.distances = None
+
+    def calc_distances(self, all_valves):
+        if self.distances is None:
+            def find_adj(n):
+                return [(all_valves[c], 1) for c in n.connections]
+
+            search = DijkstraSearch(find_adj)
+            results = search._execute_search(self)
+            self.distances = {}
+            for other_valve in all_valves.values():
+                if other_valve.name == self.name:
+                    continue
+
+                if other_valve.rate != 0:
+                    self.distances[other_valve] = results[other_valve].distance + 1
+
+        return self.distances
+
+    def total_flow(self, remaining_time):
+        return self.rate * remaining_time
+
+    def __eq__(self, other):
+        return self.name == other.name
+
+    def __hash__(self):
+        return hash(self.name)
+
+    def __lt__(self, other):
+        return self.name < other.name
+
+    def __repr__(self):
+        return f'Valve({self.name})'
+
+
 class Day16Solver(DaySolver):
     year = 2022
     day = 16
 
-    memo = None
+    flow_valves = None
 
     def setup(self):
-        # lines = self.load_all_input_lines(example=True)
         lines = self.load_all_input_lines()
 
-        self.connections = {}
-        self.flow_rates = {}
+        all_valves = {}
+        self.flow_valves = {}
         for line in lines:
             result = INPUT_REGEX.findall(line)
             valve = result[0][0]
             flow_rate = int(result[0][1])
-            cur_connections = result[0][2].split(', ')
+            connections = result[0][2].split(', ')
 
-            self.connections[valve] = cur_connections
-            if flow_rate != 0:
-                self.flow_rates[valve] = flow_rate
+            all_valves[valve] = Valve(valve, flow_rate, connections)
+            if flow_rate > 0 or valve == 'AA':
+                self.flow_valves[valve] = Valve(valve, flow_rate, connections)
 
-        def find_adj(cur_valve):
-            return [(c, 1) for c in self.connections[cur_valve]]
-
-        search = DijkstraSearch(find_adj)
-        self.distances = {}
-        for valve in self.connections:
-            results = search._execute_search(valve)
-            self.distances[valve] = {}
-            for v in self.flow_rates.keys():
-                self.distances[valve][v] = results[v].build_path()[1:]
+        for node in self.flow_valves.values():
+            node.calc_distances(all_valves)
 
     def solve_puzzle_one(self):
-        self.memo = {}
-        closed_valves = set(self.flow_rates.keys())
-        return self._get_max_release('AA', closed_valves, 30)
+        unvisited_valves = {v for v in self.flow_valves.values() if v.name != 'AA'}
+        start_valve = self.flow_valves['AA']
+        possible_orders = self._all_possible_orders(unvisited_valves, 30, start_valve, [])
+        return max(self._get_result(start_valve, 30, order) for order in possible_orders)
 
     def solve_puzzle_two(self):
-        return 2400
-        self.memo = {}
-        closed_valves = set(self.flow_rates.keys())
-        return self._get_max_release_two('AA', 'AA', closed_valves, 26)
+        unvisited_valves = {v for v in self.flow_valves.values() if v.name != 'AA'}
+        start_valve = self.flow_valves['AA']
+        possible_orders = self._all_possible_orders(unvisited_valves, 26, start_valve, [])
 
-    def _get_max_release(self, cur_valve, closed_valves, remaining_time):
-        state = f'{remaining_time} {cur_valve} {sorted(closed_valves)}'
-        if state in self.memo:
-            return self.memo[state]
+        results = [(self._get_result(start_valve, 26, order), set(order)) for order in possible_orders]
+        results.sort(key=lambda x: -x[0])
 
-        if remaining_time < 1:
-            return 0
+        best = 0
+        for idx, (score_1, order_1) in enumerate(results):
+            if score_1 * 2 < best:
+                break
+            for score_2, order_2 in results[idx+1:]:
+                if not order_1 & order_2:
+                    best = max(best, score_1 + score_2)
+        return best
 
-        current_flow = sum(v for k, v in self.flow_rates.items() if k not in closed_valves)
-        if remaining_time == 1:
-            self.memo[state] = current_flow
-            return current_flow
+    def _all_possible_orders(self, unvisited_valves, remaining_time, cur_value, cur_order):
+        for next_valve in unvisited_valves:
+            cost = cur_value.distances[next_valve]
+            if cost < remaining_time:
+                yield from self._all_possible_orders(
+                    unvisited_valves - {next_valve},
+                    remaining_time - cost,
+                    next_valve,
+                    cur_order + [next_valve],
+                )
+        yield cur_order
 
-        if len(closed_valves) == 0:
-            result = current_flow + self._get_max_release('XX', closed_valves, remaining_time - 1)
-            self.memo[state] = result
-            return result
-
-        max_total = 0
-
-        for next_valve in closed_valves:
-                advance_by = len(self.distances[cur_valve][next_valve]) + 1
-                next_closed_valves = closed_valves.difference({next_valve})
-
-                if advance_by >= remaining_time:
-                    advance_by = remaining_time
-                    new_total = 0
-                else:
-                    new_total = self._get_max_release(next_valve, next_closed_valves, remaining_time - advance_by)
-
-                new_total += current_flow * (advance_by - 1)
-                max_total = max(max_total, new_total)
-
-        result = max_total + current_flow
-        self.memo[state] = result
-        return result
-
-    def _get_max_release_two(self, cur_valve_1, cur_valve_2, closed_valves, remaining_time):
-        state = f'{remaining_time} {sorted([cur_valve_1, cur_valve_2])} {sorted(closed_valves)}'
-        if state in self.memo:
-            return self.memo[state]
-
-        if remaining_time < 1:
-            return 0
-
-        current_flow = sum(v for k, v in self.flow_rates.items() if k not in closed_valves)
-        if remaining_time == 1:
-            self.memo[state] = current_flow
-            return current_flow
-
-        if len(closed_valves) == 0:
-            result = current_flow + self._get_max_release_two('XX', 'XX', closed_valves, remaining_time - 1)
-            self.memo[state] = result
-            return result
-
-        max_total = 0
-
-        for action_1 in closed_valves:
-            for action_2 in closed_valves:
-                if action_1 == action_2 and len(closed_valves) > 1:
-                    continue
-
-                time_1 = len(self.distances[cur_valve_1][action_1]) + 1
-                time_2 = len(self.distances[cur_valve_2][action_2]) + 1
-
-                advance_by = min(time_1, time_2)
-                next_closed_valves = closed_valves.copy()
-
-                if time_1 > advance_by:
-                    next_valve_1 = self.distances[cur_valve_1][action_1][advance_by - 1]
-                else:
-                    next_valve_1 = action_1
-                    next_closed_valves.discard(action_1)
-
-                if time_2 > advance_by:
-                    next_valve_2 = self.distances[cur_valve_2][action_2][advance_by - 1]
-                else:
-                    next_valve_2 = action_2
-                    next_closed_valves.discard(action_2)
-
-                if advance_by >= remaining_time:
-                    advance_by = remaining_time
-                    new_total = 0
-                else:
-                    new_total = self._get_max_release_two(next_valve_1, next_valve_2, next_closed_valves, remaining_time - advance_by)
-                new_total += current_flow * (advance_by - 1)
-                max_total = max(max_total, new_total)
-
-        result = max_total + current_flow
-        self.memo[state] = result
-        return result
-
-
-Day16Solver().print_results()
+    def _get_result(self, start_valve, time, order):
+        total = 0
+        cur_valve = start_valve
+        cur_time = time
+        for valve in order:
+            cur_time -= (cur_valve.distances[valve])
+            total += valve.total_flow(cur_time)
+            cur_valve = valve
+        return total
