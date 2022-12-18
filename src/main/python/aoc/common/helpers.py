@@ -117,3 +117,7 @@ def lcm(values):
         _lcm = abs(_lcm * v) // gcd
 
     return _lcm
+
+
+def apply_deltas(point, deltas):
+    return tuple(v + deltas[i] for i, v in enumerate(point))
