@@ -62,6 +62,7 @@ for year in years:
 #       Day 23  ~ ?????? ms
 #   2022
 #       Day 15  ~   8700 ms
+#       Day 19  ~  42000 ms
 
 
 for solver in all_solvers:
