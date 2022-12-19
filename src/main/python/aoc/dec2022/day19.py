@@ -24,7 +24,6 @@ class Blueprint(object):
         self.max_obsidian = self.geode_cost[1]
 
     def get_max_geodes(self, time):
-        # print(f'{self.id}: ore({self.ore_cost}), clay({self.clay_cost}), obsidian{self.obsidian_cost}, geode{self.geode_cost}')
         # Robot Count - Resources
         start_state = (1, 0, 0, 0, 0, 0, 0, time)
 
@@ -46,11 +45,6 @@ class Blueprint(object):
             ore = min(ore, self.max_ore * time)
             clay = min(clay, self.max_clay * time)
             obsidian = min(obsidian, self.max_obsidian * time)
-
-            # We only need at most enough robots to replenish the max resource amount consumed on a given round
-            # ore_bot = min(ore_bot, self.max_ore)
-            # clay_bot = min(clay_bot, self.max_clay)
-            # obsidian_bot = min(obsidian_bot, self.max_obsidian)
 
             cur_state = ore_bot, clay_bot, obsidian_bot, ore, clay, obsidian, geode, time
             if cur_state in closed_states:
@@ -95,7 +89,6 @@ class Blueprint(object):
                 time - 1
             ))
 
-        # print(f'\t{max_geodes}')
         return max_geodes
 
 
@@ -117,6 +110,3 @@ class Day19Solver(DaySolver):
             p2 *= blueprint.get_max_geodes(32)
 
         return p1, p2
-
-
-Day19Solver().print_results()
