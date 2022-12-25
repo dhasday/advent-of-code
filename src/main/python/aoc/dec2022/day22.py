@@ -16,12 +16,51 @@ DIRECTION_OFFSETS = {
 
 class Cube:
     def __init__(self, size, lines):
-        self.top = TopSide(size, 1, 0)
-        self.bottom = BottomSide(size, 1, 2)
-        self.left = LeftSide(size, 0, 2)
-        self.right = RightSide(size, 2, 0)
-        self.front = FrontSide(size, 1, 1)
-        self.back = BackSide(size, 0, 3)
+        def inv(v):
+            return size - 1 - v
+
+        self.top = Side(
+            size, 1, 0,
+            overflow_left=lambda p: (0, inv(p[1]), 1, 0),
+            overflow_right=lambda p: (0, p[1], 1, 0),
+            overflow_up=lambda p: (0, p[0], 1, 0),
+            overflow_down=lambda p: (p[0], 0, 0, 1),
+        )
+        self.bottom = Side(
+            size, 1, 2,
+            overflow_left=lambda p: (size - 1, p[1], -1, 0),
+            overflow_right=lambda p: (size - 1, inv(p[1]), -1, 0),
+            overflow_up=lambda p: (p[0], size - 1, 0, -1),
+            overflow_down=lambda p: (size - 1, p[0], -1, 0),
+        )
+        self.left = Side(
+            size, 0, 2,
+            overflow_left=lambda p: (0, inv(p[1]), 1, 0),
+            overflow_right=lambda p: (0, p[1], 1, 0),
+            overflow_up=lambda p: (0, p[0], 1, 0),
+            overflow_down=lambda p: (p[0], 0, 0, 1),
+        )
+        self.right = Side(
+            size, 2, 0,
+            overflow_left=lambda p: (size - 1, p[1], -1, 0),
+            overflow_right=lambda p: (size - 1, inv(p[1]), -1, 0),
+            overflow_up=lambda p: (p[0], size - 1, 0, -1),
+            overflow_down=lambda p: (size - 1, p[0], -1, 0),
+        )
+        self.front = Side(
+            size, 1, 1,
+            overflow_left=lambda p: (p[1], 0, 0, 1),
+            overflow_right=lambda p: (p[1], size - 1, 0, -1),
+            overflow_up=lambda p: (p[0], size - 1, 0, -1),
+            overflow_down=lambda p: (p[0], 0, 0, 1),
+        )
+        self.back = Side(
+            size, 0, 3,
+            overflow_left=lambda p: (p[1], 0, 0, 1),
+            overflow_right=lambda p: (p[1], size - 1, 0, -1),
+            overflow_up=lambda p: (p[0], size - 1, 0, -1),
+            overflow_down=lambda p: (p[0], 0, 0, 1),
+        )
 
         self.top.link_sides(self.left, self.right, self.back, self.front)
         self.bottom.link_sides(self.left, self.right, self.front, self.back)
@@ -40,17 +79,21 @@ class Cube:
                 self.back.load_pos(lines, x, y)
 
 
-class Side(ABC):
+class Side:
     left = None
     right = None
     up = None
     down = None
 
-    def __init__(self, size, offset_x, offset_y):
+    def __init__(self, size, offset_x, offset_y, overflow_left, overflow_right, overflow_up, overflow_down):
         self.size = size
         self.walls = set()
         self.offset_x = offset_x
         self.offset_y = offset_y
+        self.overflow_left = overflow_left
+        self.overflow_right = overflow_right
+        self.overflow_up = overflow_up
+        self.overflow_down = overflow_down
 
     def load_pos(self, lines, x, y):
         abs_pos = self.get_absolute_position((x, y))
@@ -71,14 +114,23 @@ class Side(ABC):
         next_dir = cur_dir
         next_side = self
 
+        overflow = None
         if next_pos[0] < 0:
-            next_side, next_pos, next_dir = self.overflow_left(cur_pos)
+            overflow = self.overflow_left(cur_pos)
+            next_side = self.left
         if next_pos[0] >= self.size:
-            next_side, next_pos, next_dir = self.overflow_right(cur_pos)
+            overflow = self.overflow_right(cur_pos)
+            next_side = self.right
         if next_pos[1] < 0:
-            next_side, next_pos, next_dir = self.overflow_up(cur_pos)
+            overflow = self.overflow_up(cur_pos)
+            next_side = self.up
         if next_pos[1] >= self.size:
-            next_side, next_pos, next_dir = self.overflow_down(cur_pos)
+            overflow = self.overflow_down(cur_pos)
+            next_side = self.down
+
+        if overflow:
+            next_pos = overflow[0], overflow[1]
+            next_dir = overflow[2], overflow[3]
 
         if next_pos in next_side.walls:
             return None
@@ -87,157 +139,6 @@ class Side(ABC):
 
     def get_absolute_position(self, pos):
         return pos[0] + (self.offset_x * self.size), pos[1] + (self.offset_y * self.size)
-
-    def _invert_side(self, cur_val):
-        return self.size - 1 - cur_val
-
-    @abstractmethod
-    def overflow_left(self, cur_pos):
-        pass
-
-    @abstractmethod
-    def overflow_right(self, cur_pos):
-        pass
-
-    @abstractmethod
-    def overflow_up(self, cur_pos):
-        pass
-
-    @abstractmethod
-    def overflow_down(self, cur_pos):
-        pass
-
-
-class TopSide(Side):
-    def overflow_left(self, cur_pos):
-        next_pos = 0, self._invert_side(cur_pos[1])
-        next_dir = 1, 0
-        return self.left, next_pos, next_dir
-
-    def overflow_right(self, cur_pos):
-        next_pos = 0, cur_pos[1]
-        next_dir = 1, 0
-        return self.right, next_pos, next_dir
-
-    def overflow_up(self, cur_pos):
-        next_pos = 0, cur_pos[0]
-        next_dir = 1, 0
-        return self.up, next_pos, next_dir
-
-    def overflow_down(self, cur_pos):
-        next_pos = cur_pos[0], 0
-        next_dir = 0, 1
-        return self.down, next_pos, next_dir
-
-
-class FrontSide(Side):
-    def overflow_left(self, cur_pos):
-        next_pos = cur_pos[1], 0
-        next_dir = 0, 1
-        return self.left, next_pos, next_dir
-
-    def overflow_right(self, cur_pos):
-        next_pos = cur_pos[1], self.size - 1
-        next_dir = 0, -1
-        return self.right, next_pos, next_dir
-
-    def overflow_up(self, cur_pos):
-        next_pos = cur_pos[0], self.size - 1
-        next_dir = 0, -1
-        return self.up, next_pos, next_dir
-
-    def overflow_down(self, cur_pos):
-        next_pos = cur_pos[0], 0
-        next_dir = 0, 1
-        return self.down, next_pos, next_dir
-
-
-class RightSide(Side):
-    def overflow_left(self, cur_pos):
-        next_pos = self.size - 1, cur_pos[1]
-        next_dir = -1, 0
-        return self.left, next_pos, next_dir
-
-    def overflow_right(self, cur_pos):
-        next_pos = self.size - 1, self._invert_side(cur_pos[1])
-        next_dir = -1, 0
-        return self.right, next_pos, next_dir
-
-    def overflow_up(self, cur_pos):
-        next_pos = cur_pos[0], self.size - 1
-        next_dir = 0, -1
-        return self.up, next_pos, next_dir
-
-    def overflow_down(self, cur_pos):
-        next_pos = self.size - 1, cur_pos[0]
-        next_dir = -1, 0
-        return self.down, next_pos, next_dir
-
-
-class LeftSide(Side):
-    def overflow_left(self, cur_pos):
-        next_pos = 0, self._invert_side(cur_pos[1])
-        next_dir = 1, 0
-        return self.left, next_pos, next_dir
-
-    def overflow_right(self, cur_pos):
-        next_pos = 0, cur_pos[1]
-        next_dir = 1, 0
-        return self.right, next_pos, next_dir
-
-    def overflow_up(self, cur_pos):
-        next_pos = 0, cur_pos[0]
-        next_dir = 1, 0
-        return self.up, next_pos, next_dir
-
-    def overflow_down(self, cur_pos):
-        next_pos = cur_pos[0], 0
-        next_dir = 0, 1
-        return self.down, next_pos, next_dir
-
-
-class BottomSide(Side):
-    def overflow_left(self, cur_pos):
-        next_pos = self.size - 1, cur_pos[1]
-        next_dir = -1, 0
-        return self.left, next_pos, next_dir
-
-    def overflow_right(self, cur_pos):
-        next_pos = self.size - 1, self._invert_side(cur_pos[1])
-        next_dir = -1, 0
-        return self.right, next_pos, next_dir
-
-    def overflow_up(self, cur_pos):
-        next_pos = cur_pos[0], self.size - 1
-        next_dir = 0, -1
-        return self.up, next_pos, next_dir
-
-    def overflow_down(self, cur_pos):
-        next_pos = self.size - 1, cur_pos[0]
-        next_dir = -1, 0
-        return self.down, next_pos, next_dir
-
-
-class BackSide(Side):
-    def overflow_left(self, cur_pos):
-        next_pos = cur_pos[1], 0
-        next_dir = 0, 1
-        return self.left, next_pos, next_dir
-
-    def overflow_right(self, cur_pos):
-        next_pos = cur_pos[1], self.size - 1
-        next_dir = 0, -1
-        return self.right, next_pos, next_dir
-
-    def overflow_up(self, cur_pos):
-        next_pos = cur_pos[0], self.size - 1
-        next_dir = 0, -1
-        return self.up, next_pos, next_dir
-
-    def overflow_down(self, cur_pos):
-        next_pos = cur_pos[0], 0
-        next_dir = 0, 1
-        return self.down, next_pos, next_dir
 
 
 class Day22Solver(DaySolver):
@@ -304,3 +205,6 @@ class Day22Solver(DaySolver):
 
         cur_pos = cur_side.get_absolute_position(cur_pos)
         return (cur_pos[1] + 1) * 1000 + (cur_pos[0] + 1) * 4 + DIRECTION_OFFSETS[cur_dir]['val']
+
+
+Day22Solver().print_results()
