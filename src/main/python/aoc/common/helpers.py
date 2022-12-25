@@ -1,5 +1,7 @@
+import math
 import re
 
+ALL_DIGITS_REGEX = re.compile(r'\d+')
 ALL_NUMBERS_REGEX = re.compile(r'-?\d+')
 
 STANDARD_DIRECTIONS = [
@@ -25,6 +27,45 @@ STANDARD_DIRECTIONAL_OFFSETS = [
     (1, -1),
     (1, 0),
     (1, 1),
+]
+
+STANDARD_DIRECTIONS_3D_MANHATTAN = [
+    (-1, 0, 0),
+    (1, 0, 0),
+    (0, -1, 0),
+    (0, 1, 0),
+    (0, 0, -1),
+    (0, 0, 1),
+]
+
+STANDARD_DIRECTIONAL_OFFSETS_3D = [
+    (-1, -1, -1),
+    (-1, -1, 0),
+    (-1, -1, 1),
+    (-1, 0, -1),
+    (-1, 0, 0),
+    (-1, 0, 1),
+    (-1, 1, -1),
+    (-1, 1, 0),
+    (-1, 1, 1),
+    (0, -1, -1),
+    (0, -1, 0),
+    (0, -1, 1),
+    (0, 0, -1),
+    (0, 0, 0),
+    (0, 0, 1),
+    (0, 1, -1),
+    (0, 1, 0),
+    (0, 1, 1),
+    (1, -1, -1),
+    (1, -1, 0),
+    (1, -1, 1),
+    (1, 0, -1),
+    (1, 0, 0),
+    (1, 0, 1),
+    (1, 1, -1),
+    (1, 1, 0),
+    (1, 1, 1),
 ]
 
 HEX_DIRECTION_OFFSETS = {
@@ -61,3 +102,22 @@ def hex_to_binary(value):
     if missing:
         out = '0' * (8-missing) + out
     return out
+
+
+def split_layers(full_output, layer_size):
+    """Splits a single list into layers of the specified size"""
+    for i in range(0, len(full_output), layer_size):
+        yield full_output[i:i + layer_size]
+
+
+def lcm(values):
+    _lcm = values[0]
+    for v in values[1:]:
+        gcd = math.gcd(_lcm, v)
+        _lcm = abs(_lcm * v) // gcd
+
+    return _lcm
+
+
+def apply_deltas(point, deltas):
+    return tuple(v + deltas[i] for i, v in enumerate(point))

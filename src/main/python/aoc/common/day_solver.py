@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod, abstractproperty
+from abc import ABCMeta, abstractmethod
 from time import time
 import os
 
@@ -14,6 +14,7 @@ class DaySolver(object):
         super(DaySolver, self).__init__()
 
     def solve_puzzles(self):
+        self.setup()
         return self.solve_puzzle_one(), self.solve_puzzle_two()
 
     @property
@@ -24,6 +25,9 @@ class DaySolver(object):
     @property
     @abstractmethod
     def day(self):
+        pass
+
+    def setup(self):
         pass
 
     def solve_puzzle_one(self):
@@ -57,22 +61,26 @@ class DaySolver(object):
 
     def _get_input_directory(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        return '{}/../../../resources/dec{}/'.format(dir_path, self.year)
+        return '{}/../../../resources/dec{}'.format(dir_path, self.year)
 
-    def _get_input_filename(self, filename=None):
+    def _get_input_filename(self, filename=None, example=False):
         if filename is None:
-            return '{}/{}-input'.format(self._get_input_directory(), self.day)
+            return '{}/{}-input{}'.format(
+                self._get_input_directory(),
+                self.day,
+                '-example' if example else '',
+            )
         else:
             return '{}/{}'.format(self._get_input_directory(), filename)
 
-    def load_only_input_line(self, filename=None):
-        filename = self._get_input_filename(filename)
+    def load_only_input_line(self, filename=None, example=False):
+        filename = self._get_input_filename(filename, example)
 
         with open(filename) as f:
             return f.readline()
 
-    def load_all_input_lines(self, filename=None):
-        filename = self._get_input_filename(filename)
+    def load_all_input_lines(self, filename=None, example=False):
+        filename = self._get_input_filename(filename, example)
 
         with open(filename) as f:
             return [line.strip('\n') for line in f]

@@ -1,4 +1,5 @@
 from aoc.common.day_solver import DaySolver
+from aoc.common.helpers import split_layers
 from aoc.common.letter_reader import read_output
 
 LAYER_WIDTH = 25
@@ -13,7 +14,7 @@ class Day08Solver(DaySolver):
     def solve_puzzle_one(self):
         line = self.load_only_input_line()
 
-        layers = list(self.split_layers(line, LAYER_SIZE))
+        layers = list(split_layers(line, LAYER_SIZE))
 
         min_zeros = None
         result = None
@@ -32,16 +33,12 @@ class Day08Solver(DaySolver):
 
         layer_size = LAYER_HEIGHT * LAYER_WIDTH
 
-        layers = list(self.split_layers(line, layer_size))
+        layers = list(split_layers(line, layer_size))
 
         output = [self._determine_color(layers, i) for i in range(layer_size)]
 
-        lines = [''.join(l) for l in self.split_layers(output, 25)]
+        lines = [''.join(layer) for layer in split_layers(output, 25)]
         return read_output(lines)
-
-    def split_layers(self, lst, n):
-        for i in range(0, len(lst), n):
-            yield lst[i:i + n]
 
     def _count_layer(self, layer):
         counts = {
