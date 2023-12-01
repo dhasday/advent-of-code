@@ -205,6 +205,3 @@ class Day22Solver(DaySolver):
 
         cur_pos = cur_side.get_absolute_position(cur_pos)
         return (cur_pos[1] + 1) * 1000 + (cur_pos[0] + 1) * 4 + DIRECTION_OFFSETS[cur_dir]['val']
-
-
-Day22Solver().print_results()

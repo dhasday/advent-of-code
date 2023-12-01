@@ -1,6 +1,6 @@
 from aoc import (
     dec2015, dec2016, dec2017, dec2018, dec2019,
-    dec2020, dec2021, dec2022,
+    dec2020, dec2021, dec2022, dec2023
 )
 
 
@@ -21,7 +21,8 @@ years = [
     # dec2019,
     # dec2020,
     # dec2021,
-    dec2022,
+    # dec2022,
+    dec2023,
 ]
 
 all_solvers = []
