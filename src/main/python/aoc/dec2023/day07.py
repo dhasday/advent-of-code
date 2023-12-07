@@ -123,6 +123,3 @@ class Day07Solver(DaySolver):
         for idx, hand in enumerate(hands, start=1):
             total += (idx * hand.bid)
         return total
-
-
-Day07Solver().print_results()
