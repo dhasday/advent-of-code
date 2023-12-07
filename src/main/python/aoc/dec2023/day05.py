@@ -1,21 +1,36 @@
+import dataclasses
 from collections import defaultdict
 
 from aoc.common import helpers
 from aoc.common.day_solver import DaySolver
 
 
+@dataclasses.dataclass
+class Range:
+    start: int  # Inclusive
+    end: int    # Exclusive
+
+    @property
+    def size(self):
+        return self.end - self.start
+
+
+@dataclasses.dataclass
 class PlantingRange:
-    def __init__(self, destination_start, origin_start, range_length):
-        self.origin_start = origin_start
-        self.origin_end = origin_start + range_length
+    origin: Range
+    destination: Range
 
-        self.destination_start = destination_start
-        self.destination_end = destination_start + range_length
+    @property
+    def delta(self):
+        return self.destination.start - self.origin.start
 
-        self.delta = destination_start - origin_start
+    @property
+    def from_start(self):
+        return self.origin.start
 
-    def __repr__(self):
-        return f'O:{self.origin_start}-{self.origin_end} D:{self.delta}'
+    @property
+    def from_end(self):
+        return self.origin.end
 
 
 class Day05Solver(DaySolver):
@@ -25,34 +40,29 @@ class Day05Solver(DaySolver):
     seeds = None
     planting_map = None
     planting_ranges = None
-    reverse_map = None
-    reverse_ranges = None
 
     def setup(self):
+        # lines = self.load_all_input_lines(example=True)
         lines = self.load_all_input_lines()
 
         self.seeds = [int(v) for v in helpers.ALL_DIGITS_REGEX.findall(lines[0])]
         self.planting_map = {}
         self.planting_ranges = defaultdict(list)
-        self.reverse_map = {}
-        self.reverse_ranges = defaultdict(list)
         source = None
-        destination = None
         for line in lines[2:]:
             if not line:
                 continue
             elif ':' in line:
                 split_line = line.split(' ')[0].split('-')
                 source = split_line[0]
-                destination = split_line[2]
+                self.planting_map[source] = split_line[2]
             else:
                 ranges = [int(v) for v in helpers.ALL_DIGITS_REGEX.findall(line)]
-                self.planting_map[source] = destination
-                planting_range = PlantingRange(*ranges)
+                planting_range = PlantingRange(
+                    Range(ranges[1], ranges[1] + ranges[2]),
+                    Range(ranges[0], ranges[0] + ranges[2]),
+                )
                 self.planting_ranges[source].append(planting_range)
-
-                self.reverse_map[destination] = source
-                self.reverse_ranges[destination].append(planting_range)
 
     def solve_puzzle_one(self):
         start = 'seed'
@@ -67,32 +77,20 @@ class Day05Solver(DaySolver):
         return min(cur_results)
 
     def solve_puzzle_two(self):
-        # TODO: Actually solve this
-        return self._brute_force_part_two(79_000_000, 79_005_000, 1)
+        start = 'seed'
+        target = 'location'
 
-    def _brute_force_part_two(self, low, high, step):
-        start = 'location'
-        target = 'seed'
-
-        for i in range(low, high, step):
-            cur_category = start
-            cur_results = [i for i in range(i, i + step)]
-            while cur_category != target:
-                cur_results = self._get_prev_category(cur_category, cur_results)
-                cur_category = self.reverse_map[cur_category]
-
-            if any(self._is_in_range(v) for v in cur_results):
-                return i if step == 1 else f"{i}-{i + step}"
-
-        return 'Failed'
-
-    def _is_in_range(self, value):
+        cur_ranges = []
         for i in range(0, len(self.seeds), 2):
-            range_start = self.seeds[i]
-            range_end = range_start + self.seeds[i + 1]
-            if range_start <= value < range_end:
-                return True
-        return False
+            cur_ranges.append(Range(self.seeds[i], self.seeds[i] + self.seeds[i+1]))
+
+        cur = start
+        cur_ranges = sorted(cur_ranges, key=lambda r: r.start)
+        while cur != target:
+            cur_ranges = self._apply_translation_to_ranges(cur, cur_ranges)
+            cur = self.planting_map[cur]
+
+        return min(r.start for r in cur_ranges)
 
     def _get_next_category(self, category, targets):
         planting_ranges = self.planting_ranges[category]
@@ -101,7 +99,7 @@ class Day05Solver(DaySolver):
         for target in targets:
             next_target = None
             for planting_range in planting_ranges:
-                if planting_range.origin_start <= target <= planting_range.origin_end:
+                if planting_range.from_start <= target < planting_range.from_end:
                     next_target = target + planting_range.delta
                     break
 
@@ -109,17 +107,33 @@ class Day05Solver(DaySolver):
 
         return results
 
-    def _get_prev_category(self, category, targets):
-        reverse_ranges = self.reverse_ranges[category]
-
-        results = []
-        for target in targets:
-            prev_target = None
-            for reverse_range in reverse_ranges:
-                if reverse_range.destination_start <= target < reverse_range.destination_end:
-                    prev_target = target - reverse_range.delta
+    def _apply_translation_to_ranges(self, category, cur_ranges):
+        planting_ranges = sorted(self.planting_ranges[category], key=lambda r: r.from_start)
+        output = []
+        # Only need to follow the planting ranges once since the ranges are sorted by start value with no overlap
+        planting_idx = 0
+        for cur_range in cur_ranges:
+            cur_start = cur_range.start
+            while cur_start < cur_range.end:
+                # If we run out of planting ranges
+                if planting_idx >= len(planting_ranges):
+                    output.append(Range(cur_start, cur_range.end))
                     break
 
-            results.append(prev_target if prev_target is not None else target)
+                planting_range = planting_ranges[planting_idx]
+                if planting_range.from_end <= cur_start:
+                    # If the current start is lower than the end of this range, move to the next range
+                    planting_idx += 1
+                elif planting_range.from_start <= cur_start:
+                    # If the start falls into this range, then apply the translation
+                    next_start = min(planting_range.from_end, cur_range.end)
+                    output.append(Range(cur_start + planting_range.delta, next_start + planting_range.delta))
+                    cur_start = next_start
+                else:
+                    # We're starting below the current range, so just translate to the start of it
+                    next_start = min(planting_range.from_start, cur_range.end)
+                    output.append(Range(cur_start, next_start))
+                    cur_start = next_start
 
-        return results
+        # Sort here since the deltas could have caused this to get out of order
+        return sorted(output, key=lambda r: r.start)

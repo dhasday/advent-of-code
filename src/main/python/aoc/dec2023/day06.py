@@ -27,15 +27,25 @@ class Day06Solver(DaySolver):
         return self._get_num_wins(times[0], distances[0])
 
     def _get_num_wins(self, time, distance):
-        first_win = last_win = None
-        for hold_time in range(time):
-            if ((time - hold_time) * hold_time) > distance:
-                first_win = hold_time
-                break
+        min_value = 0
+        max_value = time // 2
 
-        for hold_time in range(time, first_win, -1):
-            if ((time - hold_time) * hold_time) > distance:
-                last_win = hold_time
-                break
+        if self._get_distance(time, max_value) < distance:
+            return 0
 
-        return last_win - first_win + 1
+        # Binary search for min value
+        while min_value + 1 < max_value:
+            cur = (min_value + max_value) // 2
+            if self._get_distance(time, cur) > distance:
+                max_value = cur
+            else:
+                min_value = cur
+        first_win = min_value + 1
+
+        # Calculate last win because the distance graph is quadratic
+        last_win = (time / 2) + (time / 2 - first_win)
+
+        return int(last_win - first_win + 1)
+
+    def _get_distance(self, time, hold_time):
+        return (time - hold_time) * hold_time
