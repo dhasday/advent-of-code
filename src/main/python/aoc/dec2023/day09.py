@@ -18,21 +18,22 @@ class Day09Solver(DaySolver):
 
             cur_layer = sequence
 
-            next_value = sequence[-1]
-
-            # TODO: Fix this since it's not a generalized solution
-            #       It just works for my input since all sequences are the same length
-            prev_value = sequence[0]
             is_odd = len(sequence) % 2 == 1
+            first_seq = list(sequence[0:1])
+            next_value = sequence[-1]
             while any(v for v in cur_layer if v != 0):
                 next_layer = []
                 for idx in range(len(cur_layer) - 1):
                     next_layer.append(cur_layer[idx + 1] - cur_layer[idx])
 
                 cur_layer = next_layer
+                first_seq.append(cur_layer[0])
                 next_value += cur_layer[-1]
-                prev_value += -cur_layer[0] if is_odd else cur_layer[0]
                 is_odd = not is_odd
+
+            prev_value = 0
+            while first_seq:
+                prev_value = first_seq.pop() - prev_value
 
             ans_one += next_value
             ans_two += prev_value

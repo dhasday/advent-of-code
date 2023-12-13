@@ -1,3 +1,5 @@
+import re
+
 from aoc.common.day_solver import DaySolver
 
 
@@ -62,15 +64,15 @@ class Day12Solver(DaySolver):
             self.memo[memo_key] = 0
             return 0
 
+        # If the first spring is good, skip to the next value
+        if seq[0] == '.':
+            return self._num_possible_arrangements(seq[1:], parts)
+
         # There are broken sections remaining, so if there aren't any possible broken strings, we don't match
         first_broken = seq.find(BROKEN)
         if seq.find(UNKNOWN) == -1 and first_broken == -1:
             self.memo[memo_key] = 0
             return 0
-
-        # If the first spring is good, skip to the next value
-        if seq[0] == '.':
-            return self._num_possible_arrangements(seq[1:], parts)
 
         count = 0
         for i in range(len(seq) if first_broken == -1 else first_broken + 1):

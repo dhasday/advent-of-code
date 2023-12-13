@@ -1,10 +1,6 @@
 from aoc.common.day_solver import DaySolver
 
 
-ROCK = '#'
-ASH = '.'
-
-
 class Day13Solver(DaySolver):
     year = 2023
     day = 13
@@ -20,7 +16,7 @@ class Day13Solver(DaySolver):
                 patterns.append(pattern)
                 pattern = []
             else:
-                pattern.append(line)
+                pattern.append([0 if v == '.' else 1 for v in line])
         if pattern:
             patterns.append(pattern)
 
@@ -80,12 +76,14 @@ class Day13Solver(DaySolver):
         return True
 
     def _rotate_pattern(self, pattern):
-        # Reflect around x = y so we can reuse the column reflection logic
-        rotated = [''] * len(pattern[0])
+        # Reflect around x = y, so we can reuse the column reflection logic
+        rotated = []
 
-        for line in pattern:
-            for idx, char in enumerate(line):
-                rotated[idx] += char
+        for col in range(len(pattern[0])):
+            rotated_col = []
+            for row in range(len(pattern)):
+                rotated_col.append(pattern[row][col])
+            rotated.append(rotated_col)
 
         return rotated
 
@@ -102,10 +100,10 @@ class Day13Solver(DaySolver):
                 yield row, col
 
     def _apply_smudge(self, pattern, row, col):
-        smudge = ASH if pattern[row][col] == ROCK else ROCK
+        smudge = (pattern[row][col] + 1) % 2
 
         smudged = pattern[:row]
-        smudged.append(pattern[row][:col] + smudge + pattern[row][col + 1:])
+        smudged.append(pattern[row][:col] + [smudge] + pattern[row][col + 1:])
         smudged.extend(pattern[row + 1:])
 
         return smudged
