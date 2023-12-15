@@ -42,7 +42,6 @@ class Day05Solver(DaySolver):
     planting_ranges = None
 
     def setup(self):
-        # lines = self.load_all_input_lines(example=True)
         lines = self.load_all_input_lines()
 
         self.seeds = [int(v) for v in helpers.ALL_DIGITS_REGEX.findall(lines[0])]

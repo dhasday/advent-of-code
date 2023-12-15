@@ -1,5 +1,3 @@
-import re
-
 from aoc.common.day_solver import DaySolver
 
 

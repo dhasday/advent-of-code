@@ -68,7 +68,6 @@ class Day03Solver(DaySolver):
                 self.parts.append(PartNumber(int(cur_number), row_idx, start_idx, end_idx))
 
     def solve_puzzle_one(self):
-        # 4361 Too Low
         ans_one = 0
         for part in self.parts:
             for adj_loc in part.get_adj_locations():
