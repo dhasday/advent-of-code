@@ -62,6 +62,8 @@ years = [
 #   2022
 #       Day 15  ~   8700 ms
 #       Day 19  ~  42000 ms
+#   2023
+#       Day 17  ~   7200 ms
 
 for year in years:
     start_timestamp = int(time() * 1000.0)

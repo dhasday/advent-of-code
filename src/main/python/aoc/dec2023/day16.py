@@ -91,5 +91,3 @@ class Day16Solver(DaySolver):
     def _get_next_offsets(self, cur_pos, cur_dir):
         cur_val = self.mirrors.get(cur_pos)
         return DIRECTIONs.get((cur_val, cur_dir), [cur_dir])
-
-Day16Solver().print_results()
