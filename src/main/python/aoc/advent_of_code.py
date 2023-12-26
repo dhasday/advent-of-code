@@ -1,6 +1,8 @@
+from time import time
+
 from aoc import (
     dec2015, dec2016, dec2017, dec2018, dec2019,
-    dec2020, dec2021, dec2022,
+    dec2020, dec2021, dec2022, dec2023
 )
 
 
@@ -21,12 +23,9 @@ years = [
     # dec2019,
     # dec2020,
     # dec2021,
-    dec2022,
+    # dec2022,
+    dec2023,
 ]
-
-all_solvers = []
-for year in years:
-    all_solvers.extend(load_solvers_for_year(year))
 
 # Slow Days (>5000 ms)
 #   2015
@@ -63,7 +62,18 @@ for year in years:
 #   2022
 #       Day 15  ~   8700 ms
 #       Day 19  ~  42000 ms
+#   2023
+#       Day 17  ~   7200 ms
+#       Day 21  ~   7100 ms
+#       Day 23  ~ ?????? ms
+#       Day 25  ~ ?????? ms
 
+for year in years:
+    start_timestamp = int(time() * 1000.0)
+    year_solvers = load_solvers_for_year(year)
 
-for solver in all_solvers:
-    solver().print_results()
+    for solver in year_solvers:
+        solver().print_results()
+
+    end_timestamp = int(time() * 1000.0)
+    print(f'{year.__name__} Elapsed Time: {end_timestamp - start_timestamp} ms\n')
