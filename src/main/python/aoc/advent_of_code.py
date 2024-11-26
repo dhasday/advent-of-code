@@ -2,7 +2,7 @@ from time import time
 
 from aoc import (
     dec2015, dec2016, dec2017, dec2018, dec2019,
-    dec2020, dec2021, dec2022, dec2023
+    dec2020, dec2021, dec2022, dec2023, dec2024,
 )
 
 
@@ -24,7 +24,8 @@ years = [
     # dec2020,
     # dec2021,
     # dec2022,
-    dec2023,
+    # dec2023,
+    dec2024,
 ]
 
 # Slow Days (>5000 ms)
@@ -67,6 +68,7 @@ years = [
 #       Day 21  ~   7100 ms
 #       Day 23  ~ ?????? ms
 #       Day 25  ~ ?????? ms
+#   2024
 
 for year in years:
     start_timestamp = int(time() * 1000.0)
