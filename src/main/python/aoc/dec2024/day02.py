@@ -46,6 +46,3 @@ class Day02Solver(DaySolver):
             if self._check_safe_p1(test):
                 return True
         return False
-
-
-Day02Solver().print_results()
