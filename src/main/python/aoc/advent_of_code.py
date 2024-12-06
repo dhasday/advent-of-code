@@ -69,6 +69,7 @@ years = [
 #       Day 23  ~ ?????? ms
 #       Day 25  ~ ?????? ms
 #   2024
+#       Day  6  ~   7000 ms
 
 for year in years:
     start_timestamp = int(time() * 1000.0)
