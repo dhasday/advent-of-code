@@ -121,3 +121,10 @@ def lcm(values):
 
 def apply_deltas(point, deltas):
     return tuple(v + deltas[i] for i, v in enumerate(point))
+
+
+def manhattan_distance(p1, p2):
+    distance = 0
+    for i in range(len(p1)):
+        distance += abs(p1[i] - p2[i])
+    return distance
