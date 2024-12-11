@@ -1,3 +1,5 @@
+from functools import cache
+
 from aoc.common.day_solver import DaySolver
 
 
@@ -5,24 +7,33 @@ class Day11Solver(DaySolver):
     year = 2024
     day = 11
 
-    def setup(self):
-        pass
+    def solve_puzzles(self):
+        stones = self.load_only_input_line().split(' ')
 
-    def solve_puzzle_one(self):
-        # line = self.load_only_input_line(example=True)
-        line = self.load_only_input_line()
-        # lines = self.load_all_input_lines(example=True)
-        lines = self.load_all_input_lines()
+        total_p1 = 0
+        total_p2 = 0
 
-        return 'TODO'
+        for stone in stones:
+            stone = int(stone)
+            total_p1 += self.process_stone(stone, 25)
+            total_p2 += self.process_stone(stone, 75)
 
-    def solve_puzzle_two(self):
-        # line = self.load_only_input_line(example=True)
-        line = self.load_only_input_line()
-        # lines = self.load_all_input_lines(example=True)
-        lines = self.load_all_input_lines()
+        return total_p1, total_p2
 
-        return 'TODO'
+    @cache
+    def process_stone(self, value, num_iters):
+        if num_iters == 0:
+            return 1
 
+        if value == 0:
+            return self.process_stone(1, num_iters - 1)
 
-Day11Solver().print_results()
+        value_length = len(str(value))
+        div, rem = divmod(value_length, 2)
+        if rem == 0:
+            return (
+                    self.process_stone(int(str(value)[:div]), num_iters - 1) +
+                    self.process_stone(int(str(value)[div:]), num_iters - 1)
+            )
+
+        return self.process_stone(value * 2024, num_iters - 1)
