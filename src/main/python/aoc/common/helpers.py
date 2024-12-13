@@ -78,6 +78,9 @@ HEX_DIRECTION_OFFSETS = {
 }
 
 
+def parse_all_numbers(line):
+    return [int(v) for v in ALL_NUMBERS_REGEX.findall(line)]
+
 def decimal_to_binary(value, min_length=None):
     result = ''
 
