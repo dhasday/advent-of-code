@@ -13,4 +13,4 @@ Solutions for puzzles from https://adventofcode.com/.
 | [2021](https://adventofcode.com/2021) | -      | Day 25 (except 23) |
 | [2022](https://adventofcode.com/2022) | -      | Day 25             |
 | [2023](https://adventofcode.com/2023) | -      | Day 25             |
-| [2024](https://adventofcode.com/2024) | -      | Day 15             |
+| [2024](https://adventofcode.com/2024) | -      | Day 16             |
