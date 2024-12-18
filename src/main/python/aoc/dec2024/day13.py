@@ -45,6 +45,3 @@ class Day13Solver(DaySolver):
             return None
 
         return num_a, num_b
-
-
-Day13Solver().print_results()

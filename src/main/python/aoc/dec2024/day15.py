@@ -137,5 +137,3 @@ class Day15Solver(DaySolver):
                 coordinate_total += x + y * 100
 
         return coordinate_total
-
-Day15Solver().print_results()
