@@ -5,24 +5,34 @@ class Day19Solver(DaySolver):
     year = 2024
     day = 19
 
-    def setup(self):
-        pass
+    towel_options = None
+    cached_counts = None
 
-    def solve_puzzle_one(self):
-        # line = self.load_only_input_line(example=True)
-        line = self.load_only_input_line()
-        # lines = self.load_all_input_lines(example=True)
+    def solve_puzzles(self):
         lines = self.load_all_input_lines()
 
-        return 'TODO'
+        self.cached_counts = {'': 1}
+        self.towel_options = lines[0].split(', ')
+        desired_designs = lines[2:]
 
-    def solve_puzzle_two(self):
-        # line = self.load_only_input_line(example=True)
-        line = self.load_only_input_line()
-        # lines = self.load_all_input_lines(example=True)
-        lines = self.load_all_input_lines()
+        possible_count = 0
+        total_count = 0
+        for design in desired_designs:
+            count = self._design_counts(design)
+            if count:
+                possible_count += 1
+                total_count += count
 
-        return 'TODO'
+        return possible_count, total_count
 
+    def _design_counts(self, design):
+        if design in self.cached_counts:
+            return self.cached_counts[design]
 
-Day19Solver().print_results()
+        count = 0
+        for option in self.towel_options:
+            if design.startswith(option):
+                count += self._design_counts(design[len(option):])
+
+        self.cached_counts[design] = count
+        return count
