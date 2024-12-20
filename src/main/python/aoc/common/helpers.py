@@ -131,3 +131,12 @@ def manhattan_distance(p1, p2):
     for i in range(len(p1)):
         distance += abs(p1[i] - p2[i])
     return distance
+
+def get_manhattan_circle_offsets(radius):
+    offsets = set()
+    for cur_radius in range(radius + 1):
+        x, y = (cur_radius, radius - cur_radius)
+        # print(x, y)
+        offsets.update([(x, y), (x, -y), (-x, -y), (-x, y)])
+    return offsets
+
