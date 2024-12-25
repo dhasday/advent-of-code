@@ -78,6 +78,9 @@ HEX_DIRECTION_OFFSETS = {
 }
 
 
+def parse_all_numbers(line):
+    return [int(v) for v in ALL_NUMBERS_REGEX.findall(line)]
+
 def decimal_to_binary(value, min_length=None):
     result = ''
 
@@ -121,3 +124,19 @@ def lcm(values):
 
 def apply_deltas(point, deltas):
     return tuple(v + deltas[i] for i, v in enumerate(point))
+
+
+def manhattan_distance(p1, p2):
+    distance = 0
+    for i in range(len(p1)):
+        distance += abs(p1[i] - p2[i])
+    return distance
+
+def get_manhattan_circle_offsets(radius):
+    offsets = set()
+    for cur_radius in range(radius + 1):
+        x, y = (cur_radius, radius - cur_radius)
+        # print(x, y)
+        offsets.update([(x, y), (x, -y), (-x, -y), (-x, y)])
+    return offsets
+
