@@ -70,5 +70,3 @@ class Day20Solver(DaySolver):
     @cache
     def get_offsets(self, radius):
         return helpers.get_manhattan_circle_offsets(radius)
-
-Day20Solver().print_results()
