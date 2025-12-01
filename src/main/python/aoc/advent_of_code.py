@@ -3,6 +3,7 @@ from time import time
 from aoc import (
     dec2015, dec2016, dec2017, dec2018, dec2019,
     dec2020, dec2021, dec2022, dec2023, dec2024,
+    dec2025,
 )
 
 
@@ -25,7 +26,8 @@ years = [
     # dec2021,
     # dec2022,
     # dec2023,
-    dec2024,
+    # dec2024,
+    dec2025,
 ]
 
 # Slow Days (>5000 ms)
