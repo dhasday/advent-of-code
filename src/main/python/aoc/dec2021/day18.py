@@ -1,8 +1,4 @@
-import math
-from collections import defaultdict, deque
-
 from aoc.common.day_solver import DaySolver
-from aoc.common.helpers import ALL_NUMBERS_REGEX
 
 
 class Day18Solver(DaySolver):
