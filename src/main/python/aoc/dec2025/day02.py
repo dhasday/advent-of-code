@@ -2,7 +2,6 @@ import re
 
 from aoc.common.day_solver import DaySolver
 
-
 REGEX_HAS_REPEAT = re.compile(r"^(\d+)(\1)+$")
 
 

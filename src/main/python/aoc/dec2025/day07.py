@@ -24,5 +24,5 @@ class Day07Solver(DaySolver):
                     next_beams[beam] += count
             cur_beams = next_beams
 
-        total_futures = sum(v for v in cur_beams.values())
+        total_futures = sum(num for num in cur_beams.values())
         return num_splits, total_futures
