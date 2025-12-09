@@ -1,3 +1,5 @@
+import math
+
 STANDARD_DIRECTIONS = [
     (1, 0),   # Right
     (0, -1),  # Down
@@ -87,6 +89,12 @@ def get_manhattan_circle_offsets(radius):
         offsets.update([(x, y), (x, -y), (-x, -y), (-x, y)])
     return offsets
 
+
+def euclidean_distance(p1, p2):
+    distance = 0
+    for i in range(len(p1)):
+        distance += math.pow(abs(p1[i] - p2[i]), 2)
+    return math.sqrt(distance)
 
 def apply_deltas(point, deltas):
     return tuple(v + deltas[i] for i, v in enumerate(point))

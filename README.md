@@ -14,4 +14,4 @@ Solutions for puzzles from https://adventofcode.com/.
 | [2022](https://adventofcode.com/2022) | -      | Day 25             | 25         |
 | [2023](https://adventofcode.com/2023) | -      | Day 25             | 25         |
 | [2024](https://adventofcode.com/2024) | -      | Day 25             | 25         |
-| [2025](https://adventofcode.com/2025) | -      | Day  7             | 12         |
+| [2025](https://adventofcode.com/2025) | -      | Day  8             | 12         |
