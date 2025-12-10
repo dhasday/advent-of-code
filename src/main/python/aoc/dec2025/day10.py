@@ -31,6 +31,7 @@ class Day10Solver(DaySolver):
         return light_pushes, digit_pushes
 
     def _get_min_pushes_lights(self, target, buttons):
+        # TODO: Maybe optimize this by converting target and buttons to bit so they can be xor instead of looping
         num_lights = len(target)
         def find_adjacent_nodes(current):
             adj = []
@@ -75,6 +76,3 @@ class Day10Solver(DaySolver):
         optimize.minimize(total_presses)
         optimize.check()
         return int(str(optimize.model()[total_presses]))
-
-
-Day10Solver().print_results()
