@@ -8,12 +8,25 @@ MAX_YEAR = 2100
 MIN_DAY = 1
 MAX_DAY = 25
 
+PUZZLE_DAYS_IN_YEAR = {
+    2015: 25,
+    2016: 25,
+    2017: 25,
+    2018: 25,
+    2019: 25,
+    2020: 25,
+    2021: 25,
+    2022: 25,
+    2023: 25,
+    2024: 25,
+    2025: 12,
+}
 
 parser = argparse.ArgumentParser(
     description='Generates the skeleton for the specified day',
 )
 parser.add_argument('year', type=int, metavar=f'[{MIN_YEAR}-{MAX_YEAR}]')
-parser.add_argument('day', type=int, metavar=f'[{MIN_DAY}-{MAX_DAY}]')
+parser.add_argument('day', type=int, metavar=f'[{MIN_DAY}-{MAX_DAY} (varies by year)]')
 parser.add_argument('--force', required=False, action='store_true', default=False)
 parser.add_argument('--skip', required=False, action='store_true', default=False)
 
@@ -30,8 +43,9 @@ def run():
         print(f'Invalid argument: year must be between {MIN_YEAR} and {MAX_YEAR}. You entered {year}')
         exit(1)
 
-    if MIN_DAY > day or MAX_DAY < day:
-        print(f'Invalid argument: day must be between {MIN_DAY} and {MAX_DAY}. You entered {day}')
+    max_day_for_year = PUZZLE_DAYS_IN_YEAR[year]
+    if MIN_DAY > day or max_day_for_year < day:
+        print(f'Invalid argument: day must be between {MIN_DAY} and {max_day_for_year}. You entered {day}')
         exit(1)
 
     _init_year_if_missing(year)
@@ -55,7 +69,7 @@ def _init_year_if_missing(year):
 
     init_file = f'{src_dir}/__init__.py'
     if not exists(init_file):
-        init_contents = _get_init_file_contents()
+        init_contents = _get_init_file_contents(year)
         with open(init_file, 'w') as f:
             f.write(init_contents)
 
@@ -68,13 +82,18 @@ def _build_filename(path):
     return f'{os.path.dirname(__file__)}/{path}'
 
 
-def _get_init_file_contents():
+def _get_init_file_contents(year):
     contents = []
 
-    for i in range(1, 26):
+    max_day = PUZZLE_DAYS_IN_YEAR[year]
+
+    for i in range(1, max_day + 1):
         contents.append(f'# from .day{i:02d} import Day{i:02d}Solver')
         if i % 5 == 0:
             contents.append('')
+
+    if max_day % 5 != 0:
+        contents.append('')
 
     return '\n'.join(contents)
 

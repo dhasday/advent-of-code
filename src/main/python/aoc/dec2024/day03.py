@@ -3,7 +3,7 @@ import re
 from aoc.common.day_solver import DaySolver
 
 
-INSTRUCTION_REGEX = re.compile('(do|don\'t)\(\)|mul\((\d{1,3}),(\d{1,3})\)')
+INSTRUCTION_REGEX = re.compile(r'(do|don\'t)\(\)|mul\((\d{1,3}),(\d{1,3})\)')
 
 class Day03Solver(DaySolver):
     year = 2024
